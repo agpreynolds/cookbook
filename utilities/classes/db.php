@@ -12,6 +12,8 @@ class db extends mysqli{
 
 	}
     public function query($sql) {
+    	//TODO: SQL INJECTION PROTECTION
+
     	parent::query($sql);
     }
     public function insert($args) {

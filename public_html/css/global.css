@@ -1,0 +1,53 @@
+body {
+	font-family:arial;
+}
+
+h1,h2,h3,h4,p,ul {
+	margin:0;
+	padding:0;
+}
+
+ul {
+	list-style: none;	
+}
+
+header {
+	text-align:center;
+}
+
+footer {
+	width:100%;
+}
+
+/* TODO: Responsive Scaling for mobile */
+section#recipeSearchContainer section {
+	float:left;
+	width:33%;
+	border:1px dotted;
+}
+
+section#recipeSearchContainer section#recipeSearchValues, section#recipeSearchContainer section#recipeSearchResults {
+	display:none;
+}
+
+/* TODO: Will need more specific selectors */
+li:hover {
+	background:green;
+	border-radius:5px;
+}
+
+section#recipeSearchContainer section#recipeSearchValues li.selected {
+	background:red;
+}
+
+section#recipeSearchContainer section#recipeSearchResults li {
+	border: 1px solid;
+	border-radius:5px;
+	width:250px;
+	height:64px;
+	padding:5px;
+}
+
+/* Generic Classes */
+.fLeft {float:left;}
+.fRight {float:right;}

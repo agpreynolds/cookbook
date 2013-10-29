@@ -1,12 +1,84 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>TODO: Good Title</title>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" type="text/css" href="/css/global.css">
+	
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
+	<script type="text/javascript" src="/js/global.js"></script>
+	<script type="text/javascript" src="/js/recipeSearch.js"></script>
 </head>
+
 <body>
 	<header>
-		TODO: Good Title
+		<h1>TODO: Good Title</h1>
 	</header>
+
+	<section id="recipeSearchContainer">
+		<section id="recipeSearchParameters">
+			<header>
+				<h3>Search Parameters</h3>
+			</header>
+
+			<ul>
+				<li id="searchByMealType">Meal Type</li>
+				<li id="searchByCuisineType">Cuisine Type</li>
+			</ul>
+		
+		</section>
+		
+		<section id="recipeSearchValues">
+			<header>
+				<h3>Values</h3>
+			</header>
+
+			<section id="mealTypeValues" class="valueList">
+				<ul>
+					<li>Breakfast</li>
+					<li>Lunch</li>
+					<li>Dinner</li>
+				</ul>
+			</section>
+
+			<section id="cuisineTypeValues" class="valueList">
+				<ul>
+					<li id="chineseCuisine">Chinese</li>
+					<li id="italianCuisine">Italian</li>
+				</ul>
+			</section>
+			
+		</section>
+
+		<section id="recipeSearchResults">
+			<header>
+				<h3>Results</h3>
+			</header>
+
+			<ul>
+				<li>
+					<img class="fLeft" src="/media/recipe_default.png" height="64" width="64" alt="http://www.iconarchive.com/show/virtual-kitchen-icons-by-sirea/Pan-icon.html">
+					<article>
+						<header>
+							<h4>Pizza</h4>
+						</header>
+						<section class="thumbnailRating">
+							<img src="#" height="20" width="80" alt="Rating">
+							<p>4 / 5 (200 votes)</p>
+						</section>
+					</article>
+				</li>
+			</ul>
+			
+		</section>
+
+	</section>
+
+	<footer>
+		<p>TODO: Disclaimer</p>
+	</footer>
 
 </body>
 </html>
