@@ -7,12 +7,16 @@ h1,h2,h3,h4,p,ul {
 	padding:0;
 }
 
-ul {
-	list-style: none;	
-}
-
 header {
 	text-align:center;
+}
+
+h4 {
+	text-align:left;
+}
+
+ul {
+	list-style: none;	
 }
 
 footer {
@@ -34,6 +38,11 @@ section#recipeSearchContainer section#recipeSearchValues, section#recipeSearchCo
 li:hover {
 	background:green;
 	border-radius:5px;
+	cursor:pointer;
+}
+
+section#recipeSearchContainer section#recipeSearchParameters li.selected {
+	background:red;
 }
 
 section#recipeSearchContainer section#recipeSearchValues li.selected {
@@ -46,6 +55,12 @@ section#recipeSearchContainer section#recipeSearchResults li {
 	width:250px;
 	height:64px;
 	padding:5px;
+}
+
+section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRating {
+	border:none;
+	width:auto;
+	font-size:0.8em;
 }
 
 /* Generic Classes */
