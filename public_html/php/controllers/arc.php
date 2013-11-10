@@ -1,0 +1,5 @@
+<?php
+
+$db = new arcDb();
+
+?>

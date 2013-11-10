@@ -1,25 +1,23 @@
-var responseData = {
-
-};
-
 var global = global || {};
 
 global.recipeSearch = {
 	defaultState : 'visible',
 	queryData : {
-		searchByCuisineType : [],
-		searchByMealType : []
+		method : 'recipeSearch',
+		data : {
+			searchByCuisineType : [],
+			searchByMealType : []			
+		}
 	},
 	handleQueryData : function() {
 		var _this = global.recipeSearch;
 
-		$.get('search.php',_this.queryData)
-			.done(function() {
-				_this.resultPanel.init(responseData);
+		$.get('/php/controllers/ajax.php',_this.queryData)
+			.done(function(responseData) {
+				alert(responseData);
 			})
 			.fail(function() {
-				//TODO: Only doing this for frontend testing
-				_this.resultPanel.init(responseData);
+				alert("get request failed");
 			});
 	},	
 	init : function() {
@@ -103,32 +101,20 @@ global.recipeSearch.valuePanel = {
 
 		//Bind a click event to each available option to store user selection
 		//TODO: this.innerHTML will only work while no additional content is stored
-		_this.availableOptions = _this[_this.view].find("li.searchValue");
-		
-		//Spotted issue with re-binding click events, only bind if no click events currently assigned
-		_this.availableOptions.each(function(i,item){
-			//Get the event data for each item
-			var eventData = $._data( $(item)[0] ,"events");
-			if ( !eventData || !eventData.click ) {
-				$(item).bind("click",_this.handleValueSelection);
-			}
-		});		
-	},
-	handleValueSelection : function() {
-		//Define _this as a shortcut to the panel
-		var _this = global.recipeSearch.valuePanel;
-
-		if ( $(this).hasClass('selected') ) {
-			$(this).removeClass('selected');
-			var index = $.inArray(this.innerHTML,global.recipeSearch.queryData[_this.view]);
-			global.recipeSearch.queryData[_this.view].splice(index,1);
-			global.recipeSearch.handleQueryData();
-		}
-		else {
-			$(this).addClass('selected');
-			global.recipeSearch.queryData[_this.view].push(this.innerHTML);								
-			global.recipeSearch.handleQueryData();
-		}
+		_this.availableOptions = _this[_this.view].find("li.searchValue");		
+		_this.availableOptions.unbind("click.searchValue")
+			.bind("click.searchValue",function(){
+				if ( $(this).hasClass('selected') ) {
+					var index = $.inArray(this.innerHTML,global.recipeSearch.queryData[_this.view]);
+					global.recipeSearch.queryData.data[_this.view].splice(index,1);
+					global.recipeSearch.handleQueryData();
+				}
+				else {
+					global.recipeSearch.queryData.data[_this.view].push(this.innerHTML);								
+					global.recipeSearch.handleQueryData();
+				}
+				$(this).toggleClass("selected");				
+			});	
 	}
 };
 
@@ -147,7 +133,7 @@ global.recipeSearch.resultPanel = {
 		_this.resultThumbnails = $(".searchResult");
 
 		if (!responseData.recipes) {
-			_this.container.innerHTML = "<p>No recipes were found</p>";
+			_this.container.html("<p>No recipes were found</p>");
 		}
 
 		_this.resultThumbnails.bind("click",function(){
