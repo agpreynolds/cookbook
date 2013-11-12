@@ -4,20 +4,18 @@ global.recipeSearch = {
 	defaultState : 'visible',
 	queryData : {
 		method : 'recipeSearch',
-		data : {
-			searchByCuisineType : [],
-			searchByMealType : []			
-		}
+		data : { }
 	},
 	handleQueryData : function() {
 		var _this = global.recipeSearch;
 
 		$.get('/php/controllers/ajax.php',_this.queryData)
 			.done(function(responseData) {
-				alert(responseData);
+				_this.resultPanel.init($.parseJSON(responseData));
+				global.consoleDebug('response',responseData);
 			})
 			.fail(function() {
-				alert("get request failed");
+				global.consoleDebug("get request failed");
 			});
 	},	
 	init : function() {
@@ -25,7 +23,7 @@ global.recipeSearch = {
 
 		_this.container = $("#recipeSearchContainer");
 		
-		_this.typePanel.init();
+		_this.facetPanel.init();
 	},
 	reset : function() {
 		var _this = global.recipeSearch;
@@ -34,87 +32,73 @@ global.recipeSearch = {
 	}
 };
 
-global.recipeSearch.typePanel = {
+global.recipeSearch.facetPanel = {
 	defaultState : 'visible',
 	init : function() {
-		var _this = global.recipeSearch.typePanel;
+		var _this = global.recipeSearch.facetPanel;
 
-		_this.container = $("#recipeSearchParameters");
-		_this.mealType = $("#searchByMealType");
-		_this.cuisineType = $("#searchByCuisineType");
+		_this.container = $("#recipeSearchFacets");
+		_this.searchFacets = $(".searchFacet");
 
-		_this.searchOptions = $(".searchOption");
-
-		_this.searchOptions.bind("click",function(){
-			if ($(this).hasClass("selected")) {
-				$(this).removeClass("selected");
+		//Get the top level links and bind a click event
+		_this.facetLinks = $("a.facetLink");
+		_this.facetLinks.bind("click",function(){
+			//Get the parent of the link element
+			var parent = $(this).parent();
+			
+			//If this facet is already selected, un-select and return
+			if (parent.hasClass("selected")) {
+				parent.removeClass("selected");
+				return;
 			}
-			else {
-				if ( _this.searchOptions.hasClass("selected") ) {
-					_this.searchOptions.removeClass("selected");
-				}
-				$(this).addClass("selected");
-				global.recipeSearch.valuePanel.init({ view : this.id });					
+			//Only one facet selected at a time, de-select other facets
+			if ( _this.searchFacets.hasClass("selected") ) {
+				_this.searchFacets.removeClass("selected");
 			}
+			
+			//Make this facet active
+			parent.addClass("selected");
+
+			var bindEventsToOptionsList = function(listNode) {
+				var facetValues = listNode.find("li.facetValue a");
+				facetValues.bind("click",function(){
+					var searchType = $(this).parents().get(1).id;
+					var value = this.innerHTML;
+					if ( $(this).parent().hasClass('selected') ) {
+						var index = $.inArray(value,global.recipeSearch.queryData[searchType]);
+						global.recipeSearch.queryData.data[searchType].splice(index,1);
+						global.recipeSearch.handleQueryData();
+					}
+					else {
+						if ( !global.recipeSearch.queryData.data[searchType] ) {
+							global.recipeSearch.queryData.data[searchType] = [];
+						}
+						global.recipeSearch.queryData.data[searchType].push(value);								
+						global.recipeSearch.handleQueryData();
+					}
+					$(this).parent().toggleClass("selected");				
+				})
+				listNode.addClass("evBound");
+			}
+
+			var facetOptionsList = parent.find("ul.facetOptions");
+			if ( !facetOptionsList.length ) {
+				$.get('/templates/facetOptionsList/' + parent.get(0).id + '.php')
+					.done(function(html){
+						var listNode = $(html);
+						bindEventsToOptionsList(listNode);
+						parent.append(listNode);
+					})
+					.fail(function(response){
+						global.consoleDebug(response);
+					})
+			}
+			else if ( !facetOptionsList.hasClass("evBound") ) {
+				bindEventsToOptionsList(facetOptionsList);
+			}		
 		});
 
-		global.consoleDebug("global.recipeSearch.typePanel successfully initialised" ,_this);	
-	}
-};
-
-global.recipeSearch.valuePanel = {
-	defaultState : 'hidden',
-	init : function(args) {
-		//Panel won't work - exit out
-		if (!args || !args.view) {
-			global.consoleDebug('global.recipeSearch.valuePanel.init() Invalid arguments specified' + args);
-			return null;
-		}
-
-		//Define _this as a shortcut to the panel
-		var _this = global.recipeSearch.valuePanel;
-
-		//Set the nodes we may need to access
-		_this.container = $("#recipeSearchValues");
-		_this.searchByMealType = $("#mealTypeValues");
-		_this.searchByCuisineType = $("#cuisineTypeValues");
-
-		//Get a list of value lists and hide them all by default
-		_this.valueLists = $(".valueList");
-		_this.valueLists.hide();
-		
-		//Show the list of values requested
-		_this.view = args.view;
-		_this[_this.view].show();
-
-		//Bind the events for the panel
-		_this.bindEvents();		
-
-		//If we are not already showing the panel, show it
-		this.container.is(":hidden") ? this.container.show() : '';
-
-		global.consoleDebug("global.recipeSearch.valuePanel successfully initialised" ,_this);
-	},
-	bindEvents : function() {
-		//Define _this as a shortcut to the panel
-		var _this = global.recipeSearch.valuePanel;
-
-		//Bind a click event to each available option to store user selection
-		//TODO: this.innerHTML will only work while no additional content is stored
-		_this.availableOptions = _this[_this.view].find("li.searchValue");		
-		_this.availableOptions.unbind("click.searchValue")
-			.bind("click.searchValue",function(){
-				if ( $(this).hasClass('selected') ) {
-					var index = $.inArray(this.innerHTML,global.recipeSearch.queryData[_this.view]);
-					global.recipeSearch.queryData.data[_this.view].splice(index,1);
-					global.recipeSearch.handleQueryData();
-				}
-				else {
-					global.recipeSearch.queryData.data[_this.view].push(this.innerHTML);								
-					global.recipeSearch.handleQueryData();
-				}
-				$(this).toggleClass("selected");				
-			});	
+		global.consoleDebug("global.recipeSearch.facetPanel successfully initialised" ,_this);	
 	}
 };
 
@@ -148,4 +132,4 @@ global.recipeSearch.resultPanel = {
 	}
 };
 
-window.onload = global.recipeSearch.init;
+$(document).ready(global.recipeSearch.init);

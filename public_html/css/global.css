@@ -19,6 +19,11 @@ ul {
 	list-style: none;	
 }
 
+a:hover {
+	cursor:pointer;
+	text-decoration:underline;
+}
+
 footer {
 	width:100%;
 }
@@ -26,27 +31,26 @@ footer {
 /* TODO: Responsive Scaling for mobile */
 section#recipeSearchContainer section {
 	float:left;
-	width:33%;
-	border:1px dotted;
 }
 
-section#recipeSearchContainer section#recipeSearchValues, section#recipeSearchContainer section#recipeSearchResults {
+section#recipeSearchFacets {
+	min-width:20%;
+}
+
+section#recipeSearchResults {
+	min-width:80%;
+}
+
+a.facetLink {font-weight:bold;}
+.selected a.facetLink, .selected.facetValue a {background:green;}
+.selected .facetOptions { display:block; }
+.facetOptions { 
 	display:none;
+	margin-left:10px; 
 }
 
-/* TODO: Will need more specific selectors */
-li:hover {
-	background:green;
+.facetLink:hover, .facetValue a {
 	border-radius:5px;
-	cursor:pointer;
-}
-
-section#recipeSearchContainer section#recipeSearchParameters li.selected {
-	background:red;
-}
-
-section#recipeSearchContainer section#recipeSearchValues li.selected {
-	background:red;
 }
 
 section#recipeSearchContainer section#recipeSearchResults li {

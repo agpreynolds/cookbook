@@ -18,40 +18,44 @@
 	</header>
 
 	<section id="recipeSearchContainer">
-		<section id="recipeSearchParameters">
+		<section id="recipeSearchFacets">
 			<header>
-				<h3>Search Parameters</h3>
+				<h3>Search By:</h3>
 			</header>
 
 			<ul>
-				<li id="searchByMealType" class="searchOption">Meal Type</li>
-				<li id="searchByCuisineType" class="searchOption">Cuisine Type</li>
+				<li id="searchByMealType" class="searchFacet">
+					<a class="facetLink">Meal Type</a>
+					<ul id="mealTypeOptions" class="facetOptions">
+						<li class="facetValue">
+							<a>Breakfast</a>
+						</li>
+						<li class="facetValue">
+							<a>Lunch</a>
+						</li>
+						<li class="facetValue">
+							<a>Dinner</a>
+						</li>	
+					</ul>
+				</li>
+				<li id="searchByCuisineType" class="searchFacet">
+					<a class="facetLink">Cuisine Type</a>
+					<ul id="cuisineTypeOptions" class="facetOptions">
+						<li class="facetValue">
+							<a>Chinese</a>
+						</li>
+						<li class="facetValue">
+							<a>Italian</a>
+						</li>
+					</ul>
+				</li>
+				<li id="searchByPreparationTime" class="searchFacet">
+					<a class="facetLink">Preparation Time</a>
+				</li>
 			</ul>
 		
 		</section>
 		
-		<section id="recipeSearchValues">
-			<header>
-				<h3>Values</h3>
-			</header>
-
-			<section id="mealTypeValues" class="valueList">
-				<ul>
-					<li class="searchValue">Breakfast</li>
-					<li class="searchValue">Lunch</li>
-					<li class="searchValue">Dinner</li>
-				</ul>
-			</section>
-
-			<section id="cuisineTypeValues" class="valueList">
-				<ul>
-					<li id="chineseCuisine" class="searchValue">Chinese</li>
-					<li id="italianCuisine" class="searchValue">Italian</li>
-				</ul>
-			</section>
-			
-		</section>
-
 		<section id="recipeSearchResults">
 			<header>
 				<h3>Results</h3>

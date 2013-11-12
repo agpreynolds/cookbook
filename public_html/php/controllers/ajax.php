@@ -1,5 +1,5 @@
 <?php
 
-var_dump($request->response);
+echo json_encode($request->response);
 
 ?>
