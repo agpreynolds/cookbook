@@ -1,11 +1,12 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix recipe: <http://linkedrecipes.org/schema/> .
 
-<mailto:uther1@example.org> a recipe:Recipe ; 
+<recipe:/Recipe/noodles> a recipe:Recipe ; 
 	recipe:cuisine "chinese" ;
-	recipe:xyz "randomWords" ;
-	recipe:ingredients
+	recipe:name "noodles" .
 
-<mailto:uther@example.org> a foaf:Person ; foaf:name "alex reynolds" .
+<recipe:/Recipe/pizza> a recipe:Recipe ;
+	recipe:cuisine "italian" ;
+	recipe:name "pizza" .
 
 

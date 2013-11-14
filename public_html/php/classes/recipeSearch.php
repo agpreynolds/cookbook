@@ -1,23 +1,34 @@
 <?php
 
 class recipeSearch {
-	private $results;
+	private $recipes = array();
 
 	public function __construct($data) {
-		$this->results = array(
-			'recipes' => array(
-				array(
-					'name' => 'pizza'
-				),
-				array(
-					'name' => 'pasta'
-				)
-			) 
+		$db = new arcDb();
+		$results = $db->query2(array(
+				'prefix' => 'recipe: <http://linkedrecipes.org/schema/>',
+				'cuisine' => strtolower($data['cuisineTypeOptions'][0])
+			)
 		);
+
+		foreach ( $results as $result ) {
+			$this->recipes[] = new recipe($result);
+		}
+
+		//$this->results = array(
+		//	'recipes' => array(
+		//		array(
+		//			'name' => 'pizza'
+		//		),
+		//		array(
+		//			'name' => 'pasta'
+		//		)
+		//	) 
+		//);
 	}
 
-	public function getResults() {
-		return $this->results;
+	public function getRecipes() {
+		return $this->recipes;
 	}
 }
 

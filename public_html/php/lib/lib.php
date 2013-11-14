@@ -3,6 +3,10 @@
 function includeAbs($path) {
 	return include($_SERVER['DOCUMENT_ROOT'] . $path );
 }
+
+function getAbsIncPath($path) {
+	return $_SERVER['DOCUMENT_ROOT'] . $path;	
+}
 function requireAbs_once($path) {
 	return require_once($_SERVER['DOCUMENT_ROOT'] . $path );
 }

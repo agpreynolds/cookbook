@@ -10,7 +10,8 @@ class recipe {
 	private $dateUploaded;
 	private $dateLastUpdated;
 
-	public function __construct() {
+	public function __construct($data) {
+		$this->name = $data['name'];
 		
 	}
 
@@ -27,6 +28,10 @@ class recipe {
 
 	public function isVeganSuitable() {
 
+	}
+
+	public function getName() {
+		return $this->name;
 	}
 
 	public function store() {

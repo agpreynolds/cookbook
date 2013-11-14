@@ -9,10 +9,15 @@ global.recipeSearch = {
 	handleQueryData : function() {
 		var _this = global.recipeSearch;
 
-		$.get('/php/controllers/ajax.php',_this.queryData)
-			.done(function(responseData) {
-				_this.resultPanel.init($.parseJSON(responseData));
-				global.consoleDebug('response',responseData);
+		$.get('/templates/searchPanels/results.php',_this.queryData)
+			.done(function(response) {
+				if (_this.resultPanel.state == 'visible') {
+					_this.resultPanel.resultList.html(response);
+					_this.resultPanel.bindEvents();
+				}
+				else {
+					_this.resultPanel.init(response);					
+				}
 			})
 			.fail(function() {
 				global.consoleDebug("get request failed");
@@ -103,7 +108,7 @@ global.recipeSearch.facetPanel = {
 };
 
 global.recipeSearch.resultPanel = {
-	defaultState : 'hidden',
+	state : 'hidden',
 	init : function(responseData) {
 		//If there is no response data, something went wrong
 		if (!responseData) {
@@ -114,21 +119,25 @@ global.recipeSearch.resultPanel = {
 		var _this = global.recipeSearch.resultPanel;
 
 		_this.container = $("#recipeSearchResults");
-		_this.resultThumbnails = $(".searchResult");
+		_this.resultList = $("#resultList");
 
-		if (!responseData.recipes) {
-			_this.container.html("<p>No recipes were found</p>");
-		}
-
-		_this.resultThumbnails.bind("click",function(){
-			//Launch the full recipe
-			console.log(this);
-		});
-
+		_this.resultList.html(responseData);
+		_this.bindEvents();
+		
 		//If we are not already showing the panel, show it
-		this.container.is(":hidden") ? this.container.show() : '';
+		_this.container.is(":hidden") ? _this.container.show() : '';
+		_this.state = 'visible';
 
 		global.consoleDebug("global.recipeSearch.resultPanel successfully initialised" ,_this);
+	},
+	bindEvents : function() {
+		var _this = global.recipeSearch.resultPanel;
+		_this.resultThumbnails = $(".searchResult");
+
+		_this.resultThumbnails.unbind('click').bind("click",function(){
+			//Launch the full recipe
+			console.log(this);
+		});		
 	}
 };
 

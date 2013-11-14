@@ -24,8 +24,7 @@ class request {
                 // }
         // }
         private function handleAjax($method,$data) {
-            $instance = new $method($this->request['data']);
-            $this->response = $instance->getResults(); 
+            $this->response = new $method($this->request['data']);
         }
 }
 
