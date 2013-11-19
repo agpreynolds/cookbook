@@ -11,8 +11,14 @@ header {
 	text-align:center;
 }
 
-h4 {
+h3,h4 {
 	text-align:left;
+}
+
+h3 {
+	padding-bottom:2px;
+	margin-bottom:5px;
+	border-bottom:1px solid;
 }
 
 ul {
@@ -24,41 +30,55 @@ a:hover {
 	text-decoration:underline;
 }
 
+/* TODO: Clear Both is a temp hack - do not leave in */
 footer {
+	clear:both;
 	width:100%;
+	font-size:80%;
+	border-top:1px solid;
 }
 
 /* TODO: Responsive Scaling for mobile */
-section#recipeSearchContainer section {
+#recipeSearchContainer section {
 	float:left;
 }
 
-section#recipeSearchFacets {
+#recipeSearchFacets {
 	min-width:20%;
 }
 
-section#recipeSearchResults {
-	min-width:80%;
+#recipeSearchResults {
+	margin-left:2%;
+	min-width:78%;
 }
 
 a.facetLink {font-weight:bold;}
-.selected a.facetLink, .selected.facetValue a {background:green;}
+.selected.facetValue a {background:green;}
 .selected .facetOptions { display:block; }
 .facetOptions { 
 	display:none;
-	margin-left:10px; 
+	margin-left:10px;
+	font-size:80%;
+}
+.selected.facetValue a {
+	display:block;
+	padding:5px;
+	margin: 5px 0;
 }
 
 .facetLink:hover, .facetValue a {
-	border-radius:5px;
+	border-radius:10px;
 }
 
-section#recipeSearchContainer section#recipeSearchResults li {
+#recipeSearchResults li {
+	float:left;
+	margin:5px 10px 5px 0px;
+	padding:5px;
 	border: 1px solid;
 	border-radius:5px;
 	width:250px;
 	height:64px;
-	padding:5px;
+	cursor:pointer;
 }
 
 section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRating {
