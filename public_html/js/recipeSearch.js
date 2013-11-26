@@ -9,19 +9,25 @@ global.recipeSearch = {
 	handleQueryData : function() {
 		var _this = global.recipeSearch;
 
-		$.get('/templates/searchPanels/results.php',_this.queryData)
-			.done(function(response) {
-				if (_this.resultPanel.state == 'visible') {
-					_this.resultPanel.resultList.html(response);
-					_this.resultPanel.bindEvents();
-				}
-				else {
-					_this.resultPanel.init(response);					
-				}
-			})
-			.fail(function() {
-				global.consoleDebug("get request failed");
-			});
+		//TODO: Reliable way of detecting no params
+		//TODO: Make use of resultData for filtering rather than unnecessary querying of backend
+		if (_this.queryData.data) {
+			$.get('/templates/searchPanels/results.php',_this.queryData)
+				.done(function(response) {
+					var responseParsed = $.parseJSON(response);
+					_this.resultData = responseParsed.data;
+					if (_this.resultPanel.state == 'visible') {
+						_this.resultPanel.resultList.html(responseParsed.html);
+						_this.resultPanel.bindEvents();
+					}
+					else {
+						_this.resultPanel.init(responseParsed.html);					
+					}
+				})
+				.fail(function() {
+					global.consoleDebug("get request failed");
+				});			
+		}
 	},	
 	init : function() {
 		var _this = global.recipeSearch;
@@ -50,10 +56,11 @@ global.recipeSearch.facetPanel = {
 		_this.facetLinks.bind("click",function(){
 			//Get the parent of the link element
 			var parent = $(this).parent();
-			
+			var facetOptionsList = parent.find("ul.facetOptions");
 			//If this facet is already selected, un-select and return
 			if (parent.hasClass("selected")) {
 				parent.removeClass("selected");
+				facetOptionsList.slideToggle();
 				return;
 			}
 			//Only one facet selected at a time, de-select other facets
@@ -67,7 +74,7 @@ global.recipeSearch.facetPanel = {
 			var bindEventsToOptionsList = function(listNode) {
 				var facetValues = listNode.find("li.facetValue a");
 				facetValues.bind("click",function(){
-					var searchType = $(this).parents().get(1).id;
+					var searchType = $(this).parents().get(2).id;
 					var value = this.innerHTML;
 					if ( $(this).parent().hasClass('selected') ) {
 						var index = $.inArray(value,global.recipeSearch.queryData[searchType]);
@@ -86,21 +93,24 @@ global.recipeSearch.facetPanel = {
 				listNode.addClass("evBound");
 			}
 
-			var facetOptionsList = parent.find("ul.facetOptions");
 			if ( !facetOptionsList.length ) {
 				$.get('/templates/facetOptionsList/' + parent.get(0).id + '.php')
 					.done(function(html){
 						var listNode = $(html);
 						bindEventsToOptionsList(listNode);
 						parent.append(listNode);
+						listNode.slideToggle();
 					})
 					.fail(function(response){
 						global.consoleDebug(response);
 					})
 			}
-			else if ( !facetOptionsList.hasClass("evBound") ) {
-				bindEventsToOptionsList(facetOptionsList);
-			}		
+			else {
+				facetOptionsList.slideToggle();
+				if ( !facetOptionsList.hasClass("evBound") ) {
+					bindEventsToOptionsList(facetOptionsList);
+				}
+			}
 		});
 
 		global.consoleDebug("global.recipeSearch.facetPanel successfully initialised" ,_this);	
@@ -135,9 +145,33 @@ global.recipeSearch.resultPanel = {
 		_this.resultThumbnails = $(".searchResult");
 
 		_this.resultThumbnails.unbind('click').bind("click",function(){
-			//Launch the full recipe
-			console.log(this);
+			var ele = this;
+			$(global.recipeSearch.resultData).each(function(i,item){
+				//Matching by name - yuck
+				//Discuss identifiers with Jack
+				if (item.name == ele.id) {
+					$.get('/templates/searchPanels/includes/resultLarge.php',
+						{ method: 'recipe',data : item })
+						.done(function(response){
+							global.recipeSearch.largeResultPanel.init(response);
+						});
+				}
+			});
 		});		
+	}
+};
+
+global.recipeSearch.largeResultPanel = {
+	state : 'hidden',
+	init : function(response) {
+		var _this = global.recipeSearch.largeResultPanel;
+		_this.container = $("#resultLarge");
+		_this.container.html(response);
+		
+		_this.componentLists = $("li.componentOption a");
+		_this.componentLists.bind('click',function(){
+			$(this).parent().find('ul').slideToggle('slow');
+		});
 	}
 };
 

@@ -54,7 +54,7 @@ footer {
 
 a.facetLink {font-weight:bold;}
 .selected.facetValue a {background:green;}
-.selected .facetOptions { display:block; }
+.selected .facetOptions { /*display:block;*/ }
 .facetOptions { 
 	display:none;
 	margin-left:10px;
@@ -66,7 +66,7 @@ a.facetLink {font-weight:bold;}
 	margin: 5px 0;
 }
 
-.facetLink:hover, .facetValue a {
+.facetLink:hover {
 	border-radius:10px;
 }
 
@@ -85,6 +85,21 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 	border:none;
 	width:auto;
 	font-size:0.8em;
+}
+
+#resultLarge {
+	border:1px solid;
+	padding:5px;
+}
+
+#resultLarge h3 {
+	border:none;
+}
+
+#components li {
+	padding:5px;
+	margin:5px 0;
+	background:gray;
 }
 
 /* Generic Classes */

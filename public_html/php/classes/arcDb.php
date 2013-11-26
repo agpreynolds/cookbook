@@ -25,12 +25,19 @@ class arcDb {
 	public function query2($args) {
 		if (!$args) { return; }
 
-		if ($args['prefix']) {
-			$sparql = "PREFIX {$args['prefix']} .";
+		if ($args['prefixes']) {
+			$sparql = "PREFIX {$args['prefixes']} .";
 		}
 
 		$sparql .= "SELECT ?recipe ?name ?cuisine WHERE { ?recipe a recipe:Recipe; recipe:name ?name; recipe:cuisine ?cuisine;";
-		$sparql .= "FILTER regex(?cuisine, '{$args['cuisine']}') }";
+		
+		if ($args['filters']) {
+			foreach ($args['filters'] as $filter => $value) {
+				$sparql .= "FILTER regex($filter,'$value')";
+			}
+		}
+
+		$sparql .= "}";
 
 		$result = $this->store->query($sparql,'rows');
 		return $result;

@@ -1,12 +1,63 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix recipe: <http://linkedrecipes.org/schema/> .
 
-<recipe:/Recipe/noodles> a recipe:Recipe ; 
+@prefix dFood: <http://palacealex.com/data/Food/> .
+@prefix dRecipe: <http://palacealex.com/data/Recipe/> .
+@prefix dTechnique: <http://palacealex.com/data/Technique/> .
+@prefix dTool: <http://palacealex.com/data/Tool/> .
+
+dFood:Sultana 	a recipe:Food .
+dFood:Margarine a recipe:Food .
+dFood:Sugar 	a recipe:Food .
+dFood:Egg 		a recipe:Food .
+dFood:Flour 	a recipe:Food .
+dFood:Salt 		a recipe:Food .
+
+dTechnique:Cook a recipe:Technique .
+
+dTool:Oven a recipe:Tool .
+
+dRecipe:sultanaCake a recipe:Recipe ;
+	recipe:Cuisine "british" ;
+	recipe:Ingredients [
+		recipe:Ingredient [
+			recipe:Food 	dFood:Sultana ;
+			recipe:Quantity "225g" ;
+		] ;
+		recipe:Ingredient [
+			recipe:Food 	dFood:Margarine ;
+			recipe:Quantity	"125g" ;
+		] ;
+		recipe:Ingredient [
+			recipe:Food 	dFood:Sugar ;
+			recipe:Quantity "175g" ;
+		] ;
+		recipe:Ingredient [
+			recipe:Food 	dFood:Egg ;
+			recipe:Quanity 	2 ;
+		] ;
+		recipe:Ingredient [
+			recipe:Food 	dFood:Flour ;
+			recipe:Quantity "175g" ;
+		] ;
+		recipe:Ingredient [
+			recipe:Food 	dFood:Salt ;
+			recipe:Quantiy "a pinch of" ;
+		]
+	] ;
+	recipe:Method [
+		recipe:Step [
+			recipe:Ingredient ;
+			recipe:Tool dTool:Oven ;
+			recipe:Technique dTechnique:Cook ;
+		]
+	] .
+
+dRecipe:noodles a recipe:Recipe ; 
 	recipe:cuisine "chinese" ;
 	recipe:name "noodles" .
 
-<recipe:/Recipe/pizza> a recipe:Recipe ;
+dRecipe:pizza a recipe:Recipe ;
 	recipe:cuisine "italian" ;
 	recipe:name "pizza" .
-
 

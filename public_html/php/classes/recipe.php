@@ -1,14 +1,14 @@
 <?php
 
 class recipe {
-	private $author;
-	private $name;
-	private $cuisine;
-	private $ingredients;
-	private $description;
-	private $isComplete;
-	private $dateUploaded;
-	private $dateLastUpdated;
+	public $author;
+	public $name;
+	public $cuisine;
+	public $ingredients;
+	public $description;
+	public $isComplete;
+	public $dateUploaded;
+	public $dateLastUpdated;
 
 	public function __construct($data) {
 		$this->name = $data['name'];
@@ -28,10 +28,6 @@ class recipe {
 
 	public function isVeganSuitable() {
 
-	}
-
-	public function getName() {
-		return $this->name;
 	}
 
 	public function store() {
