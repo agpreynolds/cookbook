@@ -44,12 +44,12 @@ footer {
 }
 
 #recipeSearchFacets {
-	min-width:20%;
+	width:20%;
 }
 
 #recipeSearchResults {
 	margin-left:2%;
-	min-width:78%;
+	width:78%;
 }
 
 a.facetLink {font-weight:bold;}

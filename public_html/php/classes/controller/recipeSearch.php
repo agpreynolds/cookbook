@@ -21,13 +21,14 @@ class recipeSearch {
 	private function generateQueryData($data) {
 		$this->queryData = array(
 			'prefixes' => 'recipe: <http://linkedrecipes.org/schema/>',
+			'where' => "?recipe a recipe:Recipe ; rdfs:label ?name ; recipe:cuisine ?cuisine ; recipe:course ?course .",
 			'filters' => array()
 		);
 
 		foreach ($data as $param => $value) {
-			$config = $this->config[$param];
-			if ($config && $config['mapsTo'] && $config['active']) {
-				$this->queryData['filters'][$config['mapsTo']] = strtolower($value[0]);
+			$facet = new facet($param,$this->config[$param]);
+			if ($facet && $facet->mapsTo && $facet->active) {
+				$this->queryData['filters'][$facet->mapsTo] = $value;
 			}
 		}		
 	}

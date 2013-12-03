@@ -12,7 +12,7 @@ global.recipeSearch = {
 		//TODO: Reliable way of detecting no params
 		//TODO: Make use of resultData for filtering rather than unnecessary querying of backend
 		if (_this.queryData.data) {
-			$.get('/templates/searchPanels/results.php',_this.queryData)
+			$.get('/templates/searchPanels/resultSmall/index.php',_this.queryData)
 				.done(function(response) {
 					var responseParsed = $.parseJSON(response);
 					_this.resultData = responseParsed.data;
@@ -77,7 +77,7 @@ global.recipeSearch.facetPanel = {
 					var searchType = $(this).parents().get(2).id;
 					var value = this.innerHTML;
 					if ( $(this).parent().hasClass('selected') ) {
-						var index = $.inArray(value,global.recipeSearch.queryData[searchType]);
+						var index = $.inArray(value,global.recipeSearch.queryData.data[searchType]);
 						global.recipeSearch.queryData.data[searchType].splice(index,1);
 						global.recipeSearch.handleQueryData();
 					}
@@ -150,7 +150,7 @@ global.recipeSearch.resultPanel = {
 				//Matching by name - yuck
 				//Discuss identifiers with Jack
 				if (item.name == ele.id) {
-					$.get('/templates/searchPanels/includes/resultLarge.php',
+					$.get('/templates/searchPanels/resultLarge/index.php',
 						{ method: 'recipe',data : item })
 						.done(function(response){
 							global.recipeSearch.largeResultPanel.init(response);
@@ -170,7 +170,7 @@ global.recipeSearch.largeResultPanel = {
 		
 		_this.componentLists = $("li.componentOption a");
 		_this.componentLists.bind('click',function(){
-			$(this).parent().find('ul').slideToggle('slow');
+			$(this).parent().find('ul,ol').slideToggle('slow');
 		});
 	}
 };

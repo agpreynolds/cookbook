@@ -1,13 +1,25 @@
 <?php
 
 return array(
-	'byMealType' => 1,
 	'searchByCuisineType' => array(
 		'active' => 1,
-		'mapsTo' => '?cuisine'
+		'label' => 'Cuisine Type',
+		'mapsTo' => '?cuisine',
+		'options' => array(
+			'British','Chinese','Indian','Italian','Mexican','Russian'
+		)
 	),
-	'byIngredient' => 1,
-	'byEquipment' => 1
+	'searchByCourse' => array(
+		'active' => 1,
+		'label' => 'Course',
+		'mapsTo' => '?course',
+		'options' => array(
+			'Starter','Main','Dessert'
+		)
+	)
+	// 'byMealType' => 1,
+	// 'byIngredient' => 1,
+	// 'byEquipment' => 1
 );
 
 ?>

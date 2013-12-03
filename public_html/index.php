@@ -23,37 +23,7 @@
 				<h3>Search By:</h3>
 			</header>
 
-			<ul>
-				<li id="searchByMealType" class="searchFacet">
-					<a class="facetLink">Meal Type</a>
-					<ul id="mealTypeOptions" class="facetOptions">
-						<li class="facetValue">
-							<a>Breakfast</a>
-						</li>
-						<li class="facetValue">
-							<a>Lunch</a>
-						</li>
-						<li class="facetValue">
-							<a>Dinner</a>
-						</li>	
-					</ul>
-				</li>
-				<li id="searchByCuisineType" class="searchFacet">
-					<a class="facetLink">Cuisine Type</a>
-					<ul id="cuisineTypeOptions" class="facetOptions">
-						<li class="facetValue">
-							<a>Chinese</a>
-						</li>
-						<li class="facetValue">
-							<a>Italian</a>
-						</li>
-					</ul>
-				</li>
-				<li id="searchByPreparationTime" class="searchFacet">
-					<a class="facetLink">Preparation Time</a>
-				</li>
-			</ul>
-		
+			<ul><?php new searchOptions(); ?></ul>		
 		</section>
 		
 		<section id="recipeSearchResults">

@@ -1,63 +1,142 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema> .
 @prefix recipe: <http://linkedrecipes.org/schema/> .
 
+@prefix dUser: <http://palacealex.com/data/User/> .
+
+@prefix dCourse: <http://palacealex.com/data/Course/> .
+@prefix dCuisine: <http://palacealex.com/data/Cuisine/> .
 @prefix dFood: <http://palacealex.com/data/Food/> .
 @prefix dRecipe: <http://palacealex.com/data/Recipe/> .
 @prefix dTechnique: <http://palacealex.com/data/Technique/> .
 @prefix dTool: <http://palacealex.com/data/Tool/> .
 
-dFood:Sultana 	a recipe:Food .
-dFood:Margarine a recipe:Food .
-dFood:Sugar 	a recipe:Food .
-dFood:Egg 		a recipe:Food .
-dFood:Flour 	a recipe:Food .
-dFood:Salt 		a recipe:Food .
+dCourse:Starter a recipe:Course ;
+	rdfs:label "Starter" .
+dCourse:Main a recipe:Course ;
+	rdfs:label "Main" .
+dCourse:Dessert a recipe:Course ;
+	rdfs:label "Dessert" .
+
+dCuisine:British a recipe:Cuisine ;
+	rdfs:label "British" .
+dCuisine:Chinese a recipe:Cuisine ;
+	rdfs:label "Chinese" .
+dCuisine:Indian	 a recipe:Cuisine ;
+	rdfs:label "Indian" .
+dCuisine:Italian a recipe:Cuisine ;
+	rdfs:label "Italian" .
+dCuisine:Mexican a recipe:Cuisine ;
+	rdfs:label "Mexican" .
+dCuisine:Russian a recipe:Cuisine ;
+	rdfs:label "Russian" .
+
+dFood:Sultana 	a recipe:Food ;
+	rdfs:label "sultana" .
+dFood:Margarine a recipe:Food ;
+	rdfs:label "margarine" .
+dFood:Sugar 	a recipe:Food ;
+	rdfs:label "sugar" .
+dFood:Egg 		a recipe:Food ;
+	rdfs:label "egg" .
+dFood:Flour 	a recipe:Food ;
+	rdfs:label "flour" .
+dFood:Salt 		a recipe:Food ;
+	rdfs:label "salt" .
 
 dTechnique:Cook a recipe:Technique .
 
 dTool:Oven a recipe:Tool .
 
-dRecipe:sultanaCake a recipe:Recipe ;
-	recipe:Cuisine "british" ;
-	recipe:Ingredients [
-		recipe:Ingredient [
-			recipe:Food 	dFood:Sultana ;
-			recipe:Quantity "225g" ;
+dRecipe:Noodles a recipe:Recipe ; 
+	rdfs:label "Noodles" ;
+	recipe:course dCourse:Starter ;
+	recipe:cuisine dCuisine:Chinese .
+
+dRecipe:Pizza a recipe:Recipe ;
+	rdfs:label "Pizza" ;
+	recipe:course dCourse:Main ;
+	recipe:cuisine dCuisine:Italian .
+
+dRecipe:GarlicBread a recipe:Recipe ;
+	rdfs:label "Garlic Bread" ;
+	recipe:course dCourse:Starter ;
+	recipe:cuisine dCuisine:Italian ;
+	recipe:time "PT20M"^^xsd:duration .
+
+dRecipe:ChickenFajitas a recipe:Recipe ;
+	rdfs:label "Chicken Fajitas" ;
+	recipe:course dCourse:Main ;
+	recipe:cuisine dCuisine:Mexican .
+
+dRecipe:ChickenKorma a recipe:Recipe ;
+	rdfs:label "Chicken Korma" ;
+	recipe:course dCourse:Main ;
+	recipe:cuisine dCuisine:Indian .
+
+dRecipe:Nachos a recipe:Recipe ;
+	rdfs:label "Nachos" ;
+	recipe:course dCourse:Starter ;
+	recipe:cuisine dCuisine:Mexican .
+
+dRecipe:RoastTurkey a recipe:Recipe ;
+	rdfs:label "Roast Turkey" ;
+	recipe:course dCourse:Main ;
+	recipe:cuisine dCuisine:British .
+
+dRecipe:Bolognese a recipe:Recipe ;
+	rdfs:label "Spaghetti Bolognese" ;
+	recipe:course dCourse:Main ;
+	recipe:cuisine dCuisine:Italian .
+
+dRecipe:Tiramisu a recipe:Recipe ;
+	rdfs:label "Tiramisu" ;
+	recipe:course dCourse:Dessert ;
+	recipe:cuisine dCuisine:Italian .
+
+dRecipe:Pavlova a recipe:Recipe ;
+	rdfs:label "Pavlova" ;
+	recipe:course dCourse:Dessert ;
+	recipe:cuisine dCuisine:Russian .
+
+dRecipe:SultanaCake a recipe:Recipe ;
+	rdfs:label "Sultana Cake" ;
+	recipe:course dCourse:Dessert ;
+	recipe:cuisine dCuisine:British ;
+	recipe:ingredients [ a recipe:IngredientList ;
+		rdf:_1 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Sultana ;
+			recipe:quantity "225g" ;
 		] ;
-		recipe:Ingredient [
-			recipe:Food 	dFood:Margarine ;
-			recipe:Quantity	"125g" ;
+		rdf:_2 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Margarine ;
+			recipe:quantity	"125g" ;
 		] ;
-		recipe:Ingredient [
-			recipe:Food 	dFood:Sugar ;
-			recipe:Quantity "175g" ;
+		rdf:_3 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Sugar ;
+			recipe:quantity "175g" ;
 		] ;
-		recipe:Ingredient [
-			recipe:Food 	dFood:Egg ;
-			recipe:Quanity 	2 ;
+		rdf:_4 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Egg ;
+			recipe:quanity 	2 ;
 		] ;
-		recipe:Ingredient [
-			recipe:Food 	dFood:Flour ;
-			recipe:Quantity "175g" ;
+		rdf:_5 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Flour ;
+			recipe:quantity "175g" ;
 		] ;
-		recipe:Ingredient [
-			recipe:Food 	dFood:Salt ;
-			recipe:Quantiy "a pinch of" ;
+		rdf:_6 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Salt ;
+			recipe:quantiy "a pinch" ;
 		]
 	] ;
-	recipe:Method [
-		recipe:Step [
+	recipe:method [
+		rdf:_1 [ a recipe:Step ;
 			recipe:Ingredient ;
 			recipe:Tool dTool:Oven ;
 			recipe:Technique dTechnique:Cook ;
 		]
 	] .
 
-dRecipe:noodles a recipe:Recipe ; 
-	recipe:cuisine "chinese" ;
-	recipe:name "noodles" .
-
-dRecipe:pizza a recipe:Recipe ;
-	recipe:cuisine "italian" ;
-	recipe:name "pizza" .
 
