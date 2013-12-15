@@ -15,7 +15,7 @@ class arcDb {
 		$this->store->query('LOAD <file://' . $_SERVER['DOCUMENT_ROOT'] . '/php/data/rdf/test.ttl>');
 	}
 	public function query($sparql) {
-		$result = $this->store->query($sparql);
+		$result = $this->store->query($sparql,'rows');
 
 		echo $sparql;
 		var_dump($result);
@@ -29,8 +29,20 @@ class arcDb {
 			$sparql = "PREFIX {$args['prefixes']} .";
 		}
 
-		$sparql .= "SELECT * WHERE { {$args['where']}";
-		
+		$sparql .= "SELECT ";
+		if ($args['select']) {
+			foreach ($args['select'] as $prop) {
+				$sparql .= $prop . ' ';
+			}
+		}
+		else {
+			$sparql .= "*";
+		}
+
+		if ($args['where']) {
+			$sparql .= "WHERE { {$args['where']} ";
+		}
+
 		if (isset($args['filters'])) {
 			foreach ($args['filters'] as $filter => $choices) {
 				if (is_array($choices)) {

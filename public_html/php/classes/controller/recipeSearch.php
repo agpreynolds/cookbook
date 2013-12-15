@@ -20,8 +20,16 @@ class recipeSearch {
 
 	private function generateQueryData($data) {
 		$this->queryData = array(
+			'select' => array(
+				'?name',
+				'?cuisine',
+				'?course'
+			),
 			'prefixes' => 'recipe: <http://linkedrecipes.org/schema/>',
-			'where' => "?recipe a recipe:Recipe ; rdfs:label ?name ; recipe:cuisine ?cuisine ; recipe:course ?course .",
+			'where' => "?recipe a recipe:Recipe ; 
+				rdfs:label ?name ;
+				recipe:cuisine ?cuisine ;
+				recipe:course ?course .",
 			'filters' => array()
 		);
 
