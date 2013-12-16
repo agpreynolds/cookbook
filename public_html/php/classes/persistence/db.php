@@ -1,20 +1,23 @@
 <?php
 
-class db extends mysqli{
+class db extends mysqli {
+    private $config;
+
     public function __construct() {
-        $this->config = require2('/utils/configuration/db.php');
+        $this->config = getConfig('db');
              
         parent::__construct(
             $this->config['host'],
             $this->config['username'],
-            $this->config['password']
+            $this->config['password'],
+            $this->config['db_name']
         );
 
 	}
     public function query($sql) {
     	//TODO: SQL INJECTION PROTECTION
 
-    	parent::query($sql);
+    	return parent::query($sql);
     }
     public function insert($args) {
         if (!$args || !$args['table'] || !$args['values']) {
@@ -27,7 +30,7 @@ class db extends mysqli{
             $sql .= " (" . $args['fields'] . ")";
         }
 
-        $sql .= " VALUES ('{$args['values']}')";
+        $sql .= " VALUES ({$args['values']})";
         $this->query($sql);
     }
     public function select($args) {
@@ -37,7 +40,6 @@ class db extends mysqli{
 
         $sql = "SELECT {$args['select']} FROM {$args['table']}";
         $sql .= ( isset($args['where']) ) ? " WHERE {$args['where']}" : "";
-        
         return $this->query($sql);
     }
 }

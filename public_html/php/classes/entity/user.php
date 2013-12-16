@@ -5,6 +5,7 @@ class user {
 	private $encryptedPassword;
 	private $isVegetarian;
 	private $isVegan;
+	public $isSignedIn;
 
 	public function __construct() {
 

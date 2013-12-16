@@ -33,6 +33,8 @@ global.recipeSearch = {
 		var _this = global.recipeSearch;
 
 		_this.container = $("#recipeSearchContainer");
+
+		global.initPanel(_this);
 		
 		_this.facetPanel.init();
 	},
@@ -150,11 +152,17 @@ global.recipeSearch.resultPanel = {
 				//Matching by name - yuck
 				//Discuss identifiers with Jack
 				if (item.name == ele.id) {
-					$.get('/templates/searchPanels/resultLarge/index.php',
-						{ method: 'recipe',data : item })
-						.done(function(response){
-							global.recipeSearch.largeResultPanel.init(response);
-						});
+					global.popup.init({
+						id : 'resultLarge',
+						path : '/templates/searchPanels/resultLarge/index.php',
+						data : {
+							method : 'recipe',
+							data: item
+						},
+						callback : function(response,container) {
+							global.recipeSearch.largeResultPanel.init(response,container);
+						}
+					});
 				}
 			});
 		});		
@@ -163,14 +171,19 @@ global.recipeSearch.resultPanel = {
 
 global.recipeSearch.largeResultPanel = {
 	state : 'hidden',
-	init : function(response) {
+	init : function(response,container) {
 		var _this = global.recipeSearch.largeResultPanel;
-		_this.container = $("#resultLarge");
-		_this.container.html(response);
+		_this.closeButton = $("a.indicator");
+		_this.closeButton.bind('click',function(){
+			container.remove();
+		});
 		
-		_this.componentLists = $("li.componentOption a");
+		_this.componentLists = $("article.componentOption header");
 		_this.componentLists.bind('click',function(){
-			$(this).parent().find('ul,ol').slideToggle('slow');
+			var indicator = $(this).find('span.indicator');
+			global.toggleHTML(indicator,'+','-');
+			
+			$(this).parent().find('ul,ol').slideToggle();
 		});
 	}
 };

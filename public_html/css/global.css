@@ -7,22 +7,16 @@ h1,h2,h3,h4,p,ul {
 	padding:0;
 }
 
-header {
-	text-align:center;
-}
-
 h3,h4 {
 	text-align:left;
 }
 
-h3 {
-	padding-bottom:2px;
-	margin-bottom:5px;
-	border-bottom:1px solid;
-}
-
 ul {
 	list-style: none;	
+}
+
+input, a {
+	display:block;
 }
 
 a:hover {
@@ -35,12 +29,37 @@ footer {
 	clear:both;
 	width:100%;
 	font-size:80%;
-	border-top:1px solid;
 }
 
-/* TODO: Responsive Scaling for mobile */
-#recipeSearchContainer section {
+section header {
+	background:#006600;
+	padding: 5px;
+	margin-top:5px;
+}
+
+
+article {
 	float:left;
+	padding: 0 1%;
+}
+
+article header {
+	background:white;
+	padding:0;
+	border-bottom:1px solid;	
+}
+
+.wrapper {
+	background:white;
+	overflow:hidden;
+	border:1px solid #006600;	
+}
+
+.indicator { float:right; }
+
+/* TODO: Responsive Scaling for mobile */
+#userLoginContainer article {
+	width:48%;
 }
 
 #recipeSearchFacets {
@@ -48,22 +67,18 @@ footer {
 }
 
 #recipeSearchResults {
-	margin-left:2%;
-	width:78%;
+	width:76%;
 }
 
 a.facetLink {font-weight:bold;}
-.selected.facetValue a {background:green;}
-.selected .facetOptions { /*display:block;*/ }
+.selected.facetValue a {background:#006600;}
 .facetOptions { 
 	display:none;
-	margin-left:10px;
 	font-size:80%;
 }
-.selected.facetValue a {
-	display:block;
-	padding:5px;
-	margin: 5px 0;
+.facetValue a {
+	margin: 2px 0;
+	padding:2px;
 }
 
 .facetLink:hover {
@@ -87,21 +102,63 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 	font-size:0.8em;
 }
 
-#resultLarge {
-	border:1px solid;
-	padding:5px;
+#components {
+	clear:both;
 }
 
-#resultLarge h3 {
-	border:none;
+.componentOption {
+	margin-bottom:5px;
 }
 
-#components li {
-	padding:5px;
-	margin:5px 0;
-	background:gray;
+.componentOption ul, .componentOption ol {
+	display:none;
 }
 
 /* Generic Classes */
 .fLeft {float:left;}
 .fRight {float:right;}
+.note {
+	font-style:italic;
+	font-size:12px;
+}
+
+div.popup-bg {
+    background: black;
+    opacity:0.5;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;left:0;
+}
+
+div.popup {
+    position: absolute;
+    max-width:95%;
+    border:3px solid #006600;
+    border-radius:5px;        
+    background:white;        
+    z-index:100;        
+}
+
+.popup article {
+	padding:0;
+	float:none;
+}
+.popup article header {
+	background:#006600;
+	padding:5px;
+	margin:0;
+	border:none;
+}
+
+.popup article section.wrapper {
+	margin:5px;
+	border:none;
+}
+
+.popup img {
+	border:2px solid #006600;
+	border-radius:10px;
+	padding:5px;
+	margin: 0 5px 5px 0;
+}
