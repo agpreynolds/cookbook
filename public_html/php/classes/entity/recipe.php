@@ -44,8 +44,14 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 	}
 
+	/*
+		* Writes a recipe out to the database represented in triple stores
+		* Returns 0 on Error
+	*/
 	public function store() {
-
+		$arcDb = new arcDb();
+		$sqarql = "INSERT ";
+		return 0;
 	}
 }
 

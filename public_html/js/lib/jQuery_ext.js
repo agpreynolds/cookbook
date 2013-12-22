@@ -35,8 +35,8 @@ $.fn.center = function() {
     var xPos =  ( window.innerWidth - width ) / 2;
     var height = this.outerHeight();
     var yPos = ( window.innerHeight - height ) / 2;
-    if (yPos < 0 ) {
-        yPos = 0;
+    if (yPos < 10 ) {
+        yPos = 10;
     }
     this.css('left',xPos + "px");
     this.css('top', yPos + "px");   

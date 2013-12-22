@@ -49,7 +49,12 @@ global.popup = {
         .done(function(response){
         	contentContainer.html(response);
         	fgContainer.center();
-        	callback(response,container);
+            
+            $('body').animate({
+                scrollTop: $('body').offset().top
+            }, 500);
+        	
+            callback(response,container);
         });
         
         $(window).resize(function(){

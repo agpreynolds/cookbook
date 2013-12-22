@@ -2,7 +2,7 @@ body {
 	font-family:arial;
 }
 
-h1,h2,h3,h4,p,ul {
+h1,h2,h3,h4,p,ul,input {
 	margin:0;
 	padding:0;
 }
@@ -15,8 +15,30 @@ ul {
 	list-style: none;	
 }
 
-input, a {
+label {
+	font-size:12px;
+}
+
+input, textarea, select, a {
 	display:block;
+}
+
+input {
+	padding:2px;
+}
+
+input[type="submit"] {
+	background: #228B22;
+	border:none;
+	padding:5px;
+	margin:5px 0;
+	font-weight:bold;
+	color:white;
+	min-width:100px;
+}
+
+select {
+	min-width:150px;
 }
 
 a:hover {
@@ -31,28 +53,30 @@ footer {
 	font-size:80%;
 }
 
-section header {
-	background:#006600;
+header {
+	background:#228B22;
 	padding: 5px;
 	margin-top:5px;
+	color:white;
 }
 
-
-article {
-	float:left;
-	padding: 0 1%;
-}
-
-article header {
+header.black {
 	background:white;
 	padding:0;
-	border-bottom:1px solid;	
+	border-bottom:1px solid;
+	color:#000;
 }
 
 .wrapper {
 	background:white;
 	overflow:hidden;
-	border:1px solid #006600;	
+	border:1px solid #228B22;
+	padding:5px;
+}
+
+.wrapper article, .wrapper section {
+	float:left;
+	padding: 0 1%;
 }
 
 .indicator { float:right; }
@@ -71,7 +95,7 @@ article header {
 }
 
 a.facetLink {font-weight:bold;}
-.selected.facetValue a {background:#006600;}
+.selected.facetValue a {background:#228B22;}
 .facetOptions { 
 	display:none;
 	font-size:80%;
@@ -88,12 +112,20 @@ a.facetLink {font-weight:bold;}
 #recipeSearchResults li {
 	float:left;
 	margin:5px 10px 5px 0px;
-	padding:5px;
-	border: 1px solid;
-	border-radius:5px;
-	width:250px;
-	height:64px;
+	border: 1px solid #228B22;
+	width:200px;
+	max-height:100px;
 	cursor:pointer;
+}
+
+#recipeSearchResults article {
+	float:none;
+	padding:0;
+	width:100%;
+}
+
+#recipeSearchResults article header {
+	margin:0;
 }
 
 section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRating {
@@ -102,9 +134,7 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 	font-size:0.8em;
 }
 
-#components {
-	clear:both;
-}
+#components {clear:both}
 
 .componentOption {
 	margin-bottom:5px;
@@ -121,6 +151,12 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 	font-style:italic;
 	font-size:12px;
 }
+input.error { border:1px solid;}
+select.error { outline: 1px solid;}
+.error {
+	color:red;
+	font-size:12px;
+}
 
 div.popup-bg {
     background: black;
@@ -134,31 +170,54 @@ div.popup-bg {
 div.popup {
     position: absolute;
     max-width:95%;
-    border:3px solid #006600;
+    border:3px solid #228B22;
     border-radius:5px;        
     background:white;        
     z-index:100;        
 }
+
+div.popup a.close-link { float:right; }
 
 .popup article {
 	padding:0;
 	float:none;
 }
 .popup article header {
-	background:#006600;
-	padding:5px;
 	margin:0;
-	border:none;
 }
 
-.popup article section.wrapper {
+.popup article .wrapper {
 	margin:5px;
 	border:none;
 }
 
+.popup article .wrapper section {
+	float:none;
+	padding:0;
+}
+
 .popup img {
-	border:2px solid #006600;
+	border:2px solid #228B22;
 	border-radius:10px;
 	padding:5px;
 	margin: 0 5px 5px 0;
+}
+
+@media (max-width:480px) {
+	input, textarea {width:98%;}
+	select, input[type="submit"] {width:100%;}
+	#userLoginContainer article {
+		width:98%;
+	}
+
+	#userLogin {
+		border-bottom:1px solid #228B22;
+	}
+	#recipeSearchFacets {
+		width:98%;
+	}
+
+	#recipeSearchResults {
+		width:98%;
+	}
 }

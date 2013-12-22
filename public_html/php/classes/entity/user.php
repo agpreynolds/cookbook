@@ -1,22 +1,29 @@
 <?php
 
 class user {
-	private $username;
-	private $encryptedPassword;
-	private $isVegetarian;
-	private $isVegan;
+	public $username;
 	public $isSignedIn;
+	public $isVegetarian;
+	public $isVegan;
 
 	public function __construct() {
 
 	}
 
-	public function setEncryptedPassword($password) {
-		$this->encryptedPassword = encrypt($password);
+	public function populate($userData) {
+		$this->username = $userData['username'];
 	}
 
-	public function store() {
+	public function exists($username) {
+		global $db;
 
+		$result = $db->select(array(
+			'select' => 'username,password',
+			'table' => 'user',
+			'where' => "username = '$username'"
+		));
+
+		return ( $result->num_rows === 1 ? $result : 0);
 	}
 }
 

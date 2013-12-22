@@ -173,7 +173,7 @@ global.recipeSearch.largeResultPanel = {
 	state : 'hidden',
 	init : function(response,container) {
 		var _this = global.recipeSearch.largeResultPanel;
-		_this.closeButton = $("a.indicator");
+		_this.closeButton = $("a.close-link");
 		_this.closeButton.bind('click',function(){
 			container.remove();
 		});

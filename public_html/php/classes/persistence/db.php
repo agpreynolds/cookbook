@@ -1,23 +1,26 @@
 <?php
 
 class db extends mysqli {
-    private $config;
+    protected $config;
+    private $connection;
 
     public function __construct() {
-        $this->config = getConfig('db');
-             
-        parent::__construct(
+        $this->config = getConfig('db');             
+    }
+    private function setup() {
+        $this->connection = parent::__construct(
             $this->config['host'],
             $this->config['username'],
             $this->config['password'],
             $this->config['db_name']
-        );
-
-	}
+        );        
+    }
     public function query($sql) {
-    	//TODO: SQL INJECTION PROTECTION
-
-    	return parent::query($sql);
+        //TODO: SQL INJECTION PROTECTION
+        if (!$this->connection) {
+            $this->setup();
+        }
+        return parent::query($sql);
     }
     public function insert($args) {
         if (!$args || !$args['table'] || !$args['values']) {
@@ -31,7 +34,7 @@ class db extends mysqli {
         }
 
         $sql .= " VALUES ({$args['values']})";
-        $this->query($sql);
+        return $this->query($sql);
     }
     public function select($args) {
         if (!$args) {

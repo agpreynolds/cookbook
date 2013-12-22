@@ -11,12 +11,13 @@ global.consoleDebug = function(msg,obj) {
 }
 global.initPanel = function(panel) {
 	panel.wrapper = panel.container.find('section.wrapper');
+	panel.headerLink = panel.container.find('a.panelHeader');
 
 	if (panel.defaultState == 'hidden') {
 		panel.wrapper.hide();			
 	}
 
-	panel.container.find('a.panelHeader').bind('click',function(){
+	panel.headerLink.bind('click',function(){
 		var indicator = $(this).find('span.indicator');
 		global.toggleHTML(indicator,'+','-');
 		panel.wrapper.slideToggle('slow');

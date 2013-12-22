@@ -16,6 +16,11 @@ function getConfig($config) {
 	return requireAbs_once($path);
 }
 
+function getForm($id) {
+	$path = '/php/forms/' . $id . '.php';
+	return require ( getAbsIncPath($path) );
+}
+
 function encrypt($arg) {
 	return md5($arg);
 }

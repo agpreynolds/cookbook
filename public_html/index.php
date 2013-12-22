@@ -12,8 +12,9 @@
 	<script type="text/javascript" src="/js/global.js"></script>
 	<script type="text/javascript" src="/js/form.js"></script>
 	<script type="text/javascript" src="/js/popup.js"></script>
+	<script type="text/javascript" src="/js/recipeCreate.js"></script>
 	<script type="text/javascript" src="/js/recipeSearch.js"></script>
-	<script type="text/javascript" src="/js/signin.js"></script>
+	<script type="text/javascript" src="/js/user.js"></script>
 </head>
 
 <body>
@@ -21,55 +22,21 @@
 		<h1>TODO: Good Title</h1>
 	</header>
 
-	<section id="userLoginContainer">
-		<header>
-			<h3><a class="panelHeader">Sign In / Register<span class="indicator">+</span></a></h3>
-		</header>
-		<section class="wrapper">
-			<article id="userLogin">
-				<header>
-					<h4>Sign In:</h4>
-				</header>
-				<p class="note">Already have an account? Enter your username and password below to sign in.</p>
-				<form name="userLogin">
-					<input name="username" type="text" placeholder="Username"/>
-					<input name="password" type="password" placeholder="Password"/>
-					<input type="submit" value="Sign In"/>
-				</form>
-			</article>
-			<article id="userSignup">
-				<header>
-					<h4>Register:</h4>
-				</header>
-				<p class="note">To create an account enter a unique username below:</p>
-				<form name="userSignup">
-					<input name="username" type="text" placeholder="Username"/>
-					<input name="password" type="password" placeholder="Password"/>
-					<input name="password2" type="password" placeholder="Verify Password"/>
-					<input type="submit" value="Register">
-				</form>
-			</article>
-		</section>
-	</section>
+	<div id="userOptionsContainer"><?php new userOptions(); ?></div>
+	<section id="recipeCreateContainer"></section>
 
 	<section id="recipeSearchContainer">
 		<header>
 			<h3><a class="panelHeader">Search Recipes<span class="indicator">-</span></a></h3>
 		</header>
 		<section class="wrapper">
-			<article id="recipeSearchFacets">
-				<header>
-					<h3>Search By:</h3>
-				</header>
+			<section id="recipeSearchFacets">
 				<ul><?php new searchOptions(); ?></ul>		
-			</article>
+			</section>
 			
-			<article id="recipeSearchResults">
-				<header>
-					<h3>Results:</h3>
-				</header>
+			<section id="recipeSearchResults">
 				<ul id="resultList"></ul>			
-			</article>
+			</section>
 		</section>
 	</section>
 

@@ -8,7 +8,7 @@ class request {
             $this->request = $_REQUEST;
             //$this->formRequest();
             
-            if ( isset($this->request) && isset($this->request['method']) && isset($this->request['data']) ) {
+            if ( isset($this->request) && isset($this->request['method']) ) {
                 $this->handleAjax($this->request['method'],$this->request['data']);                    
             }
         }

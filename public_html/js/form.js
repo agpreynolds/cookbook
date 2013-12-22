@@ -3,12 +3,15 @@ var global = global || {};
 global.form = {
 	init : function() {
 		var _this = global.form
-		$('form').bind('submit',_this.onSubmit);
+		$('form').unbind('submit').bind('submit',_this.onSubmit);
 	},
 	onSubmit : function(evt) {
 		evt.preventDefault();
 		var form = this;
 		var _this = global.form;
+
+		$(form).find('.errorList').remove();
+		$(form).find('.error').removeClass('error');
 		
 		$.post('/php/controllers/formHandler.php',{
 			method : form.name,
@@ -17,22 +20,42 @@ global.form = {
 		.done(function(response){
 			var response = JSON.parse(response);
 
-			if (response.type == 'error') {
-				_this.onError(form,response.messages);
+			if (response.type == 'success') {
+				_this.onSuccess(form,response);
 			}
-			global.consoleDebug('Form: ' + form.name + ' successfully processed');
+			else if (response.type == 'error') {
+				_this.onError(form,response);
+			}
+			global.consoleDebug('Form: ' + form.name + ' successfully processed with response:',response);
 		})
 		.fail(function(response){
+			_this.onError(form,response);
 			global.consoleDebug('Form: ' + form.name + ' failed processing');
 		});
 	},
-	onError : function(form,messages) {
-		var errorNode = $(form).find('errors')
-		if ( errorNode.length ) {
-			errorNode.html(messages);
+	onSuccess : function(form,response) {
+		if (response.onSuccess) {
+			eval(response.onSuccess)();			
 		}
-		else {
-			$(form).prepend(messages);
+	},
+	onError : function(form,response) {
+		var errorNode = $('<ul>').addClass('errorList');
+		$(form).prepend(errorNode);
+		
+		if (response && response.messages) {
+			$(response.messages).each(function(){
+				errorNode.append($('<li>').attr('id',this.key).addClass('error').html(this.text));
+				if (this.field) {
+					$(form).find('[name="' + this.field + '"],label[for="' + this.field + '"]').addClass('error');
+				}
+			});			
+		}
+		else {	
+			errorNode.append($('<li>').attr('id','system_error').addClass('error').html('System Error'));
+		}
+
+		if (response.onError) {
+			eval(response.onError)(form,response);			
 		}
 	}
 }

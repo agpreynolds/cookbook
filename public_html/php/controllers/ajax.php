@@ -1,5 +1,12 @@
 <?php
 
-echo json_encode($request->response);
+$db = new db();
+
+$insert = $db->insert(
+	array(
+		'table' => 'user',
+		'values' => "'username','password'"
+	)
+);
 
 ?>

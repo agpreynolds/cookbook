@@ -11,7 +11,13 @@ function __autoload($class_name) {
 	include ( getAbsIncPath('/php/classes/persistence/' . $class_name . '.php' ) );	
 }
 
-$request 	= new request();
-$user 		= new user();
+$db = new db();
+$session = new session();
+
+if (!isset($_SESSION['user'])) {
+	$_SESSION['user'] = new user();
+}
+
+$request = new request();
 
 ?>
