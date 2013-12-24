@@ -1,8 +1,9 @@
 body {
 	font-family:arial;
+	margin:5px;
 }
 
-h1,h2,h3,h4,p,ul,input {
+h1,h2,h3,h4,p,ul,input,select,textarea {
 	margin:0;
 	padding:0;
 }
@@ -19,12 +20,20 @@ label {
 	font-size:12px;
 }
 
-input, textarea, select, a {
+input, textarea {
 	display:block;
+	padding:2px;
+	border: solid 1px #228B22;
 }
 
-input {
-	padding:2px;
+select {
+	display:block;
+	outline: solid 1px #228B22;
+	min-width:150px;
+}
+
+input[type="checkbox"] {
+	float:left;
 }
 
 input[type="submit"] {
@@ -37,10 +46,9 @@ input[type="submit"] {
 	min-width:100px;
 }
 
-select {
-	min-width:150px;
+a {
+	display:block;
 }
-
 a:hover {
 	cursor:pointer;
 	text-decoration:underline;
@@ -81,10 +89,24 @@ header.black {
 
 .indicator { float:right; }
 
+div.checkbox {
+	margin:10px 0;
+	overflow:hidden;
+}
+div.checkbox label {
+	float:left;
+	margin-left:15px;
+}
+
 /* TODO: Responsive Scaling for mobile */
 #userLoginContainer article {
 	width:48%;
 }
+
+.pwd-strength span {font-weight:bold;}
+.pwd-strength .weak {color:red;}
+.pwd-strength .average {color:orange;}
+.pwd-strength .strong {color:green;}
 
 #recipeSearchFacets {
 	width:20%;
@@ -151,8 +173,8 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 	font-style:italic;
 	font-size:12px;
 }
-input.error { border:1px solid;}
-select.error { outline: 1px solid;}
+textarea.error, input.error { border:1px solid red;}
+select.error, input[type="checkbox"].error { outline: 1px solid;}
 .error {
 	color:red;
 	font-size:12px;
@@ -206,6 +228,9 @@ div.popup a.close-link { float:right; }
 @media (max-width:480px) {
 	input, textarea {width:98%;}
 	select, input[type="submit"] {width:100%;}
+	input[type="checkbox"] {width:13px;}
+	.wrapper {padding:0;}
+
 	#userLoginContainer article {
 		width:98%;
 	}

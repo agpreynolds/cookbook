@@ -35,6 +35,7 @@
 			</section>
 			
 			<section id="recipeSearchResults">
+				<p class="note">Select from the options on the left to start searching for recipes</p>
 				<ul id="resultList"></ul>			
 			</section>
 		</section>

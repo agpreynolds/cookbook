@@ -9,11 +9,11 @@
 			</header>
 			<p class="note">Already have an account? Enter your username and password below to sign in.</p>
 			<form name="userLogin">
-				<label for="username">Username</label>
-				<input name="username" type="text" placeholder="Username"/>
+				<label for="username">*Username</label>
+				<input name="username" type="text" placeholder="Username" maxlength="15" />
 
-				<label for="password">Password</label>
-				<input name="password" type="password" placeholder="Password"/>
+				<label for="password">*Password</label>
+				<input name="password" type="password" placeholder="Password" maxlength="12" />
 				
 				<input type="submit" value="Sign In"/>
 			</form>
@@ -24,17 +24,19 @@
 			</header>
 			<p class="note">To create an account enter a unique username below:</p>
 			<form name="userSignup" autocomplete="off">
-				<label for="username">Username</label>
+				<label for="username">*Username</label>
 				<input name="username" type="text" placeholder="Username"/>
 
-				<label for="password">Password (case sensitive, 6 - 12 characters)</label>
-				<input name="password" type="password" placeholder="Password"/>
+				<label for="password">*Password (case sensitive, 6 - 12 characters)</label>
+				<input name="password" type="password" placeholder="Password" maxlength="12" />
 				
-				<label for="password2">Verify Password</label>
-				<input name="password2" type="password" placeholder="Verify Password"/>
+				<label for="password2">*Verify Password</label>
+				<input name="password2" type="password" placeholder="Verify Password" maxlength="12" />
 
-				<input name="terms" type="checkbox"/>
-				<label for="terms">Please confirm you have read and agreed to our <a>Terms of Use</a></label>
+				<div class="checkbox">
+					<input name="terms" type="checkbox"/>
+					<label for="terms">*Please confirm you have read and agreed to our <a href>Terms of Use</a></label>
+				</div>
 				
 				<input type="submit" value="Register">
 			</form>

@@ -7,7 +7,7 @@ $resultLogic = new resultLogic($recipe);
 
 <article>
 	<header>
-		<h3><?php echo $recipe->name; ?><a class="close-link">X</a></h3>			
+		<h3><?php echo $recipe->label; ?><a class="close-link">X</a></h3>			
 	</header>
 	<section class="wrapper">
 		<img class="fLeft" src="/media/recipe_default.png" alt="http://www.iconarchive.com/show/virtual-kitchen-icons-by-sirea/Pan-icon.html">
@@ -17,7 +17,7 @@ $resultLogic = new resultLogic($recipe);
 			</a>
 		</p>
 		
-		<p><?php echo $recipe->description; ?></p>
+		<p><?php echo $recipe->comment; ?></p>
 		
 		<section id="components">
 			<article class="componentOption">

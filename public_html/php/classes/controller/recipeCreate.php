@@ -15,6 +15,9 @@ class recipeCreate extends validateForm {
 		if (!$_SESSION['user']->isSignedIn) {
 			$this->errors[] = $this->setError('user_notSignedIn');
 		}
+		else {
+			$this->formData['author'] = $_SESSION['user']->username;
+		}
 		
 		if ( $this->isValid() && !$this->errors ) {
 			$recipe = new recipe($this->formData);

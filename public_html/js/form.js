@@ -1,9 +1,16 @@
 var global = global || {};
 
 global.form = {
+	requiredText : 'Fields marked with "*" are required',
 	init : function() {
 		var _this = global.form
 		$('form').unbind('submit').bind('submit',_this.onSubmit);
+		$('form').each(function(){
+			var requiredNoteNode = $(this).find(".required-note");
+			if (!requiredNoteNode.length) {
+				$(this).prepend($('<p>').addClass('note required-note').html(_this.requiredText));
+			}
+		});
 	},
 	onSubmit : function(evt) {
 		evt.preventDefault();

@@ -10,10 +10,13 @@ function getAbsIncPath($path) {
 function requireAbs_once($path) {
 	return require_once($_SERVER['DOCUMENT_ROOT'] . $path );
 }
+function requireAbs($path) {
+	return require($_SERVER['DOCUMENT_ROOT'] . $path );
+}
 
 function getConfig($config) {
 	$path = '/php/configuration/' . $config . '.php';
-	return requireAbs_once($path);
+	return requireAbs($path);
 }
 
 function getForm($id) {

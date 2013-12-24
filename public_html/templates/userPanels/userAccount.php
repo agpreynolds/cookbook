@@ -10,14 +10,20 @@
 			</header>
 			<a id="recipeCreate">Upload Recipe</a>
 			<form name="userPreferences">
-				<input name="vegetarian" type="checkbox"/>
-				<label for="vegetarian">Vegetarian</label>
+				<div class="checkbox">
+					<input name="vegetarian" type="checkbox"/>
+					<label for="vegetarian">Vegetarian</label>
+				</div>
+				
+				<div class="checkbox">
+					<input name="vegan" type="checkbox"/>
+					<label for="vegan">Vegan</label>
+				</div>
 
-				<input name="vegan" type="checkbox"/>
-				<label for="vegan">Vegan</label>
-
-				<input name="lactoseIntolerant" type="checkbox"/>
-				<label for="lactoseIntolerant">Lactose Intolerant</label>
+				<div class="checkbox">
+					<input name="lactoseIntolerant" type="checkbox"/>
+					<label for="lactoseIntolerant">Lactose Intolerant</label>
+				</div>
 			</form>
 		</article>
 	</section>

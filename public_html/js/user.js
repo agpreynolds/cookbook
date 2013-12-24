@@ -12,6 +12,9 @@ global.user = {
 			_this.container = signInContainer;
 			_this.signinForm = signInContainer.find('form[name="userLogin"]');
 			_this.registrationForm = signInContainer.find('form[name="userSignup"]');
+			_this.registrationForm.find('input[name="password"]').bind('keyup',function(){
+				_this.checkPasswordStrength(this);
+			});
 			
 			//Sign in container forms need events bound
 			//This happens on first page load but needs to be done again here
@@ -73,6 +76,29 @@ global.user = {
 		.done(function(response){
 			_this.switchPanels(response);
 		});
+	},
+	checkPasswordStrength : function(field) {
+		var _this = global.user;
+		var value = $(field).val();
+		var strength;
+		var outputNode = $('.pwd-strength');
+		
+		if (!outputNode.length) {
+			outputNode = $('<p>').addClass('pwd-strength note');
+			$(field).after(outputNode);
+		}
+
+		if ( value.length < 6 ) {
+			strength = 'weak';			
+		}
+		else if (value.length < 10) {
+			strength = 'average';
+		}
+		else {
+			strength = 'strong';
+		}
+
+		outputNode.html("Password strength: <span class='" + strength + "'>" + strength + "</span>");
 	}
 }
 

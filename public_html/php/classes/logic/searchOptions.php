@@ -1,16 +1,12 @@
 <?php
 
 class searchOptions {
-	private $options = array();
-
 	public function __construct() {
 		$config = getConfig('search');
 
-		foreach ($config as $key => $value) {
-			$facet = new facet($key,$value);
-			if ($facet->active) {
-				include ( getAbsIncPath('/templates/searchPanels/facet.php') );
-			}
+		foreach ($config as $option) {
+			$facet = new facet($option);
+			include ( getAbsIncPath('/templates/searchPanels/facet.php') );			
 		}
 	}
 

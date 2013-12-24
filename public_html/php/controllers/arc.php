@@ -1,6 +1,6 @@
 <?php
 
-$db = new arcDb();
+global $arcDb;
 
 
 
@@ -26,6 +26,27 @@ $db = new arcDb();
 	// 		'filters' => array()
 	// 	);
 
+$q = array(
+			'select' => array(
+				'?recipe',
+				'?label',
+				'?comment',
+				'?author',
+				'?cuisine',
+				'?course'
+			),
+			'where' => "?recipe a recipe:Recipe ; 
+				rdfs:label ?label ;
+				rdfs:comment ?comment ;
+				recipe:cuisine ?cuisine ;
+				recipe:course ?course ;
+				rdf:author ?auth .
+				?auth rdfs:label ?author",
+			'filters' => array()
+		);
+$result = $arcDb->query2($q);
+var_dump($result);
+
 //$result = $db->query2($queryData);
 
 // $q = "PREFIX recipe:<http://linkedrecipes.org/schema/> .
@@ -39,13 +60,6 @@ $db = new arcDb();
 // 	recipe:quantity ?quantity
 // }";
 
-$q = "dRecipe:S&S a recipe:Recipe ; 
-	rdfs:label 'S&S' ;
-	recipe:course dCourse:Starter ;
-	recipe:cuisine dCuisine:Chinese .";
 
-$result = $db->query("LOAD " . $q);
-
-var_dump( $db->getError() );
 
 ?>

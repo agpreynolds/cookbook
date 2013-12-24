@@ -64,13 +64,13 @@ class validateForm {
 		if ($this->errors) {
 			$response['type'] 		= 'error';
 			$response['messages'] 	= $this->errors;
-			if ($this->config['onError']) {
+			if ( isset($this->config['onError']) ) {
 				$response['onError'] = $this->config['onError'];
 			}
 		}
 		else {
 			$response['type'] 		= 'success';
-			if ($this->config['onSuccess']) {
+			if ( isset($this->config['onSuccess']) ) {
 				$response['onSuccess'] = $this->config['onSuccess'];	
 			}
 		}

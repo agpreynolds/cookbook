@@ -149,9 +149,7 @@ global.recipeSearch.resultPanel = {
 		_this.resultThumbnails.unbind('click').bind("click",function(){
 			var ele = this;
 			$(global.recipeSearch.resultData).each(function(i,item){
-				//Matching by name - yuck
-				//Discuss identifiers with Jack
-				if (item.name == ele.id) {
+				if (item.label == ele.id) {
 					global.popup.init({
 						id : 'resultLarge',
 						path : '/templates/searchPanels/resultLarge/index.php',

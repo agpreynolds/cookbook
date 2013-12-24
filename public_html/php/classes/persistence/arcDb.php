@@ -10,25 +10,22 @@ class arcDb {
 
 		if ( !$this->store->isSetup() ) {
 			$this->store->setUp();
+			$this->store->query('LOAD <file://' . $_SERVER['DOCUMENT_ROOT'] . '/php/data/rdf/test.ttl>');
 		}
 
-		$this->store->query('LOAD <file://' . $_SERVER['DOCUMENT_ROOT'] . '/php/data/rdf/test.ttl>');
+		 // $this->store->drop();
 	}
 	public function query($sparql) {
-		$result = $this->store->query($sparql,'rows');
+		$result = $this->store->query($sparql);
 
-		echo $sparql;
-		var_dump($result);
 		return $result;
 	}
 
 	public function query2($args) {
 		if (!$args) { return; }
 
-		if ($args['prefixes']) {
-			$sparql = "PREFIX {$args['prefixes']} .";
-		}
-
+		$sparql = $this->attachDefaultPrefixes();
+		
 		$sparql .= "SELECT ";
 		if ($args['select']) {
 			foreach ($args['select'] as $prop) {
@@ -61,9 +58,25 @@ class arcDb {
 		}
 
 		$sparql .= "}";
-		//echo $sparql;
-		$result = $this->store->query($sparql,'rows');
-		return $result;
+		// echo $sparql;
+		return $result = $this->store->query($sparql,'rows');
+	}
+
+	public function insert($triples) {
+		$sparql = $this->attachDefaultPrefixes();
+
+		$sparql .= "INSERT INTO <...> { $triples }";
+		
+		return $result = $this->store->query($sparql);
+	}
+
+	private function attachDefaultPrefixes() {
+		$OUT = '';
+		if ($this->config['prefixes']) {
+			foreach ($this->config['prefixes'] as $prefix)
+			$OUT .= "PREFIX {$prefix} . \n";
+		}
+		return $OUT;
 	}
 
 	private function filterString($filter,$value) {

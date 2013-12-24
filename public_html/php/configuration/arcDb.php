@@ -5,6 +5,17 @@ return array(
 	'db_name' => 'cookbook',
 	'db_user' => 'root',
 	'db_pwd' => 'ls55ftc',
+	'prefixes' => array(
+		'foaf: <http://xmlns.com/foaf/0.1/>',
+		'recipe: <http://linkedrecipes.org/schema/>',
+		'dCourse: <http://palacealex.com/data/Course/>',
+		'dCuisine: <http://palacealex.com/data/Cuisine/>',
+		'dFood: <http://palacealex.com/data/Food/>',
+		'dRecipe: <http://palacealex.com/data/Recipe/>',
+		'dTechnique: <http://palacealex.com/data/Technique/>',
+		'dTool: <http://palacealex.com/data/Tool/>',
+		'dUser: <http://palacealex.com/data/User/>'
+	),
 	/* store */
 	'store_name' => 'arc_tests',
 	/* network */

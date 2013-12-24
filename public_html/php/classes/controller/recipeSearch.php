@@ -7,11 +7,10 @@ class recipeSearch {
 	private $queryData;
 
 	public function __construct($data) {
-		$this->config = getConfig('search');
 		$this->generateQueryData($data);
 
-		$db = new arcDb();
-		$this->results = $db->query2($this->queryData);
+		global $arcDb;
+		$this->results = $arcDb->query2($this->queryData);
 
 		foreach ( $this->results as $result ) {
 			$this->recipes[] = new recipe($result);
@@ -21,22 +20,27 @@ class recipeSearch {
 	private function generateQueryData($data) {
 		$this->queryData = array(
 			'select' => array(
-				'?name',
+				'?recipe',
+				'?label',
+				'?comment',
+				'?username',
 				'?cuisine',
 				'?course'
 			),
-			'prefixes' => 'recipe: <http://linkedrecipes.org/schema/>',
 			'where' => "?recipe a recipe:Recipe ; 
-				rdfs:label ?name ;
+				rdfs:label ?label ;
+				rdfs:comment ?comment ;
 				recipe:cuisine ?cuisine ;
-				recipe:course ?course .",
+				recipe:course ?course ;
+				rdf:author ?author .
+				?author rdfs:label ?username",
 			'filters' => array()
 		);
 
 		foreach ($data as $param => $value) {
-			$facet = new facet($param,$this->config[$param]);
-			if ($facet && $facet->mapsTo && $facet->active) {
-				$this->queryData['filters'][$facet->mapsTo] = $value;
+			$facet = new facet($param);
+			if ($facet && $facet->shortcut) {
+				$this->queryData['filters'][$facet->shortcut] = $value;
 			}
 		}		
 	}

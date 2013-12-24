@@ -11,6 +11,8 @@ global.recipeCreate = {
 			global.initPanel(_this);
 			global.form.init();
 		});
-
+	},
+	onSuccess : function() {
+		alert('Recipe Successfully Uploaded');
 	}
 }

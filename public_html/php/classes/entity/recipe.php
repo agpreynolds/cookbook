@@ -1,27 +1,25 @@
 <?php
 
 class recipe {
-	public $author;
-	public $name;
+	public $label;
+	public $comment;
+	public $course;
 	public $cuisine;
+	public $author;
 	public $ingredients;
 	public $tools;
 	public $techniques;
 	public $steps;
-	public $description;
 	public $isComplete;
 	public $dateUploaded;
 	public $dateLastUpdated;
 
 	public function __construct($data) {
-		$this->name = $data['name'];
-		
+		foreach($data as $key => $value){
+        	$this->{$key} = $value;
+      	}
+				
 		//TODO: Replace Dummydata
-		$this->author = 'Alex';
-		$this->description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 		$this->ingredients = array('flour','egg','milk');
 		$this->tools = array('knife','fork','spoon');
 		$this->techniques = array('cook','stir');
@@ -49,9 +47,19 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 		* Returns 0 on Error
 	*/
 	public function store() {
-		$arcDb = new arcDb();
-		$sqarql = "INSERT ";
-		return 0;
+		global $arcDb;
+
+		$triples = "dRecipe:{$this->label} a recipe:Recipe ; 
+			rdfs:label '{$this->label}' ;
+			rdfs:comment '{$this->comment}' ;
+			rdf:author dUser:{$this->author} ;
+			recipe:course dCourse:{$this->course} ;
+			recipe:cuisine dCuisine:{$this->cuisine}";
+		
+		$insertString = "INSERT INTO <...> { $q }";
+
+		$result = $arcDb->insert( $triples );
+		return  ( $result ) ? 1 : 0;
 	}
 }
 
