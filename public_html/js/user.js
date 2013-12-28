@@ -16,11 +16,6 @@ global.user = {
 				_this.checkPasswordStrength(this);
 			});
 			
-			//Sign in container forms need events bound
-			//This happens on first page load but needs to be done again here
-			if (reload) { 
-				global.form.init();
-			}
 		}
 		else if (accountContainer.length) {
 			_this.container = accountContainer;
@@ -37,22 +32,27 @@ global.user = {
 		}
 		
 		global.initPanel(_this);
+		
+		//Sign in container forms need events bound
+		//This happens on first page load but needs to be done again here
+		if (reload) { 
+			global.form.init();
+		}
 	},
-	switchPanels : function(panel) {
+	switchPanels : function(template) {
 		var _this = global.user;
 		_this.wrapper.slideUp('slow');
-		setTimeout(function(){
+		
+		$.get(template)
+		.done(function(panel) {
 			$('#userOptionsContainer').html(panel);
 			_this.init(1);
-			_this.headerLink.click();		
-		},600);
+			_this.headerLink.click();			
+		});
 	},
 	signin : function() {
 		var _this = global.user;
-		$.get('/templates/userPanels/userAccount.php')
-		.done(function(response){
-			_this.switchPanels(response);
-		});
+		_this.switchPanels('/templates/userPanels/userAccount.php');		
 	},
 	signinError : function(form,response) {
 		var _this = global.user;
@@ -69,13 +69,7 @@ global.user = {
 	},
 	signout : function() {
 		var _this = global.user;
-		$.post('/templates/userPanels/userLogin.php',{
-			method : 'userLogout',
-			data : {}
-		})
-		.done(function(response){
-			_this.switchPanels(response);
-		});
+		_this.switchPanels('/templates/userPanels/userLogin.php');
 	},
 	checkPasswordStrength : function(field) {
 		var _this = global.user;

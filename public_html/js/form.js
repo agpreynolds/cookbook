@@ -4,7 +4,7 @@ global.form = {
 	requiredText : 'Fields marked with "*" are required',
 	init : function() {
 		var _this = global.form
-		$('form').unbind('submit').bind('submit',_this.onSubmit);
+		$('form').unbind('submit.form').bind('submit.form',_this.onSubmit);
 		$('form').each(function(){
 			var requiredNoteNode = $(this).find(".required-note");
 			if (!requiredNoteNode.length) {
@@ -17,15 +17,29 @@ global.form = {
 		var form = this;
 		var _this = global.form;
 
-		$(form).find('.errorList').remove();
-		$(form).find('.error').removeClass('error');
 		
 		$.post('/php/controllers/formHandler.php',{
 			method : form.name,
 			data : $(form).serializeObject()
 		})
 		.done(function(response){
-			var response = JSON.parse(response);
+			$('.popup-container').remove();
+			$(form).find('.errorList').remove();
+			$(form).find('.error').removeClass('error');
+			
+			try {
+				response = JSON.parse(response);
+			}
+			catch(e) {
+				response = {
+					type : 'error',
+					messages : [{
+						key : 'json_error',
+						text : 'Unable to parse JSON',
+						field : ''
+					}]
+				};
+			}
 
 			if (response.type == 'success') {
 				_this.onSuccess(form,response);
@@ -36,6 +50,7 @@ global.form = {
 			global.consoleDebug('Form: ' + form.name + ' successfully processed with response:',response);
 		})
 		.fail(function(response){
+			$('.popup-container').remove();
 			_this.onError(form,response);
 			global.consoleDebug('Form: ' + form.name + ' failed processing');
 		});

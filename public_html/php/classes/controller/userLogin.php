@@ -13,7 +13,7 @@ class userLogin extends validateForm {
 		parent::__construct($formData);
 		
 		if ($_SESSION['user']->isSignedIn) {
-			$this->errors[] = $this->setError('user_isSignedIn');
+			$this->errors[] = $this->setError('user_isSignedIn','');
 		}
 		
 		if ( $this->isValid() && !$this->errors ) {
@@ -37,11 +37,11 @@ class userLogin extends validateForm {
 				$_SESSION['user']->populate($userData);				
 			}
 			else {
-				$this->errors[] = $this->setError('password_incorrect');
+				$this->errors[] = $this->setError('password_incorrect','password');
 			}
 		}
 		else {
-			$this->errors[] = $this->setError('user_not_recognized');
+			$this->errors[] = $this->setError('user_not_recognized','username');
 		}
 	}
 }

@@ -1,4 +1,7 @@
-<?php $logic = new uploadLogic(); ?>
+<?php 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
+$logic = new uploadLogic(); 
+?>
 
 <header>
 	<h3><a class="panelHeader">Upload Recipe<span class="indicator">-</span></a></h3>

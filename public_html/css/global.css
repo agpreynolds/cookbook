@@ -44,6 +44,7 @@ input[type="submit"] {
 	font-weight:bold;
 	color:white;
 	min-width:100px;
+	cursor:pointer;
 }
 
 a {
@@ -102,6 +103,16 @@ div.checkbox label {
 #userLoginContainer article {
 	width:48%;
 }
+
+#userLogout { width:100%;}
+#userLogout form {float:right;}
+
+#accountContentContainer {
+	border-left:solid 1px #228B22;
+	width:70%;
+}
+#accountMenuContainer {width:25%;}
+#accountMenu li.selected {font-weight:bold;}
 
 .pwd-strength span {font-weight:bold;}
 .pwd-strength .weak {color:red;}
@@ -189,16 +200,13 @@ div.popup-bg {
     top:0;left:0;
 }
 
-div.popup {
+section.popup {
     position: absolute;
-    max-width:95%;
-    border:3px solid #228B22;
-    border-radius:5px;        
-    background:white;        
     z-index:100;        
 }
 
-div.popup a.close-link { float:right; }
+
+section.popup a.close-link { float:right; }
 
 .popup article {
 	padding:0;
@@ -217,8 +225,14 @@ div.popup a.close-link { float:right; }
 	float:none;
 	padding:0;
 }
+#resultLarge {
+    max-width:95%;
+    border:3px solid #228B22;
+    border-radius:5px;	
+    background:white;        
+}
 
-.popup img {
+#resultLarge img {
 	border:2px solid #228B22;
 	border-radius:10px;
 	padding:5px;

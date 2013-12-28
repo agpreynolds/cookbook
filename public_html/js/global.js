@@ -12,6 +12,7 @@ global.consoleDebug = function(msg,obj) {
 global.initPanel = function(panel) {
 	panel.wrapper = panel.container.find('section.wrapper');
 	panel.headerLink = panel.container.find('a.panelHeader');
+	panel.forms = panel.container.find('form');
 
 	if (panel.defaultState == 'hidden') {
 		panel.wrapper.hide();			
@@ -21,6 +22,16 @@ global.initPanel = function(panel) {
 		var indicator = $(this).find('span.indicator');
 		global.toggleHTML(indicator,'+','-');
 		panel.wrapper.slideToggle('slow');
+	});
+
+	panel.forms.bind('submit.panel',function(){
+		var progressImg = new Image();
+		progressImg.src = '/media/images/buttons/ajax-loader.gif';
+		global.popup.init({
+			id : 'progress',
+			content : progressImg,
+			positionNode : panel.wrapper
+		});
 	});
 }
 global.toggleHTML = function(ele,a,b) {

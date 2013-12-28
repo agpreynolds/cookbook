@@ -1,5 +1,6 @@
 <?php
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
 $recipe = $request->response;
 $resultLogic = new resultLogic($recipe);
 

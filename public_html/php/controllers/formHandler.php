@@ -1,4 +1,5 @@
 <?php
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
 
 /*
 	* Dummy file - Nothing to see here

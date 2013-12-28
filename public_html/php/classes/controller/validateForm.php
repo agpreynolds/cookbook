@@ -21,10 +21,12 @@ class validateForm {
 	*/
 	protected function isValid() {
 		foreach ($this->config['fields'] as $key => $value) {
-			foreach ($value['validators'] as $validator => $param) {
-				if ( !$this->$validator($this->formData[$key],$param) ) {
-					$this->errors[] = $this->setError($validator . '_' . $key,$key);					
-				}
+			if (isset($value['validators'])) {
+				foreach ($value['validators'] as $validator => $param) {
+					if ( !$this->$validator($this->formData[$key],$param) ) {
+						$this->errors[] = $this->setError($validator . '_' . $key,$key);					
+					}
+				}				
 			}
 		}
 		if (isset($this->config['validators'])) {

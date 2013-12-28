@@ -1,3 +1,4 @@
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php'); ?>
 <section id="userLoginContainer">
 	<header>
 		<h3><a class="panelHeader">Sign In / Register<span class="indicator">+</span></a></h3>

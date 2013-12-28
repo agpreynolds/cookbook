@@ -2,35 +2,28 @@ var global = global || {};
 
 global.popup = {
     init : function(args) {
-        if (!args || !args.id || !args.path) {
+        if (!args || !args.id || ( !args.path && !args.content ) ) {
             global.consoleDebug('Missing args to: global.popup.init()');
             return false;
         }
+
+        var align = function() {
+            $(window).unbind('resize').bind('resize',function(){
+                contentContainer.center(positionNode);
+            });
+            $(window).resize();            
+        }
         
+        var positionNode = args.positionNode;
+        var content = args.content;
         var path = args.path;
         var data = args.data || {};
         var callback = args.callback;
         
-        var popupExists = function(id) {
-            var ele = $(id);
-            if (ele.length) {
-                if (ele.hasClass('content')) {
-                    var parents = ele.parents();
-                    parents.get(1).show();
-                    parents.get(0).center();
-                    return 1;
-                }
-                else {
-                    global.consoleDebug('Warning: Popup has same ID as existing element');
-                }
-            }
-            return 0;
+        var container = $('<div>').addClass('popup-container');
+        if (positionNode) {
+            container.lockTo(positionNode);
         }
-
-        //If popup exists already no need to re-build it, just show it
-        if (popupExists(args.id)) { return false; }
-
-        var container = $('<div>');
         $('body').append(container);
         
         if (!args.noBg) {
@@ -38,27 +31,28 @@ global.popup = {
             container.append(bgContainer);
         }
         
-        var fgContainer = $('<div>').addClass('popup');
-        container.append(fgContainer);
-        
-        var contentContainer = $('<section>').addClass('content');
+        var contentContainer = $('<section>').addClass('popup content');
         contentContainer.attr('id',args.id);
-        fgContainer.append(contentContainer);
+        container.append(contentContainer);
 
-        $.get(path,data)
-        .done(function(response){
-        	contentContainer.html(response);
-        	fgContainer.center();
-            
-            $('body').animate({
-                scrollTop: $('body').offset().top
-            }, 500);
-        	
-            callback(response,container);
-        });
-        
-        $(window).resize(function(){
-        	fgContainer.center();
-        });
+        //If we have a template path we should attempt to include it
+        if (path) {
+            $.post(path,data)
+            .done(function(response){
+            	contentContainer.html(response);
+            	align();
+                
+                $('body').animate({
+                    scrollTop: $('body').offset().top
+                }, 500);
+            	
+                callback(response,container);
+            });            
+        }
+        //Otherwise we may have some local or js created content to inject
+        else if (content) {
+            contentContainer.html(content);
+            align();
+        }        
     }                
 }
