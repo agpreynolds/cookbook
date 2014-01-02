@@ -16,7 +16,7 @@ class arcDb {
 		 // $this->store->drop();
 	}
 	public function query($sparql) {
-		$result = $this->store->query($sparql);
+		$result = $this->store->query($sparql,'rows');
 
 		return $result;
 	}

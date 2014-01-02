@@ -13,6 +13,9 @@
 @prefix dTechnique: <http://palacealex.com/data/Technique/> .
 @prefix dTool: <http://palacealex.com/data/Tool/> .
 
+dUser:Root a foaf:Person ;
+	rdfs:label "Root" .
+
 dCourse:Starter a recipe:Course ;
 	rdfs:label "Starter" .
 dCourse:Main a recipe:Course ;
@@ -51,58 +54,80 @@ dTechnique:Cook a recipe:Technique .
 dTool:Oven a recipe:Tool .
 
 dRecipe:Noodles a recipe:Recipe ; 
+	rdf:author dUser:Root ;
 	rdfs:label "Noodles" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Starter ;
 	recipe:cuisine dCuisine:Chinese .
 
 dRecipe:Pizza a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Pizza" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
 	recipe:cuisine dCuisine:Italian .
 
 dRecipe:GarlicBread a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Garlic Bread" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Starter ;
 	recipe:cuisine dCuisine:Italian ;
 	recipe:time "PT20M"^^xsd:duration .
 
 dRecipe:ChickenFajitas a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Chicken Fajitas" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
 	recipe:cuisine dCuisine:Mexican .
 
 dRecipe:ChickenKorma a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Chicken Korma" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
 	recipe:cuisine dCuisine:Indian .
 
 dRecipe:Nachos a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Nachos" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Starter ;
 	recipe:cuisine dCuisine:Mexican .
 
 dRecipe:RoastTurkey a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Roast Turkey" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
 	recipe:cuisine dCuisine:British .
 
 dRecipe:Bolognese a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Spaghetti Bolognese" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
 	recipe:cuisine dCuisine:Italian .
 
 dRecipe:Tiramisu a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Tiramisu" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Dessert ;
 	recipe:cuisine dCuisine:Italian .
 
 dRecipe:Pavlova a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Pavlova" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Dessert ;
 	recipe:cuisine dCuisine:Russian .
 
 dRecipe:SultanaCake a recipe:Recipe ;
+	rdf:author dUser:Root ;
 	rdfs:label "Sultana Cake" ;
+	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Dessert ;
 	recipe:cuisine dCuisine:British ;
 	recipe:ingredients [ a recipe:IngredientList ;

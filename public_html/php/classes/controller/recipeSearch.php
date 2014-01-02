@@ -26,14 +26,17 @@ class recipeSearch {
 				'?username',
 				'?cuisine',
 				'?course'
+				'?ingredients'
 			),
-			'where' => "?recipe a recipe:Recipe ; 
+			'where' => "
+				?recipe a recipe:Recipe ; 
 				rdfs:label ?label ;
 				rdfs:comment ?comment ;
 				recipe:cuisine ?cuisine ;
 				recipe:course ?course ;
-				rdf:author ?author .
-				?author rdfs:label ?username",
+				rdf:author ?author ;
+				?author rdfs:label ?username
+			",
 			'filters' => array()
 		);
 

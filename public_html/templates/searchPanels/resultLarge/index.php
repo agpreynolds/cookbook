@@ -14,7 +14,7 @@ $resultLogic = new resultLogic($recipe);
 		<img class="fLeft" src="/media/recipe_default.png" alt="http://www.iconarchive.com/show/virtual-kitchen-icons-by-sirea/Pan-icon.html">
 		<p>Uploaded by:
 			<a href="/user.php?username=<?php echo $recipe->author; ?>">
-				<?php echo $recipe->author; ?>
+				<?php echo $recipe->username; ?>
 			</a>
 		</p>
 		

@@ -1,50 +1,62 @@
 <?php
 
+include ($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
+
 global $arcDb;
 
 
 
-	// $q = array(
-	// 		'select' => array(
-	// 			'?recipe',
-	// 			'?name',
-	// 			'?cuisine',
-	// 			'?course',
-	// 			'?food',
-	// 			'?quantity'
-	// 		),
-	// 		'prefixes' => 'recipe: <http://linkedrecipes.org/schema/>',
-	// 		'where' => "?recipe a recipe:Recipe ; 
-	// 			rdfs:label ?name ;
-	// 			recipe:cuisine ?cuisine ;
-	// 			recipe:course ?course ;
-	// 			recipe:ingredients ?ingredientList .
-	// 			?ingredientList ?p ?s .
-	// 			?s a recipe:Ingredient ;
-	// 			recipe:food ?food ;
-	// 			recipe:quantity ?quantity",
-	// 		'filters' => array()
-	// 	);
-
-$q = array(
+	$q = array(
 			'select' => array(
 				'?recipe',
-				'?label',
-				'?comment',
-				'?author',
+				'?name',
 				'?cuisine',
-				'?course'
+				'?course',
+				'?s'
 			),
-			'where' => "?recipe a recipe:Recipe ; 
-				rdfs:label ?label ;
-				rdfs:comment ?comment ;
+			'prefixes' => 'recipe: <http://linkedrecipes.org/schema/>',
+			'where' => "
+				?recipe a recipe:Recipe ; 
+				rdfs:label ?name ;
 				recipe:cuisine ?cuisine ;
 				recipe:course ?course ;
-				rdf:author ?auth .
-				?auth rdfs:label ?author",
+				recipe:ingredients ?ingredientList .
+				?ingredientList ?p ?s .
+				?s a recipe:Ingredient
+			",
 			'filters' => array()
 		);
-$result = $arcDb->query2($q);
+
+	$q = "PREFIX recipe: <http://linkedrecipes.org/schema/> . 
+	SELECT ?recipe (GROUP_CONCAT(?food) as ?ing)
+	WHERE {
+		?recipe a recipe:Recipe ; 
+		recipe:ingredients ?ingredientList .
+		?ingredientList ?p ?s .
+		?s a recipe:Ingredient ;
+		recipe:food ?food
+	}
+	";
+
+// $q = array(
+// 			'select' => array(
+// 				'?recipe',
+// 				'?label',
+// 				'?comment',
+// 				'?author',
+// 				'?cuisine',
+// 				'?course'
+// 			),
+// 			'where' => "?recipe a recipe:Recipe ; 
+// 				rdfs:label ?label ;
+// 				rdfs:comment ?comment ;
+// 				recipe:cuisine ?cuisine ;
+// 				recipe:course ?course ;
+// 				rdf:author ?auth .
+// 				?auth rdfs:label ?author",
+// 			'filters' => array()
+// 		);
+$result = $arcDb->query($q);
 var_dump($result);
 
 //$result = $db->query2($queryData);
