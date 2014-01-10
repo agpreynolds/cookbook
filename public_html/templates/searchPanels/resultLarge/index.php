@@ -1,12 +1,12 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
-$recipe = $request->response;
-$resultLogic = new resultLogic($recipe);
+$resultLogic = $request->response;
+$recipe = $resultLogic->recipe;
 
 ?>
 
-<article>
+<article id="<?php echo $recipe->uri; ?>" class="contentContainer">
 	<header>
 		<h3><?php echo $recipe->label; ?><a class="close-link">X</a></h3>			
 	</header>
@@ -45,6 +45,9 @@ $resultLogic = new resultLogic($recipe);
 				</header>
 				<ul><?php $resultLogic->outputStepList(); ?></ul>
 			</article>
+		</section>
+		<section id="recipeModeration">
+			<a>Report to a Moderator</a>
 		</section>
 	</section>
 </article>

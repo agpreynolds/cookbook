@@ -19,12 +19,18 @@ global.user = {
 		}
 		else if (accountContainer.length) {
 			_this.container = accountContainer;
+			_this.selectedContent = _this.container.find("#accountSelectedContent");
 			$('.signout').bind('click',function(){
 				_this.signout();
 			});
+			$('#accountMenu a').bind('click',function(){
+				$('#accountMenu li').removeClass('selected');
+				$(this).parent().addClass('selected');
+				_this.updateAccountContent(this);
+			});
 			$('#recipeCreate').bind('click',function(){
 				global.recipeCreate.init();
-			})
+			});
 		}
 		else {
 			global.consoleDebug('No user segements on page');
@@ -70,6 +76,15 @@ global.user = {
 	signout : function() {
 		var _this = global.user;
 		_this.switchPanels('/templates/userPanels/userLogin.php');
+	},
+	updateAccountContent : function(link) {
+		var _this = global.user;
+		
+		$.get('/templates/userPanels/includes/' + link.id + '.php')
+		.done(function(response){
+			_this.selectedContent.html(response);
+		});
+
 	},
 	checkPasswordStrength : function(field) {
 		var _this = global.user;

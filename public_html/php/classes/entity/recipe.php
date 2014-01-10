@@ -1,7 +1,9 @@
 <?php
 
 class recipe {
+	public $uri;
 	public $label;
+	public $imagePath;
 	public $comment;
 	public $course;
 	public $cuisine;
@@ -18,13 +20,27 @@ class recipe {
 		foreach($data as $key => $value){
         	$this->{$key} = $value;
       	}
-				
-		//TODO: Replace Dummydata
+
+      	$this->config = getConfig('recipe');
+
+      	//TODO: Replace Dummydata
 		$this->ingredients = array('flour','egg','milk');
 		$this->tools = array('knife','fork','spoon');
 		$this->techniques = array('cook','stir');
 		$this->steps = array('put it in the oven','wait till its done');
-		
+
+		//If the uri is not set we can generate it from the label
+		if (!isset($this->uri) && isset($this->label)) {
+			$this->uri = preg_replace('/\s+/', '', $this->label);
+		}
+
+		$baseImagePath = $this->config['base_image_path'] . preg_replace('/\s+/', '', $this->label);
+		if ( $ext = getImageExtension($baseImagePath) ) {
+			$this->imagePath = $baseImagePath . '.' . $ext;
+		}
+		else {
+			$this->imagePath = $this->config['base_image_path'] . 'default.png';
+		}	
 	}
 
 	public function isVegetarianSuitable() {
@@ -49,14 +65,12 @@ class recipe {
 	public function store() {
 		global $arcDb;
 
-		$triples = "dRecipe:{$this->label} a recipe:Recipe ; 
+		$triples = "dRecipe:{$this->uri} a recipe:Recipe ; 
 			rdfs:label '{$this->label}' ;
 			rdfs:comment '{$this->comment}' ;
 			rdf:author dUser:{$this->author} ;
 			recipe:course dCourse:{$this->course} ;
 			recipe:cuisine dCuisine:{$this->cuisine}";
-		
-		$insertString = "INSERT INTO <...> { $q }";
 
 		$result = $arcDb->insert( $triples );
 		return  ( $result ) ? 1 : 0;

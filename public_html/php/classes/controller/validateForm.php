@@ -93,7 +93,7 @@ class validateForm {
 		* Returns 0 if validation failed
 	*/
 	protected function minLength($val,$param) {
-		return ( strlen($val) > $param ) ? 1 : 0;
+		return ( strlen($val) >= $param ) ? 1 : 0;
 	}
 
 	/*
@@ -101,7 +101,7 @@ class validateForm {
 		* Returns 0 if validation failed
 	*/
 	protected function maxLength($val,$param) {
-		return ( strlen($val) < $param ) ? 1 : 0;
+		return ( strlen($val) <= $param ) ? 1 : 0;
 	}
 
 	/*

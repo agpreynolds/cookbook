@@ -16,6 +16,8 @@ class arcDb {
 		 // $this->store->drop();
 	}
 	public function query($sparql) {
+		$sparql = $this->attachDefaultPrefixes() . $sparql;
+
 		$result = $this->store->query($sparql,'rows');
 
 		return $result;
@@ -66,8 +68,10 @@ class arcDb {
 		$sparql = $this->attachDefaultPrefixes();
 
 		$sparql .= "INSERT INTO <...> { $triples }";
+
+		$result = $this->store->query($sparql);
 		
-		return $result = $this->store->query($sparql);
+		return $result;
 	}
 
 	private function attachDefaultPrefixes() {

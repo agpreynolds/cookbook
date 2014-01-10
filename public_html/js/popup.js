@@ -21,6 +21,7 @@ global.popup = {
         var callback = args.callback;
         
         var container = $('<div>').addClass('popup-container');
+        container.attr('id',args.id);
         if (positionNode) {
             container.lockTo(positionNode);
         }
@@ -32,7 +33,6 @@ global.popup = {
         }
         
         var contentContainer = $('<section>').addClass('popup content');
-        contentContainer.attr('id',args.id);
         container.append(contentContainer);
 
         //If we have a template path we should attempt to include it

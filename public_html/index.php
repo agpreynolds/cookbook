@@ -10,7 +10,10 @@
 	<link rel="stylesheet" type="text/css" href="/css/global.css">
 	
 	<script type="text/javascript" src="/js/lib/jQuery_v1.10.2.js"></script>	
-	<script type="text/javascript" src="/js/lib/jQuery_ext.js"></script>	
+	<script type="text/javascript" src="/js/lib/jQuery_ext.js"></script>
+	<script type="text/javascript" src="/js/lib/jQuery-File-Upload-9.5.2/js/vendor/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="/js/lib/jQuery-File-Upload-9.5.2/js/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="/js/lib/jQuery-File-Upload-9.5.2/js/jquery.iframe-transport.js"></script>
 	<script type="text/javascript" src="/js/global.js"></script>
 	<script type="text/javascript" src="/js/form.js"></script>
 	<script type="text/javascript" src="/js/popup.js"></script>
@@ -43,9 +46,6 @@
 		</section>
 	</section>
 
-	<footer>
-		<p>TODO: Disclaimer</p>
-	</footer>
-
+	<footer>Copyright © 2013 Alex Reynolds</footer>
 </body>
 </html>

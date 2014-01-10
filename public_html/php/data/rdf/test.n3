@@ -1,7 +1,0 @@
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix me: <http://palacealex.com/php/data/rdf/test.n3> .
-
-:alex	a foaf:Person ;
-	:name 'alex reynolds' .
-
-

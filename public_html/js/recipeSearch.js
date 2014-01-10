@@ -10,12 +10,11 @@ global.recipeSearch = {
 		var _this = global.recipeSearch;
 
 		//TODO: Reliable way of detecting no params
-		//TODO: Make use of resultData for filtering rather than unnecessary querying of backend
 		if (_this.queryData.data) {
 			$.get('/templates/searchPanels/resultSmall/index.php',_this.queryData)
 				.done(function(response) {
 					var responseParsed = $.parseJSON(response);
-					_this.resultData = responseParsed.data;
+					// _this.resultData = responseParsed.data;
 					if (_this.resultPanel.state == 'visible') {
 						_this.resultPanel.resultList.html(responseParsed.html);
 						_this.resultPanel.bindEvents();
@@ -38,6 +37,7 @@ global.recipeSearch = {
 		
 		_this.facetPanel.init();
 	},
+	//TODO: Reset Search Form
 	reset : function() {
 		var _this = global.recipeSearch;
 
@@ -147,22 +147,19 @@ global.recipeSearch.resultPanel = {
 		_this.resultThumbnails = $(".searchResult");
 
 		_this.resultThumbnails.unbind('click').bind("click",function(){
-			var ele = this;
-			$(global.recipeSearch.resultData).each(function(i,item){
-				if (item.label == ele.id) {
-					global.popup.init({
-						id : 'resultLarge',
-						path : '/templates/searchPanels/resultLarge/index.php',
-						data : {
-							method : 'recipe',
-							data: item
-						},
-						callback : function(response,container) {
-							global.recipeSearch.largeResultPanel.init(response,container);
-						}
-					});
+			global.popup.init({
+				id : 'resultLarge',
+				path : '/templates/searchPanels/resultLarge/index.php',
+				data : {
+					method : 'resultLogic',
+					data: {
+						uri : this.id
+					}
+				},
+				callback : function(response,container) {
+					global.recipeSearch.largeResultPanel.init(response,container);
 				}
-			});
+			});						
 		});		
 	}
 };
@@ -171,17 +168,37 @@ global.recipeSearch.largeResultPanel = {
 	state : 'hidden',
 	init : function(response,container) {
 		var _this = global.recipeSearch.largeResultPanel;
-		_this.closeButton = $("a.close-link");
+		_this.container = $("#resultLarge");
+		_this.contentContainer = _this.container.find('article.contentContainer').get(0);
+
+		_this.closeButton = _this.container.find("a.close-link");
 		_this.closeButton.bind('click',function(){
 			container.remove();
 		});
 		
-		_this.componentLists = $("article.componentOption header");
+		_this.componentLists = _this.container.find("article.componentOption header");
 		_this.componentLists.bind('click',function(){
 			var indicator = $(this).find('span.indicator');
 			global.toggleHTML(indicator,'+','-');
 			
 			$(this).parent().find('ul,ol').slideToggle();
+		});
+
+		_this.moderation = _this.container.find('#recipeModeration');
+		_this.moderationLink = _this.moderation.find('a');
+
+		_this.moderationLink.bind('click',function(){
+			$.get('/templates/moderation/form.php',{
+				method : 'moderationLogic',
+				data : {
+					subject : _this.contentContainer.id
+				}
+			})
+			.done(function(response){
+				_this.moderation.html(response);
+				global.form.init();
+				$(window).resize();
+			});
 		});
 	}
 };

@@ -105,13 +105,15 @@ div.checkbox label {
 }
 
 #userLogout { width:100%;}
-#userLogout form {float:right;}
 
 #accountContentContainer {
 	border-left:solid 1px #228B22;
-	width:70%;
+	min-width:70%;
 }
-#accountMenuContainer {width:25%;}
+#accountSelectedContent {
+	width:100%;
+}
+#accountMenuContainer {max-width:25%;}
 #accountMenu li.selected {font-weight:bold;}
 
 .pwd-strength span {font-weight:bold;}
@@ -149,6 +151,10 @@ a.facetLink {font-weight:bold;}
 	width:200px;
 	max-height:100px;
 	cursor:pointer;
+}
+
+#recipeSearchResults li.userCreated {
+	background:gray;
 }
 
 #recipeSearchResults article {
@@ -225,14 +231,15 @@ section.popup a.close-link { float:right; }
 	float:none;
 	padding:0;
 }
-#resultLarge {
+#resultLarge .content {
+	min-width:50%;
     max-width:95%;
     border:3px solid #228B22;
     border-radius:5px;	
     background:white;        
 }
 
-#resultLarge img {
+#resultLarge .content img {
 	border:2px solid #228B22;
 	border-radius:10px;
 	padding:5px;

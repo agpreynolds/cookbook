@@ -12,18 +12,27 @@ global.form = {
 			}
 		});
 	},
+	selectCallback : function(form,response) {
+		var _this = global.form;
+
+		if (response.type == 'success') {
+			_this.onSuccess(form,response);
+		}
+		else if (response.type == 'error') {
+			_this.onError(form,response);
+		}
+	},
 	onSubmit : function(evt) {
 		evt.preventDefault();
 		var form = this;
 		var _this = global.form;
-
 		
 		$.post('/php/controllers/formHandler.php',{
 			method : form.name,
 			data : $(form).serializeObject()
 		})
 		.done(function(response){
-			$('.popup-container').remove();
+			$('#progress').remove();
 			$(form).find('.errorList').remove();
 			$(form).find('.error').removeClass('error');
 			
@@ -41,16 +50,12 @@ global.form = {
 				};
 			}
 
-			if (response.type == 'success') {
-				_this.onSuccess(form,response);
-			}
-			else if (response.type == 'error') {
-				_this.onError(form,response);
-			}
+			_this.selectCallback(form,response);
+
 			global.consoleDebug('Form: ' + form.name + ' successfully processed with response:',response);
 		})
 		.fail(function(response){
-			$('.popup-container').remove();
+			$('#progress').remove();
 			_this.onError(form,response);
 			global.consoleDebug('Form: ' + form.name + ' failed processing');
 		});

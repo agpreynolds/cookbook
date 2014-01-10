@@ -24,6 +24,16 @@ function getForm($id) {
 	return require ( getAbsIncPath($path) );
 }
 
+function getImageExtension($path) {
+	$validExtensions = array('jpg','png');
+	foreach ($validExtensions as $ext) {
+		if ( file_exists($_SERVER['DOCUMENT_ROOT'] . $path . '.' . $ext) ) {
+			return $ext; 
+		}
+	}
+	return 0;
+}
+
 function encrypt($arg) {
 	return md5($arg);
 }

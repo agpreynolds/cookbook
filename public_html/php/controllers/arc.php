@@ -10,34 +10,14 @@ global $arcDb;
 			'select' => array(
 				'?recipe',
 				'?name',
-				'?cuisine',
-				'?course',
-				'?s'
+				'?comment'			
 			),
-			'prefixes' => 'recipe: <http://linkedrecipes.org/schema/>',
 			'where' => "
 				?recipe a recipe:Recipe ; 
-				rdfs:label ?name ;
-				recipe:cuisine ?cuisine ;
-				recipe:course ?course ;
-				recipe:ingredients ?ingredientList .
-				?ingredientList ?p ?s .
-				?s a recipe:Ingredient
+				rdfs:label ?name 				
 			",
 			'filters' => array()
 		);
-
-	$q = "PREFIX recipe: <http://linkedrecipes.org/schema/> . 
-	SELECT ?recipe (GROUP_CONCAT(?food) as ?ing)
-	WHERE {
-		?recipe a recipe:Recipe ; 
-		recipe:ingredients ?ingredientList .
-		?ingredientList ?p ?s .
-		?s a recipe:Ingredient ;
-		recipe:food ?food
-	}
-	";
-
 // $q = array(
 // 			'select' => array(
 // 				'?recipe',
@@ -56,7 +36,7 @@ global $arcDb;
 // 				?auth rdfs:label ?author",
 // 			'filters' => array()
 // 		);
-$result = $arcDb->query($q);
+$result = $arcDb->query2($q);
 var_dump($result);
 
 //$result = $db->query2($queryData);

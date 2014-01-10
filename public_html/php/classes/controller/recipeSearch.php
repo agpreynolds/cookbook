@@ -20,21 +20,20 @@ class recipeSearch {
 	private function generateQueryData($data) {
 		$this->queryData = array(
 			'select' => array(
-				'?recipe',
+				'?uri',
 				'?label',
 				'?comment',
 				'?username',
 				'?cuisine',
 				'?course'
-				'?ingredients'
 			),
 			'where' => "
-				?recipe a recipe:Recipe ; 
+				?uri a recipe:Recipe ; 
 				rdfs:label ?label ;
 				rdfs:comment ?comment ;
 				recipe:cuisine ?cuisine ;
 				recipe:course ?course ;
-				rdf:author ?author ;
+				rdf:author ?author .
 				?author rdfs:label ?username
 			",
 			'filters' => array()

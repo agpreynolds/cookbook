@@ -10,8 +10,16 @@ $logic = new uploadLogic();
 	<p class="note">Please complete the form below to upload a recipe</p>
 	<article>
 		<form name="recipeCreate">
+			<input type="hidden" name="formID" value="recipeCreate"/>
+
 			<label for="label">*Name</label>
 			<input type="text" name="label" placeholder="Name"/>
+
+			<label for="image">Attach an Image<span class="note">(optional)</span></label>
+			<input type="file" name="image" id="fileupload"/>
+			<!-- <div id="progress">
+				<p class="bar" style="height:10px;width:0px;background:black;"></p>
+			</div> -->
 
 			<label for="comment">*Description</label>
 			<textarea name="comment"></textarea>
