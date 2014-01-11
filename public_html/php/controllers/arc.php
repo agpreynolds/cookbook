@@ -6,17 +6,24 @@ global $arcDb;
 
 
 
-	$q = array(
+	$query = array(
 			'select' => array(
-				'?recipe',
-				'?name',
-				'?comment'			
+				'?label',
+				'?comment',
+				'?username',
+				'?cuisine',
+				'?course'
 			),
 			'where' => "
-				?recipe a recipe:Recipe ; 
-				rdfs:label ?name 				
+				<http://palacealex.com/data/Recipe/Noodles> a recipe:Recipe ; 
+				rdfs:label ?label ;
+				rdfs:comment ?comment ;
+				recipe:cuisine ?cuisine ;
+				recipe:course ?course ;
+				rdf:author ?author .
+				?author rdfs:label ?username
 			",
-			'filters' => array()
+			'single' => 1
 		);
 // $q = array(
 // 			'select' => array(
@@ -36,7 +43,7 @@ global $arcDb;
 // 				?auth rdfs:label ?author",
 // 			'filters' => array()
 // 		);
-$result = $arcDb->query2($q);
+$result = $arcDb->query2($query);
 var_dump($result);
 
 //$result = $db->query2($queryData);

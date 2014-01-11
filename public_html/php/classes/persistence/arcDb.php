@@ -23,6 +23,14 @@ class arcDb {
 		return $result;
 	}
 
+	/*
+		* Expected args:
+			Required
+				- select - array - output vars
+				- where - string - triples to extract
+			Optional
+				- single - returns a single row if specified
+	*/
 	public function query2($args) {
 		if (!$args) { return; }
 
@@ -60,8 +68,10 @@ class arcDb {
 		}
 
 		$sparql .= "}";
+
+		$single = ( isset($args['single']) ) ? 'row' : 'rows';
 		// echo $sparql;
-		return $result = $this->store->query($sparql,'rows');
+		return $result = $this->store->query($sparql,$single);
 	}
 
 	public function insert($triples) {

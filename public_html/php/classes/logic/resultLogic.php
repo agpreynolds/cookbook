@@ -32,7 +32,6 @@ class resultLogic {
 
 		$query = array(
 			'select' => array(
-				'?uri',
 				'?label',
 				'?comment',
 				'?username',
@@ -40,19 +39,19 @@ class resultLogic {
 				'?course'
 			),
 			'where' => "
-				?uri a recipe:Recipe ; 
+				<{$data['uri']}> a recipe:Recipe ; 
 				rdfs:label ?label ;
 				rdfs:comment ?comment ;
 				recipe:cuisine ?cuisine ;
 				recipe:course ?course ;
 				rdf:author ?author .
-				?author rdfs:label ?username .
-				FILTER (?uri = <{$data['uri']}>)
-			"
+				?author rdfs:label ?username
+			",
+			'single' => 1
 		);
 		
 		$result = $arcDb->query2($query);
-		return new recipe($result[0]);
+		return new recipe($result);
 	}
 }
 
