@@ -9,15 +9,14 @@ global.consoleDebug = function(msg,obj) {
 		}
 	}
 }
-global.initPanel = function(panel) {
+global.initPanel = function(panel,keepDisplaying) {
 	panel.wrapper = panel.container.find('section.wrapper');
 	panel.headerLink = panel.container.find('a.panelHeader');
 	panel.forms = panel.container.find('form');
 
-	//TODO: Figure this out - it's wrong
-	// if (panel.defaultState == 'hidden') {
-	// 	panel.wrapper.hide();			
-	// }
+	if (panel.defaultState == 'hidden' && !keepDisplaying ) {
+		panel.wrapper.hide();			
+	}
 
 	panel.headerLink.unbind('click').bind('click',function(){
 		var indicator = $(this).find('span.indicator');
@@ -25,7 +24,7 @@ global.initPanel = function(panel) {
 		panel.wrapper.slideToggle('slow');
 	});
 
-	panel.forms.bind('submit.panel',function(){
+	panel.forms.unbind('submit.panel').bind('submit.panel',function(){
 		var progressImg = new Image();
 		progressImg.src = '/media/images/buttons/ajax-loader.gif';
 		global.popup.init({

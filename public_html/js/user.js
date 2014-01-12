@@ -2,7 +2,7 @@ var global = global || {};
 
 global.user = {
 	defaultState : 'hidden',
-	init : function(reload) {
+	init : function(args) {
 		var _this = global.user;
 
 		var signInContainer = $("#userLoginContainer");
@@ -37,11 +37,11 @@ global.user = {
 			return null;
 		}
 		
-		global.initPanel(_this);
+		global.initPanel(_this,args.keepDisplaying);
 		
 		//Sign in container forms need events bound
 		//This happens on first page load but needs to be done again here
-		if (reload) { 
+		if (args.reload) { 
 			global.form.init();
 		}
 	},
@@ -52,7 +52,9 @@ global.user = {
 		$.get(template)
 		.done(function(panel) {
 			$('#userOptionsContainer').html(panel);
-			_this.init(1);
+			_this.init({
+				reload : 1
+			});
 			_this.headerLink.click();			
 		});
 	},
@@ -83,8 +85,10 @@ global.user = {
 		$.get('/templates/userPanels/includes/' + link.id + '.php')
 		.done(function(response){
 			_this.selectedContent.html(response);
-			global.initPanel(_this);
-			global.form.init();
+			global.user.init({
+				reload : 1,
+				keepDisplaying : 1
+			});
 		});
 
 	},
