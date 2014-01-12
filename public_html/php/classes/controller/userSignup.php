@@ -43,8 +43,10 @@ class userSignup extends validateForm {
 			)
 		);
 
-		$triples = "dUser:{$username} a foaf:Person ;
-			rdfs:label '$username'";
+		$triples = array(
+			"dUser:{$username} a foaf:Person ;" ,
+			"rdfs:label '$username'"
+		);
 		$arcDb->insert( $triples );
 
 		$_SESSION['user']->isSignedIn = 1;

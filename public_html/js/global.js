@@ -14,11 +14,12 @@ global.initPanel = function(panel) {
 	panel.headerLink = panel.container.find('a.panelHeader');
 	panel.forms = panel.container.find('form');
 
-	if (panel.defaultState == 'hidden') {
-		panel.wrapper.hide();			
-	}
+	//TODO: Figure this out - it's wrong
+	// if (panel.defaultState == 'hidden') {
+	// 	panel.wrapper.hide();			
+	// }
 
-	panel.headerLink.bind('click',function(){
+	panel.headerLink.unbind('click').bind('click',function(){
 		var indicator = $(this).find('span.indicator');
 		global.toggleHTML(indicator,'+','-');
 		panel.wrapper.slideToggle('slow');

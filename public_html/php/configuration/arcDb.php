@@ -14,7 +14,8 @@ return array(
 		'dRecipe: <http://palacealex.com/data/Recipe/>',
 		'dTechnique: <http://palacealex.com/data/Technique/>',
 		'dTool: <http://palacealex.com/data/Tool/>',
-		'dUser: <http://palacealex.com/data/User/>'
+		'dUser: <http://palacealex.com/data/User/>',
+		'dUserRestricted: <http://palacealex.com/data/User/Restricted/>'
 	),
 	/* store */
 	'store_name' => 'arc_tests',

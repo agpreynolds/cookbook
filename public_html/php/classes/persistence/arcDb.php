@@ -13,7 +13,7 @@ class arcDb {
 			$this->store->query('LOAD <file://' . $_SERVER['DOCUMENT_ROOT'] . '/php/data/rdf/test.ttl>');
 		}
 
-		 // $this->store->drop();
+		// $this->store->drop();
 	}
 	public function query($sparql) {
 		$sparql = $this->attachDefaultPrefixes() . $sparql;
@@ -77,8 +77,20 @@ class arcDb {
 	public function insert($triples) {
 		$sparql = $this->attachDefaultPrefixes();
 
-		$sparql .= "INSERT INTO <...> { $triples }";
+		$sparql .= "INSERT INTO <...> {";
+		
+		$length = count($triples);
+		$i = 0;
+		foreach ( $triples as $triple ) {
+			$i++;
+			$sparql .= $triple;
+			if ( !preg_match('/;$/',$triple) ) {
+				$sparql .= ( $length == $i ) ? '' : " .\n";
+			}
+		} 
 
+		$sparql .= "}";
+		// echo $sparql;
 		$result = $this->store->query($sparql);
 		
 		return $result;
@@ -87,8 +99,9 @@ class arcDb {
 	private function attachDefaultPrefixes() {
 		$OUT = '';
 		if ($this->config['prefixes']) {
-			foreach ($this->config['prefixes'] as $prefix)
-			$OUT .= "PREFIX {$prefix} . \n";
+			foreach ($this->config['prefixes'] as $prefix) {
+				$OUT .= "PREFIX {$prefix} . \n";				
+			}
 		}
 		return $OUT;
 	}

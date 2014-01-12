@@ -65,12 +65,14 @@ class recipe {
 	public function store() {
 		global $arcDb;
 
-		$triples = "dRecipe:{$this->uri} a recipe:Recipe ; 
-			rdfs:label '{$this->label}' ;
-			rdfs:comment '{$this->comment}' ;
-			rdf:author dUser:{$this->author} ;
-			recipe:course dCourse:{$this->course} ;
-			recipe:cuisine dCuisine:{$this->cuisine}";
+		$triples = array(
+			"dRecipe:{$this->uri} a recipe:Recipe ;",
+			"rdfs:label '{$this->label}' ;",
+			"rdfs:comment '{$this->comment}' ;",
+			"rdf:author dUser:{$this->author} ;",
+			"recipe:course dCourse:{$this->course} ;",
+			"recipe:cuisine dCuisine:{$this->cuisine}"
+		);
 
 		$result = $arcDb->insert( $triples );
 		return  ( $result ) ? 1 : 0;

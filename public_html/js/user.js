@@ -83,6 +83,8 @@ global.user = {
 		$.get('/templates/userPanels/includes/' + link.id + '.php')
 		.done(function(response){
 			_this.selectedContent.html(response);
+			global.initPanel(_this);
+			global.form.init();
 		});
 
 	},

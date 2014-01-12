@@ -8,22 +8,13 @@ global $arcDb;
 
 	$query = array(
 			'select' => array(
-				'?label',
-				'?comment',
-				'?username',
-				'?cuisine',
-				'?course'
+				'?user',
+				'?label'				
 			),
 			'where' => "
-				<http://palacealex.com/data/Recipe/Noodles> a recipe:Recipe ; 
-				rdfs:label ?label ;
-				rdfs:comment ?comment ;
-				recipe:cuisine ?cuisine ;
-				recipe:course ?course ;
-				rdf:author ?author .
-				?author rdfs:label ?username
-			",
-			'single' => 1
+				?user a dUserRestricted:Vegan ; 
+				rdfs:label ?label				
+			"
 		);
 // $q = array(
 // 			'select' => array(

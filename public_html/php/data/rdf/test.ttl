@@ -5,6 +5,7 @@
 @prefix recipe: <http://linkedrecipes.org/schema/> .
 
 @prefix dUser: <http://palacealex.com/data/User/> .
+@prefix dUserRestricted: <http://palacealex.com/data/User/Restricted/> .
 
 @prefix dCourse: <http://palacealex.com/data/Course/> .
 @prefix dCuisine: <http://palacealex.com/data/Cuisine/> .
@@ -13,8 +14,14 @@
 @prefix dTechnique: <http://palacealex.com/data/Technique/> .
 @prefix dTool: <http://palacealex.com/data/Tool/> .
 
+dUserRestricted: rdfs:subClassOf foaf:Person .
+dUserRestricted:Vegetarian rdfs:subClassOf dUserRestricted: .
+dUserRestricted:Vegan rdfs:subClassOf dUserRestricted: .
+
 dUser:Root a foaf:Person ;
 	rdfs:label "Root" .
+dUser:Veggie a foaf:Person , dUserRestricted:Vegetarian ;
+	rdfs:label "Veggie" .
 
 dCourse:Starter a recipe:Course ;
 	rdfs:label "Starter" .

@@ -4,18 +4,20 @@
 	</header>
 	<form name="userPreferences">
 		<div class="checkbox">
-			<input name="vegetarian" type="checkbox"/>
-			<label for="vegetarian">Vegetarian</label>
+			<input name="isVegetarian" type="checkbox"/>
+			<label for="isVegetarian">Vegetarian</label>
 		</div>
 		
 		<div class="checkbox">
-			<input name="vegan" type="checkbox"/>
-			<label for="vegan">Vegan</label>
+			<input name="isVegan" type="checkbox"/>
+			<label for="isVegan">Vegan</label>
 		</div>
 
 		<div class="checkbox">
-			<input name="lactoseIntolerant" type="checkbox"/>
-			<label for="lactoseIntolerant">Lactose Intolerant</label>
+			<input name="isLactoseIntolerant" type="checkbox"/>
+			<label for="isLactoseIntolerant">Lactose Intolerant</label>
 		</div>
+
+		<input type="submit" value="Submit"/>
 	</form>
 </article>
