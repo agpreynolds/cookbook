@@ -36,6 +36,10 @@ $logic = new uploadLogic();
 				<?php echo $logic->outputFacetOptions('recipe:Course'); ?>
 			</select>
 
+			<label for="ingredients">*Ingredients</label>
+			<input type="text" name="ingredients[]" />
+			<input type="text" name="ingredients[]" />
+
 			<input type="submit" value="Submit Recipe"/>
 		</form>
 	</article>

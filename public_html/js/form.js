@@ -73,7 +73,7 @@ global.form = {
 			$(response.messages).each(function(){
 				errorNode.append($('<li>').attr('id',this.key).addClass('error').html(this.text));
 				if (this.field) {
-					$(form).find('[name="' + this.field + '"],label[for="' + this.field + '"]').addClass('error');
+					$(form).find('[name="' + this.field + '"],[name="' + this.field + '[]"],label[for="' + this.field + '"]').addClass('error');
 				}
 			});			
 		}

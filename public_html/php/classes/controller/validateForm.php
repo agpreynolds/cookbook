@@ -20,14 +20,23 @@ class validateForm {
 		* On error, push to errors array and continue validation - return 0 at eof
 	*/
 	protected function isValid() {
+		
 		foreach ($this->config['fields'] as $key => $value) {
-			if (isset($value['validators'])) {
-				foreach ($value['validators'] as $validator => $param) {
+			$prefix = '';
+			if ( $value['type'] == 'array' ) {
+				$prefix = 'array_';
+			}
+
+			if ( isset($value['validators']) ) {
+				foreach ( $value['validators'] as $validator => $param ) {
+					//Hmm... Better way to handle array inputs
+					$validator = $prefix . $validator;
 					if ( !$this->$validator($this->formData[$key],$param) ) {
 						$this->errors[] = $this->setError($validator . '_' . $key,$key);					
 					}
 				}				
 			}
+			
 		}
 		if (isset($this->config['validators'])) {
 			foreach ($this->config['validators'] as $key => $value) {
@@ -94,6 +103,14 @@ class validateForm {
 	*/
 	protected function minLength($val,$param) {
 		return ( strlen($val) >= $param ) ? 1 : 0;
+	}
+
+	/*
+		* Validates an array type field with minimum length
+		* Returns 0 if validation failed
+	*/
+	protected function array_minLength($val,$param) {
+		return ( count(array_filter($val)) >= $param ) ? 1 : 0;
 	}
 
 	/*

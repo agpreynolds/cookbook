@@ -27,6 +27,12 @@ return array(
 			'validators' => array(
 				'required' => 1
 			)
+		),
+		'ingredients' => array(
+			'type' => 'array',
+			'validators' => array(
+				'minLength' => 2
+			)
 		)
 	),
 	'errors' => array(
