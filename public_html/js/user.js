@@ -15,6 +15,12 @@ global.user = {
 			_this.registrationForm.find('input[name="password"]').bind('keyup',function(){
 				_this.checkPasswordStrength(this);
 			});
+			$('a.terms').bind('click',function(){
+				global.popup.init({
+					id : 'terms',
+					path : '/templates/customer_service/terms.html'
+				});
+			});
 			
 		}
 		else if (accountContainer.length) {

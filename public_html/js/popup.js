@@ -46,7 +46,16 @@ global.popup = {
                     scrollTop: $('body').offset().top
                 }, 500);
             	
-                callback(response,container);
+                if (callback) {
+                    callback(response,container);
+                }
+                //TODO: Need to bind the close link event in a more generic customisable way
+                //TODO: Consider keeping plain text/html popups on page to minimise requests
+                else {
+                    contentContainer.find('a.close-link').bind('click',function() {
+                        container.remove();
+                    });
+                }
             });            
         }
         //Otherwise we may have some local or js created content to inject

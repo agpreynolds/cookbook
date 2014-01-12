@@ -36,7 +36,7 @@
 
 				<div class="checkbox">
 					<input name="terms" type="checkbox"/>
-					<label for="terms">*Please confirm you have read and agreed to our <a href>Terms of Use</a></label>
+					<label for="terms">*Please confirm you have read and agreed to our <a class="terms">Terms of Use</a></label>
 				</div>
 				
 				<input type="submit" value="Register">
