@@ -17,14 +17,37 @@ class recipe {
 	public $dateLastUpdated;
 
 	public function __construct($data) {
+		// if ( !isset($data['ingredients']) ) {
+		// 	return null;
+		// }
+		
+		$this->ingredients = array();
+
 		foreach($data as $key => $value){
-        	$this->{$key} = $value;
+        	//Creates an ingredient instance based on array position of name and quantity
+        	if ( $key == 'ingredients' ) {
+        		$count = count($key);
+        		$i = 0;
+        		foreach ($value as $ingredient) {
+        			$ingredientProperties = array(
+        				'name' 		=> $ingredient,
+        				'quantity' 	=> $data['quantity'][$i]
+        			);
+        			
+        			$this->ingredients[] = new ingredient($ingredientProperties);
+
+        			$i++;
+        		}
+        	}
+        	else {
+        		$this->{$key} = $value;
+        	}
       	}
 
       	$this->config = getConfig('recipe');
 
       	//TODO: Replace Dummydata
-		$this->ingredients = array('flour','egg','milk');
+		// $this->ingredients = array('flour','egg','milk');
 		$this->tools = array('knife','fork','spoon');
 		$this->techniques = array('cook','stir');
 		$this->steps = array('put it in the oven','wait till its done');
@@ -71,11 +94,32 @@ class recipe {
 			"rdfs:comment '{$this->comment}' ;",
 			"rdf:author dUser:{$this->author} ;",
 			"recipe:course dCourse:{$this->course} ;",
-			"recipe:cuisine dCuisine:{$this->cuisine}"
+			"recipe:cuisine dCuisine:{$this->cuisine} ;"
 		);
 
-		$result = $arcDb->insert( $triples );
-		return  ( $result ) ? 1 : 0;
+		$triples[] = "recipe:ingredients [ a recipe:IngredientList ;";
+
+		$i = 1;
+		$count = count($this->ingredients);
+
+		foreach ( $this->ingredients as $ingredient ) {
+			if ( $ingredient->insertSuccessful ) {
+				$triple = "rdf:_{$i} [ a recipe:Ingredient ;
+				recipe:food dFood:{$ingredient->uri} ;
+				recipe:quantity '{$ingredient->quantity}' ;
+				]";
+				
+				$triple .= ( $i == $count ) ? '' : ';';
+				
+				$triples[] = $triple;
+				
+				$i++;				
+			}
+		}
+
+		$triples[] = "]";
+
+		return $result = $arcDb->insert( $triples );
 	}
 }
 

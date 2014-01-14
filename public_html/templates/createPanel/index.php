@@ -36,9 +36,19 @@ $logic = new uploadLogic();
 				<?php echo $logic->outputFacetOptions('recipe:Course'); ?>
 			</select>
 
-			<label for="ingredients">*Ingredients</label>
-			<input type="text" name="ingredients[]" />
-			<input type="text" name="ingredients[]" />
+			<label for="ingredients">*Ingredients (please enter at least two)</label>
+			
+			<div class="ingredient">
+				<input type="text" name="ingredients[]" placeholder="Name" />
+				<input type="text" name="quantity[]" placeholder="Quantity" />
+			</div>
+			
+			<div class="ingredient">
+				<input type="text" name="ingredients[]" placeholder="Name"/>
+				<input type="text" name="quantity[]" placeholder="Quantity"/>
+			</div>
+
+			<p class="note"><a class="clone-ingredient">Add another</a></p>
 
 			<input type="submit" value="Submit Recipe"/>
 		</form>

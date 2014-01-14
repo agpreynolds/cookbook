@@ -46,6 +46,10 @@ global.recipeCreate = {
 			        // });
 			    }
     		});
+
+			$('.clone-ingredient').bind('click',function(){
+				$(this).parent().before( $('.ingredient').last().clone() );
+			});
 		});
 	},
 	onSuccess : function() {

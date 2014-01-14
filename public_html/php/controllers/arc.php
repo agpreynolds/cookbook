@@ -8,11 +8,11 @@ global $arcDb;
 
 	$query = array(
 			'select' => array(
-				'?user',
-				'?label'				
+				'?recipe',
+				'?ingredients'				
 			),
 			'where' => "
-				?user a dUserRestricted:Vegan ; 
+				?ingredient a recipe:Food ; 
 				rdfs:label ?label				
 			"
 		);
@@ -34,21 +34,25 @@ global $arcDb;
 // 				?auth rdfs:label ?author",
 // 			'filters' => array()
 // 		);
-$result = $arcDb->query2($query);
-var_dump($result);
+// $result = $arcDb->query2($query);
+// var_dump($result);
 
 //$result = $db->query2($queryData);
 
-// $q = "PREFIX recipe:<http://linkedrecipes.org/schema/> .
-// PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-// SELECT ?food ?quantity
-// WHERE { ?recipe a recipe:Recipe ;
-// 	recipe:ingredients ?ingredients .
-// 	?ingredients ?p ?s .
-// 	?s a recipe:Ingredient ;
-// 	recipe:food ?food ;
-// 	recipe:quantity ?quantity
-// }";
+$q = "PREFIX recipe:<http://linkedrecipes.org/schema/> .
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+SELECT ?label ?food ?quantity
+WHERE { ?recipe a recipe:Recipe ;
+	rdfs:label ?label ;
+	recipe:ingredients ?ingredients .
+	?ingredients ?p ?s .
+	?s a recipe:Ingredient ;
+	recipe:food ?food ;
+	recipe:quantity ?quantity
+}";
+
+$result = $arcDb->query($q);
+var_dump($result);
 
 
 
