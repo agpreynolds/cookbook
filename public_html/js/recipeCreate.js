@@ -19,11 +19,11 @@ global.recipeCreate = {
        				return form.serializeArray();
        			},
        			add : function(e,data) {
-       				console.log('test');
        				data.form.unbind('submit').bind('submit.fileupload',function(evt){
        					evt.preventDefault();
        					data.submit();
        				});
+       				$(this).after( $('<p>').html(data.files[0].name) );
        			},
         		done : function (e, data) {
 		            $('#progress').remove();
@@ -37,7 +37,6 @@ global.recipeCreate = {
         		},
         		fail : function (e, data) {
         			$('#progress').remove();
-        			console.log('test');
         		},
         		progressall : function (e, data) {
 			        // var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -48,7 +47,9 @@ global.recipeCreate = {
     		});
 
 			$('.clone-ingredient').bind('click',function(){
-				$(this).parent().before( $('.ingredient').last().clone() );
+				var newNode = $('.ingredient').last().clone();
+				newNode.find('input').val('');
+				$(this).parent().before( newNode );
 			});
 		});
 	},
