@@ -25,7 +25,7 @@ function getForm($id) {
 }
 
 function getImageExtension($path) {
-	$validExtensions = array('jpg','png');
+	$validExtensions = array('jpg','JPG','png');
 	foreach ($validExtensions as $ext) {
 		if ( file_exists($_SERVER['DOCUMENT_ROOT'] . $path . '.' . $ext) ) {
 			return $ext; 

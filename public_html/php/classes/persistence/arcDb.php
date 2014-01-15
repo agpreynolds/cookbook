@@ -12,8 +12,6 @@ class arcDb {
 			$this->store->setUp();
 			$this->store->query('LOAD <file://' . $_SERVER['DOCUMENT_ROOT'] . '/php/data/rdf/test.ttl>');
 		}
-
-		// $this->store->drop();
 	}
 	public function query($sparql) {
 		$sparql = $this->attachDefaultPrefixes() . $sparql;
