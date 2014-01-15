@@ -19,7 +19,7 @@ global.recipeCreate = {
        				return form.serializeArray();
        			},
        			add : function(e,data) {
-       				data.form.unbind('submit').bind('submit.fileupload',function(evt){
+       				data.form.unbind('submit.form').unbind('submit.fileupload').bind('submit.fileupload',function(evt){
        					evt.preventDefault();
        					data.submit();
        				});
@@ -51,6 +51,46 @@ global.recipeCreate = {
 				newNode.find('input').val('');
 				$(this).parent().before( newNode );
 			});
+
+			//TODO: Move this into form.js as generic functionality
+			$('form[name="recipeCreate"]')
+				.unbind('submit.form')
+				.unbind('submit.fileupload')
+				.bind('submit.fileupload',function(evt){
+					evt.preventDefault();
+					var form = this;
+					var _this = global.form;
+					
+					$.post('/php/controllers/formHandler.php',$(form).serializeArray())
+					.done(function(response){
+						$('#progress').remove();
+						$(form).find('.errorList').remove();
+						$(form).find('.error').removeClass('error');
+						
+						try {
+							response = JSON.parse(response);
+						}
+						catch(e) {
+							response = {
+								type : 'error',
+								messages : [{
+									key : 'json_error',
+									text : 'Unable to parse JSON',
+									field : ''
+								}]
+							};
+						}
+
+						_this.selectCallback(form,response);
+
+						global.consoleDebug('Form: ' + form.name + ' successfully processed with response:',response);
+					})
+					.fail(function(response){
+						$('#progress').remove();
+						_this.onError(form,response);
+						global.consoleDebug('Form: ' + form.name + ' failed processing');
+					});
+				});
 		});
 	},
 	onSuccess : function() {
