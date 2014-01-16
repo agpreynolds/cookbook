@@ -15,6 +15,11 @@ class db extends mysqli {
             $this->config['db_name']
         );        
     }
+    public function dropUsers() {
+        $this->delete(array(
+            'table' => 'user'
+        ));
+    }
     public function query($sql) {
         //TODO: SQL INJECTION PROTECTION
         if (!$this->connection) {
@@ -43,6 +48,13 @@ class db extends mysqli {
 
         $sql = "SELECT {$args['select']} FROM {$args['table']}";
         $sql .= ( isset($args['where']) ) ? " WHERE {$args['where']}" : "";
+        return $this->query($sql);
+    }
+    public function delete($args) {
+        if (!$args || !$args['table']) { return; }
+
+        $sql = "DELETE FROM {$args['table']}";
+
         return $this->query($sql);
     }
 }

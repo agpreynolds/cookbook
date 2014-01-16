@@ -2,8 +2,10 @@
 
 include ($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
 
-global $arcDb;
+global $arcDb , $db;
 
 $arcDb->drop();
+
+$db->dropUsers();
 
 ?>
