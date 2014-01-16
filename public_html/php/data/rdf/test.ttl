@@ -152,7 +152,7 @@ dRecipe:SultanaCake a recipe:Recipe ;
 		] ;
 		rdf:_4 [ a recipe:Ingredient ;
 			recipe:food 	dFood:Egg ;
-			recipe:quanity 	2 ;
+			recipe:quantity 	2 ;
 		] ;
 		rdf:_5 [ a recipe:Ingredient ;
 			recipe:food 	dFood:Flour ;
@@ -160,7 +160,7 @@ dRecipe:SultanaCake a recipe:Recipe ;
 		] ;
 		rdf:_6 [ a recipe:Ingredient ;
 			recipe:food 	dFood:Salt ;
-			recipe:quantiy "a pinch" ;
+			recipe:quantity "a pinch" ;
 		]
 	] ;
 	recipe:method [
