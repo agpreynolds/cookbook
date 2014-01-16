@@ -29,6 +29,8 @@ class resultLogic {
 	}
 	private function lookup($data) {
 		global $arcDb;
+		
+		$ingredients = $quantity = array();
 
 		$query = array(
 			'select' => array(
@@ -36,7 +38,7 @@ class resultLogic {
 				'?comment',
 				'?username',
 				'?cuisine',
-				'?course'
+				'?course'				
 			),
 			'where' => "
 				<{$data['uri']}> a recipe:Recipe ; 
@@ -51,6 +53,33 @@ class resultLogic {
 		);
 		
 		$result = $arcDb->query2($query);
+
+		$ingredientsQuery = array(
+			'select' => array(
+				'?ingredient',
+				'?quantity'
+			),
+			'where' => "
+				<{$data['uri']}> a recipe:Recipe ;
+				recipe:ingredients ?ingredients .
+				?ingredients ?p ?s .
+				?s a recipe:Ingredient ;
+				recipe:quantity ?quantity ;
+				recipe:food ?food .
+				?food rdfs:label ?ingredient
+			"
+		);
+
+		$ingredientResults = $arcDb->query2($ingredientsQuery);
+		
+		foreach ( $ingredientResults as $ingredient ) {
+			$ingredients[] = $ingredient['ingredient'];
+			$quantity[] = $ingredient['quantity'];
+		}
+
+		$result['ingredients'] = $ingredients;
+		$result['quantity'] = $quantity;
+
 		return new recipe($result);
 	}
 }
