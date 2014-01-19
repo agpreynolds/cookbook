@@ -15,10 +15,10 @@ global.form = {
 	selectCallback : function(form,response) {
 		var _this = global.form;
 
-		if (response.type == 'success') {
+		if (response.status == 'success') {
 			_this.onSuccess(form,response);
 		}
-		else if (response.type == 'error') {
+		else if (response.status == 'error') {
 			_this.onError(form,response);
 		}
 	},
@@ -41,7 +41,7 @@ global.form = {
 			}
 			catch(e) {
 				response = {
-					type : 'error',
+					status : 'error',
 					messages : [{
 						key : 'json_error',
 						text : 'Unable to parse JSON',
@@ -61,11 +61,11 @@ global.form = {
 		});
 	},
 	onSuccess : function(form,response) {
-		if (response.onSuccess) {
-			eval(response.onSuccess)();			
-		}
+		var _this = global.form;
+		_this.doCallback(form,response);
 	},
 	onError : function(form,response) {
+		var _this = global.form;
 		var errorNode = $('<ul>').addClass('errorList');
 		$(form).prepend(errorNode);
 		
@@ -81,8 +81,11 @@ global.form = {
 			errorNode.append($('<li>').attr('id','system_error').addClass('error').html('System Error'));
 		}
 
-		if (response.onError) {
-			eval(response.onError)(form,response);			
+		_this.doCallback(form,response);
+	},
+	doCallback : function(form,response) {
+		if (response.action) {
+			eval(response.action)(form,response);			
 		}
 	}
 }

@@ -1,36 +1,29 @@
 <?php
 
 class userSignup extends validateForm {
-	public function __construct($formData) {
-		if (!$formData) { return false; }
-				
-		$this->formID = 'userSignup';
-
-		parent::__construct($formData);
-
-
-		if ( $this->isValid() ) {
-			$this->register(
-				$this->formData['username'],
-				encrypt($this->formData['password'])
-			);
-		}
-
-		$this->constructResponse();
-	}
-
+	/*
+		* @Override - validateForm::isValid()
+	*/
 	protected function isValid() {
 		if ($_SESSION['user']->exists($this->formData['username'])) {
-			$this->errors[] = $this->setError('user_exists');
+			$this->setError('user_exists');
 		}
 		if ($_SESSION['user']->isSignedIn) {
-			$this->errors[] = $this->setError('user_isSignedIn');
+			$this->setError('user_isSignedIn');
 		}
 
 		parent::isValid();
 
-		return $this->errors ? 0 : 1;
-
+		return $this->hasErrors ? 0 : 1;
+	}
+	/*
+		* Function should exist in all subclasses of validateForm
+	*/
+	protected function run() {
+		$this->register(
+			$this->formData['username'],
+			encrypt($this->formData['password'])
+		);
 	}
 
 	private function register($username,$password) {

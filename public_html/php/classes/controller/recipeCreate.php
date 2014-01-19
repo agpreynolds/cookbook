@@ -1,44 +1,42 @@
 <?php
 
 class recipeCreate extends validateForm {
-	public $formID;
-
-	public function __construct($formData) {
-		if (!$formData) { 
-			return false; 
+	/*
+		* @Override - validateForm::isValid()
+	*/
+	protected function isValid() {
+		if (!$_SESSION['user']->isSignedIn) {
+			$this->setError('user_notSignedIn');
 		}
 
-		$this->formID = 'recipeCreate';
+		parent::isValid();
 
-		parent::__construct($formData);
+		return $this->hasErrors ? 0 : 1;
+	}
+	/*
+		* Function should exist in all subclasses of validateForm
+	*/
+	protected function run() {
+		$this->create();
+	}
+	private function create() {
+		$this->formData['author'] = $_SESSION['user']->username;
 
-		if (!$_SESSION['user']->isSignedIn) {
-			$this->errors[] = $this->setError('user_notSignedIn','');
+		$recipe = new recipe($this->formData);
+			
+		if ($file = $_FILES['image']) {
+			$fileUpload = new fileUpload(array(
+				'filehandle' => $file,
+				'filename' => 'recipe_' . preg_replace('/\s+/', '', $recipe->label)
+			));
 		}
 		else {
-			$this->formData['author'] = $_SESSION['user']->username;
-		}
-		
-		if ( $this->isValid() && !$this->errors ) {
-			$recipe = new recipe($this->formData);
-			
-			if ($file = $_FILES['image']) {
-				$fileUpload = new fileUpload(array(
-					'filehandle' => $file,
-					'filename' => 'recipe_' . preg_replace('/\s+/', '', $recipe->label)
-				));
-			}
-			else {
-				$this->errors[] = $this->setError('file_not_found','');
-			}
-
-
-			if ( !$recipe->store() ) {
-				$this->errors[] = $this->setError('db_failure','');
-			}
+			$this->setError('file_not_found','');
 		}
 
-		$this->constructResponse();
+		if ( !$recipe->store() ) {
+			$this->setError('db_failure','');
+		}
 	}
 }
 

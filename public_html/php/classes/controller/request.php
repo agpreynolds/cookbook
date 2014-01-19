@@ -17,7 +17,10 @@ class request {
         }
         
         private function handleAjax($method,$data) {
+            global $response;
             $this->response = new $method($data);
+
+            $response->output();
         }
 }
 

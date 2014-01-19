@@ -2,22 +2,29 @@
 
 class validateForm {
 	protected $formData;
-	protected $errors;
+	protected $hasErrors;
 	protected $config;
 	
-	/*
-		* Construct - Should be called from all formhandler classes
-	*/
-	protected function __construct($formData) {
+	public function validateForm($formData) {
+		if (!$formData) { return false; }
+
 		$this->formData = $formData;
-		$this->config = getForm($this->formID);
-		$this->errors = array();
+		$this->config = getForm( get_class($this) );
+		
+		$this->process();
+	}
+
+	protected function process() {
+		if ( $this->isValid() && !$this->hasErrors ) {
+			$this->run();
+		}
+		$this->constructResponse();
 	}
 
 	/*
 		* Applies requested validation functions to all form fields
 		* Returns 1 if all success
-		* On error, push to errors array and continue validation - return 0 at eof
+		* On error, set error and continue validation - return 0 at eof
 	*/
 	protected function isValid() {
 		
@@ -32,7 +39,7 @@ class validateForm {
 					//Hmm... Better way to handle array inputs
 					$validator = $prefix . $validator;
 					if ( !$this->$validator($this->formData[$key],$param) ) {
-						$this->errors[] = $this->setError($validator . '_' . $key,$key);					
+						$this->setError($validator . '_' . $key,$key);					
 					}
 				}				
 			}
@@ -41,18 +48,22 @@ class validateForm {
 		if (isset($this->config['validators'])) {
 			foreach ($this->config['validators'] as $key => $value) {
 				if ( !$this->$key($value) ) {
-					$this->errors[] = $this->setError($key . '_' . $value[0]);
+					$this->setError($key . '_' . $value[0]);
 				}
 			}			
 		}
-		return ($this->errors) ? 0 : 1;
+		return ($this->hasErrors) ? 0 : 1;
 	}
 
 	/*
 		* Constructs an error message based on a given key
-		* Returns error object
+		* Sends message to response object
 	*/
 	protected function setError($key,$field) {
+		global $response;
+
+		$this->hasErrors = 1;
+
 		if ($this->config['errors'] && $this->config['errors'][$key]) {
 			$message = $this->config['errors'][$key];
 		}
@@ -60,10 +71,12 @@ class validateForm {
 			$message = $key;
 		}
 
-		return array(
-			'key' => $key,
-			'text' => $message,
-			'field' => $field
+		$response->setMessage(
+			array(
+				'key' => $key,
+				'text' => $message,
+				'field' => $field
+			)
 		);
 	}
 
@@ -71,21 +84,22 @@ class validateForm {
 		* Constructs a JSON object to return to the frontend
 	*/
 	protected function constructResponse() {
-		$response = array();
-		if ($this->errors) {
-			$response['type'] 		= 'error';
-			$response['messages'] 	= $this->errors;
+		global $response;
+
+		$response->returnJSON = 1;
+		
+		if ($this->hasErrors) {
+			$response->status = 'error';
 			if ( isset($this->config['onError']) ) {
-				$response['onError'] = $this->config['onError'];
+				$response->action = $this->config['onError'];
 			}
 		}
 		else {
-			$response['type'] 		= 'success';
+			$response->status = 'success';
 			if ( isset($this->config['onSuccess']) ) {
-				$response['onSuccess'] = $this->config['onSuccess'];	
+				$response->action = $this->config['onSuccess'];	
 			}
 		}
-		echo json_encode($response);
 	}
 
 	/*

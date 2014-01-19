@@ -1,29 +1,26 @@
 <?php
 
 class userLogin extends validateForm {
-	public $formID;
-
-	public function __construct($formData) {
-		if (!$formData) { 
-			return false; 
-		}
-
-		$this->formID = 'userLogin';
-		
-		parent::__construct($formData);
-		
+	/*
+		* @Override - validateForm::isValid()
+	*/
+	protected function isValid() {
 		if ($_SESSION['user']->isSignedIn) {
-			$this->errors[] = $this->setError('user_isSignedIn','');
-		}
-		
-		if ( $this->isValid() && !$this->errors ) {
-			$this->authenticate(
-				$this->formData['username'],
-				encrypt($this->formData['password'])
-			);
+			$this->setError('user_isSignedIn');
 		}
 
-		$this->constructResponse();
+		parent::isValid();
+
+		return $this->hasErrors ? 0 : 1;
+	}
+	/*
+		* Function should exist in all subclasses of validateForm
+	*/
+	protected function run() {
+		$this->authenticate(
+			$this->formData['username'],
+			encrypt($this->formData['password'])
+		);
 	}
 	private function authenticate($username,$password) {
 		//Check we only have one user
@@ -37,11 +34,11 @@ class userLogin extends validateForm {
 				$_SESSION['user']->populate($userData);				
 			}
 			else {
-				$this->errors[] = $this->setError('password_incorrect','password');
+				$this->setError('password_incorrect','password');
 			}
 		}
 		else {
-			$this->errors[] = $this->setError('user_not_recognized','username');
+			$this->setError('user_not_recognized','username');
 		}
 	}
 }

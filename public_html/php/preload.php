@@ -23,6 +23,8 @@ if (!isset($_SESSION['user'])) {
 	$_SESSION['user'] = new user();
 }
 
+//Response object initialised before request so that request can write to it
+$response = new response();
 $request = new request();
 
 ?>

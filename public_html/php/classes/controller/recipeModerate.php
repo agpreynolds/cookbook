@@ -1,22 +1,11 @@
 <?php
 
 class recipeModerate extends validateForm {
-	public $formID;
-
-	public function __construct($formData) {
-		if (!$formData) { 
-			return false; 
-		}
-
-		$this->formID = 'recipeModerate';
-
-		parent::__construct($formData);
+	/*
+		* Function should exist in all subclasses of validateForm
+	*/
+	protected function run() {
 		
-		if ( $this->isValid() && !$this->errors ) {
-			//TODO: Process Report
-		}
-
-		$this->constructResponse();
 	}
 }
 
