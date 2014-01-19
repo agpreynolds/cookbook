@@ -10,6 +10,8 @@
 			</header>
 			<p class="note">Already have an account? Enter your username and password below to sign in.</p>
 			<form name="userLogin">
+				<input type="hidden" name="formID" value="userLogin"/>
+				
 				<label for="username">*Username</label>
 				<input name="username" type="text" placeholder="Username" maxlength="15" />
 
@@ -25,6 +27,8 @@
 			</header>
 			<p class="note">To create an account enter a unique username below:</p>
 			<form name="userSignup" autocomplete="off">
+				<input type="hidden" name="formID" value="userSignup"/>
+
 				<label for="username">*Username</label>
 				<input name="username" type="text" placeholder="Username"/>
 

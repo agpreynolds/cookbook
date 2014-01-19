@@ -15,6 +15,7 @@
 	<h4>Report this Recipe</h4>
 </header>
 <form name="recipeModerate">
+	<input type="hidden" name="formID" value="recipeModerate"/>
 	<input type="hidden" name="subject" value="<?php echo $logic->subject ; ?>" />
 	
 	<?php echo $userInput; ?>

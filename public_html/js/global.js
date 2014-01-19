@@ -43,3 +43,21 @@ global.toggleHTML = function(ele,a,b) {
 	}
 	return 0;
 }
+
+global.parseJSONResponse = function(string,field) {
+	try {
+		response = JSON.parse(string);
+	}
+	catch(e) {
+		response = {
+			status : 'error',
+			messages : [{
+				key : 'json_error',
+				text : 'Unable to parse JSON',
+				field : field
+			}]
+		};
+	}
+
+	return response;
+}

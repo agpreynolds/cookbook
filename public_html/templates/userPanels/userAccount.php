@@ -19,6 +19,8 @@
 			</section>
 			<section id="userLogout">
 				<form name="userLogout">
+					<input type="hidden" name="formID" value="userLogout"/>
+					
 					<p class="required-note"></p>
 					<input type="hidden" name="username" value="<?php echo $_SESSION['user']->username; ?>" />
 					<input type="submit" value="Sign Out"/>

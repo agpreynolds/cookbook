@@ -27,29 +27,14 @@ global.form = {
 		var form = this;
 		var _this = global.form;
 		
-		$.post('/php/controllers/formHandler.php',{
-			method : form.name,
-			data : $(form).serializeObject()
-		})
+		$.post('/php/controllers/formHandler.php',$(form).serializeArray())
 		.done(function(response){
 			$('#progress').remove();
 			$(form).find('.errorList').remove();
 			$(form).find('.error').removeClass('error');
 			
-			try {
-				response = JSON.parse(response);
-			}
-			catch(e) {
-				response = {
-					status : 'error',
-					messages : [{
-						key : 'json_error',
-						text : 'Unable to parse JSON',
-						field : ''
-					}]
-				};
-			}
-
+			response = global.parseJSONResponse(response);
+			
 			_this.selectCallback(form,response);
 
 			global.consoleDebug('Form: ' + form.name + ' successfully processed with response:',response);
@@ -61,8 +46,7 @@ global.form = {
 		});
 	},
 	onSuccess : function(form,response) {
-		var _this = global.form;
-		_this.doCallback(form,response);
+		global.form.doCallback(form,response);
 	},
 	onError : function(form,response) {
 		var _this = global.form;

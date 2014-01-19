@@ -17,10 +17,7 @@ $logic = new uploadLogic();
 
 			<label for="image">Attach an Image<span class="note">(optional)</span></label>
 			<input type="file" name="image" id="fileupload"/>
-			<!-- <div id="progress">
-				<p class="bar" style="height:10px;width:0px;background:black;"></p>
-			</div> -->
-
+			
 			<label for="comment">*Description</label>
 			<textarea name="comment"></textarea>
 
