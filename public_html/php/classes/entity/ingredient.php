@@ -32,7 +32,7 @@ class ingredient {
 			'select' => array(
 				'?label'
 			),
-			'where' => "<dFood:{$this->uri}> a recipe:Food ;
+			'where' => "dFood:{$this->uri} a recipe:Food ;
 				rdfs:label ?label",
 			'single' => 1
 		));

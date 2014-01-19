@@ -30,10 +30,7 @@ class recipeCreate extends validateForm {
 				'filename' => 'recipe_' . preg_replace('/\s+/', '', $recipe->label)
 			));
 		}
-		else {
-			$this->setError('file_not_found','');
-		}
-
+		
 		if ( !$recipe->store() ) {
 			$this->setError('db_failure','');
 		}

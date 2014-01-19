@@ -80,14 +80,8 @@ class arcDb {
 
 		$sparql .= "INSERT INTO <...> {";
 		
-		$length = count($triples);
-		$i = 0;
 		foreach ( $triples as $triple ) {
-			$i++;
-			$sparql .= $triple;
-			if ( !preg_match('/;$/',$triple) ) {
-				$sparql .= ( $length == $i ) ? '' : " .\n";
-			}
+			$sparql .= $triple;			
 		} 
 
 		$sparql .= "}";

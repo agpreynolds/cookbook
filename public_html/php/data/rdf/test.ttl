@@ -43,18 +43,28 @@ dCuisine:Mexican a recipe:Cuisine ;
 dCuisine:Russian a recipe:Cuisine ;
 	rdfs:label "Russian" .
 
-dFood:Sultana 	a recipe:Food ;
-	rdfs:label "sultana" .
-dFood:Margarine a recipe:Food ;
-	rdfs:label "margarine" .
-dFood:Sugar 	a recipe:Food ;
-	rdfs:label "sugar" .
+dFood:Cheese 	a recipe:Food ;
+	rdfs:label "Cheese" .
 dFood:Egg 		a recipe:Food ;
-	rdfs:label "egg" .
+	rdfs:label "Egg" .
 dFood:Flour 	a recipe:Food ;
-	rdfs:label "flour" .
+	rdfs:label "Flour" .
+dFood:Margarine a recipe:Food ;
+	rdfs:label "Margarine" .
+dFood:MincedBeef a recipe:Food ;
+	rdfs:label "Minced Beef" .
+dFood:Onion 	a recipe:Food ;
+	rdfs:label "Onion" .
 dFood:Salt 		a recipe:Food ;
-	rdfs:label "salt" .
+	rdfs:label "Salt" .
+dFood:Spaghetti a recipe:Food ;
+	rdfs:label "Spaghetti" .
+dFood:Sugar 	a recipe:Food ;
+	rdfs:label "Sugar" .
+dFood:Sultana 	a recipe:Food ;
+	rdfs:label "Sultana" .
+dFood:Tomato 	a recipe:Food ;
+	rdfs:label "Tomato" .
 
 dTechnique:Cook a recipe:Technique .
 
@@ -115,7 +125,29 @@ dRecipe:Bolognese a recipe:Recipe ;
 	rdfs:label "Spaghetti Bolognese" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
-	recipe:cuisine dCuisine:Italian .
+	recipe:cuisine dCuisine:Italian ;
+	recipe:ingredients [ a recipe:IngredientList ;
+		rdf:_1 [ a recipe:Ingredient ;
+			recipe:food 	dFood:MincedBeef ;
+			recipe:quantity "500g" ;
+		] ;
+		rdf:_2 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Spaghetti ;
+			recipe:quantity	"125g" ;
+		] ;
+		rdf:_3 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Cheese ;
+			recipe:quantity "50g" ;
+		] ;
+		rdf:_4 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Onion ;
+			recipe:quantity 1 ;
+		] ;
+		rdf:_5 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Tomato ;
+			recipe:quantity 2 ;
+		]
+	] .
 
 dRecipe:Tiramisu a recipe:Recipe ;
 	rdf:author dUser:Root ;
