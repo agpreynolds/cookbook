@@ -88,16 +88,11 @@ class recipe {
 	public function store() {
 		global $arcDb;
 
-		$triples = array(
-			"dRecipe:{$this->uri} a recipe:Recipe ;",
-			"rdfs:label '{$this->label}' ;",
-			"rdfs:comment '{$this->comment}' ;",
-			"rdf:author dUser:{$this->author} ;",
-			"recipe:course dCourse:{$this->course} ;",
-			"recipe:cuisine dCuisine:{$this->cuisine} ;"
-		);
 
-		$triples[] = "recipe:ingredients [ a recipe:IngredientList ;";
+		$timestamp = time();
+		$bNodeID = 'dIngredient:bn' . $timestamp;
+
+		$ingredientTriples = array($bNodeID . ' a recipe:IngredientList ;');
 
 		$i = 1;
 		$count = count($this->ingredients);
@@ -111,14 +106,25 @@ class recipe {
 				
 				$triple .= ( $i == $count ) ? '' : ';';
 				
-				$triples[] = $triple;
+				$ingredientTriples[] = $triple;
 				
 				$i++;				
 			}
 		}
 
-		$triples[] = "]";
+		$arcDb->insert( $ingredientTriples );		
 
+		$triples = array(
+			"dRecipe:{$this->uri} a recipe:Recipe ;",
+			"rdfs:label '{$this->label}' ;",
+			"rdfs:comment '{$this->comment}' ;",
+			"rdf:author dUser:{$this->author} ;",
+			"recipe:course dCourse:{$this->course} ;",
+			"recipe:cuisine dCuisine:{$this->cuisine} ;",
+			"recipe:ingredients {$bNodeID}"
+		);
+
+		// var_dump($triples);
 		return $result = $arcDb->insert( $triples );
 	}
 }

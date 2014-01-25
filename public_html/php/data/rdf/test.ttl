@@ -45,6 +45,8 @@ dCuisine:Russian a recipe:Cuisine ;
 
 dFood:Cheese 	a recipe:Food ;
 	rdfs:label "Cheese" .
+dFood:Chicken 	a recipe:Food ;
+	rdfs:label "Chicken" .
 dFood:Egg 		a recipe:Food ;
 	rdfs:label "Egg" .
 dFood:Flour 	a recipe:Food ;
@@ -53,8 +55,12 @@ dFood:Margarine a recipe:Food ;
 	rdfs:label "Margarine" .
 dFood:MincedBeef a recipe:Food ;
 	rdfs:label "Minced Beef" .
+dFood:MixedPeppers a recipe:Food ;
+	rdfs:label "Mixed Peppers" .
 dFood:Onion 	a recipe:Food ;
 	rdfs:label "Onion" .
+dFood:Rice 		a recipe:Food ;
+	rdfs:label "Rice" .
 dFood:Salt 		a recipe:Food ;
 	rdfs:label "Salt" .
 dFood:Spaghetti a recipe:Food ;
@@ -97,14 +103,34 @@ dRecipe:ChickenFajitas a recipe:Recipe ;
 	rdfs:label "Chicken Fajitas" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
-	recipe:cuisine dCuisine:Mexican .
+	recipe:cuisine dCuisine:Mexican ;
+	recipe:ingredients [ a recipe:IngredientList ;
+		rdf:_1 [ a recipe:Ingredient ;
+			recipe:food dFood:Chicken ;
+			recipe:quantity "350g" ;
+		] ;
+		rdf:_2 [ a recipe:Ingredient ;
+			recipe:food dFood:MixedPeppers ;
+			recipe:quantity 3 ;
+		] ;
+	] .
 
 dRecipe:ChickenKorma a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Chicken Korma" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
-	recipe:cuisine dCuisine:Indian .
+	recipe:cuisine dCuisine:Indian ;
+	recipe:ingredients [ a recipe:IngredientList ;
+		rdf:_1 [ a recipe:Ingredient ;
+			recipe:food dFood:Chicken ;
+			recipe:quantity "500g" ;
+		] ;
+		rdf:_2 [ a recipe:Ingredient ;
+			recipe:food dFood:Rice ;
+			recipe:quantity "150g" ;
+		]
+	] .
 
 dRecipe:Nachos a recipe:Recipe ;
 	rdf:author dUser:Root ;
@@ -146,6 +172,10 @@ dRecipe:Bolognese a recipe:Recipe ;
 		rdf:_5 [ a recipe:Ingredient ;
 			recipe:food 	dFood:Tomato ;
 			recipe:quantity 2 ;
+		] ;
+		rdf:_6 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Salt ;
+			recipe:quantity "1g" ;
 		]
 	] .
 

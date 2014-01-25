@@ -12,6 +12,7 @@ class arcDb {
 			$this->store->setUp();
 			$this->store->query('LOAD <file://' . $_SERVER['DOCUMENT_ROOT'] . '/php/data/rdf/test.ttl>');
 		}
+		//echo $this->store->dump();
 	}
 	public function drop() {
 		return $this->store->drop();
@@ -85,10 +86,8 @@ class arcDb {
 		} 
 
 		$sparql .= "}";
-		// echo $sparql;
-		$result = $this->store->query($sparql);
-		
-		return $result;
+		 // echo $sparql;
+		return $this->store->query($sparql,'',true);
 	}
 
 	private function attachDefaultPrefixes() {
