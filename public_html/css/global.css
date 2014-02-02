@@ -184,7 +184,7 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 	margin-bottom:5px;
 }
 
-.componentOption ul, .componentOption ol {
+.componentOption section {
 	display:none;
 }
 

@@ -12,6 +12,7 @@ class recipe {
 	public $tools;
 	public $techniques;
 	public $steps;
+	public $reviews;
 	public $isComplete;
 	public $dateUploaded;
 	public $dateLastUpdated;
@@ -21,20 +22,34 @@ class recipe {
 		// 	return null;
 		// }
 		
-		$this->ingredients = array();
+		$this->ingredients = $this->reviews = array();
 
 		foreach($data as $key => $value){
+    		$i = 0;
+        	
         	//Creates an ingredient instance based on array position of name and quantity
         	if ( $key == 'ingredients' ) {
-        		$count = count($key);
-        		$i = 0;
         		foreach ($value as $ingredient) {
-        			$ingredientProperties = array(
+        			$props = array(
         				'name' 		=> $ingredient,
         				'quantity' 	=> $data['quantity'][$i]
         			);
         			
-        			$this->ingredients[] = new ingredient($ingredientProperties);
+        			$this->ingredients[] = new ingredient($props);
+
+        			$i++;
+        		}
+        	}
+        	elseif ( $key == 'reviews' ) {
+        		foreach ($value as $review) {
+        			$props = array(
+        				'uri' => $review,
+        				'author' => $data['reviewer'][$i],
+        				'title' => $data['reviewTitle'][$i],
+        				'text' => $data['reviewText'][$i]
+        			);
+
+        			$this->reviews[] = new review($props);
 
         			$i++;
         		}

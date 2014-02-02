@@ -169,6 +169,8 @@ global.recipeSearch.largeResultPanel = {
 	init : function(response,container) {
 		var _this = global.recipeSearch.largeResultPanel;
 		_this.container = $("#resultLarge");
+		global.initPanel(_this);
+
 		_this.contentContainer = _this.container.find('article.contentContainer').get(0);
 
 		_this.closeButton = _this.container.find("a.close-link");
@@ -181,7 +183,7 @@ global.recipeSearch.largeResultPanel = {
 			var indicator = $(this).find('span.indicator');
 			global.toggleHTML(indicator,'+','-');
 			
-			$(this).parent().find('ul,ol').slideToggle();
+			$(this).parent().find('section').slideToggle();
 		});
 
 		_this.moderation = _this.container.find('#recipeModeration');

@@ -3,9 +3,12 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema> .
 @prefix recipe: <http://linkedrecipes.org/schema/> .
+@prefix rev: <http://purl.org/stuff/rev#> .
 
 @prefix dUser: <http://palacealex.com/data/User/> .
 @prefix dUserRestricted: <http://palacealex.com/data/User/Restricted/> .
+
+@prefix dReview: <http://palacealex.com/data/Review/> .
 
 @prefix dCourse: <http://palacealex.com/data/Course/> .
 @prefix dCuisine: <http://palacealex.com/data/Cuisine/> .
@@ -22,6 +25,11 @@ dUser:Root a foaf:Person ;
 	rdfs:label "Root" .
 dUser:Veggie a foaf:Person , dUserRestricted:Vegetarian ;
 	rdfs:label "Veggie" .
+
+dReview:review1 a rev:Review ;
+	rev:title 'My First Review' ;
+	rev:text 'This was amazing' ;
+	rev:reviewer dUser:Root .
 
 dCourse:Starter a recipe:Course ;
 	rdfs:label "Starter" .
@@ -88,7 +96,8 @@ dRecipe:Pizza a recipe:Recipe ;
 	rdfs:label "Pizza" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
-	recipe:cuisine dCuisine:Italian .
+	recipe:cuisine dCuisine:Italian ;
+	rev:hasReview dReview:review1 .
 
 dRecipe:GarlicBread a recipe:Recipe ;
 	rdf:author dUser:Root ;

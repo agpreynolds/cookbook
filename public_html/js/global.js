@@ -33,6 +33,8 @@ global.initPanel = function(panel,keepDisplaying) {
 			positionNode : panel.wrapper
 		});
 	});
+
+	global.form.init();
 }
 global.toggleHTML = function(ele,a,b) {
 	if (ele.html() === a) {

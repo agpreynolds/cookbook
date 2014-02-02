@@ -1,0 +1,1 @@
+<li id="<?php echo $review->uri; ?>"><?php echo $review->title . ' ' . $review->text; ?></li>

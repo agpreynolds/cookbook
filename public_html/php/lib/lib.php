@@ -38,4 +38,8 @@ function encrypt($arg) {
 	return md5($arg);
 }
 
+function generateUniqueID($prefix) {
+	return $prefix . time();
+}
+
 ?>

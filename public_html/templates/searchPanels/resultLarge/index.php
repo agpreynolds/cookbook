@@ -25,25 +25,43 @@ $recipe = $resultLogic->recipe;
 				<header>
 					<a><h4>Ingredients <span class="indicator">+</span></h4></a>
 				</header>
-				<ul><?php $resultLogic->outputIngredientList(); ?></ul>
+				<section>
+					<ul><?php $resultLogic->outputIngredientList(); ?></ul>
+				</section>
 			</article>
 			<article class="componentOption">
 				<header>
 					<a><h4>Tools <span class="indicator">+</span></h4></a>
 				</header>
-				<ul><?php $resultLogic->outputToolList(); ?></ul>
+				<section>
+					<ul><?php $resultLogic->outputToolList(); ?></ul>
+				</section>
 			</article>
 			<article class="componentOption">
 				<header>
 					<a><h4>Techniques <span class="indicator">+</span></h4></a>
 				</header>
-				<ul><?php $resultLogic->outputTechniqueList(); ?></ul>
+				<section>
+					<ul><?php $resultLogic->outputTechniqueList(); ?></ul>					
+				</section>
 			</article>
 			<article class="componentOption">
 				<header>
 					<a><h4>Steps <span class="indicator">+</span></h4></a>
 				</header>
-				<ul><?php $resultLogic->outputStepList(); ?></ul>
+				<section>
+					<ul><?php $resultLogic->outputStepList(); ?></ul>
+				</section>
+			</article>
+			<article class="componentOption">
+				<header>
+					<a><h4>Reviews <span class="indicator">+</span></h4></a>
+				</header>
+				<section>
+					<ul><?php $resultLogic->outputReviews(); ?></ul>
+
+					<?php include ( getAbsIncPath('/templates/reviews/form.php') ); ?>
+				</section>
 			</article>
 		</section>
 		<section id="recipeModeration">

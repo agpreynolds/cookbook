@@ -8,6 +8,7 @@ return array(
 	'prefixes' => array(
 		'foaf: <http://xmlns.com/foaf/0.1/>',
 		'recipe: <http://linkedrecipes.org/schema/>',
+		'rev: <http://purl.org/stuff/rev#>',
 		'dCourse: <http://palacealex.com/data/Course/>',
 		'dCuisine: <http://palacealex.com/data/Cuisine/>',
 		'dFood: <http://palacealex.com/data/Food/>',
@@ -15,6 +16,7 @@ return array(
 		'dRecipe: <http://palacealex.com/data/Recipe/>',
 		'dTechnique: <http://palacealex.com/data/Technique/>',
 		'dTool: <http://palacealex.com/data/Tool/>',
+		'dReview: <http://palacealex.com/data/Review/>',
 		'dUser: <http://palacealex.com/data/User/>',
 		'dUserRestricted: <http://palacealex.com/data/User/Restricted/>'
 	),

@@ -5,22 +5,22 @@ include ($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
 global $arcDb;
 
 
-$ingredientsQuery = array(
+$query = array(
 			'select' => array(
-				'?quantity',
-				'?food'
+				'?review',
+				'?reviewer',
+				'?title',
+				'?text'
 			),
 			'where' => "
-				dRecipe:SultanaCake a recipe:Recipe ;
-				recipe:ingredients ?ingredients .
-				?ingredients ?p ?s .
-				?s a recipe:Ingredient ;
-				recipe:quantity ?quantity ;
-				recipe:food ?food
+				?review a rev:Review ;
+				rev:reviewer ?reviewer ;
+				rev:title ?title ;
+				rev:text ?text
 			"
 		);
 
-$result = $arcDb->query2($ingredientsQuery);
+$result = $arcDb->query2($query);
 var_dump($result);
 
 

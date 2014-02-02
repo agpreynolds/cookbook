@@ -1,10 +1,12 @@
 <?php
 
 class resultLogic {
+	public $data;
 	public $recipe;
 
 	public function __construct($data) {
-		$this->recipe = $this->lookup($data);
+		$this->data = $data;
+		$this->recipe = $this->lookup();
 	}
 
 	public function outputIngredientList() {
@@ -27,11 +29,16 @@ class resultLogic {
 			include ( getAbsIncPath('/templates/searchPanels/resultLarge/stepItem.php') );
 		}
 	}
-	private function lookup($data) {
+	public function outputReviews() {
+		foreach ($this->recipe->reviews as $review) {
+			include ( getAbsIncPath('/templates/searchPanels/resultLarge/reviewItem.php') );
+		}
+	}
+	private function lookup() {
 		global $arcDb;
-		
-		$ingredients = $quantity = array();
 
+		$ingredients = $quantity = array();
+		
 		$query = array(
 			'select' => array(
 				'?label',
@@ -41,7 +48,7 @@ class resultLogic {
 				'?course'				
 			),
 			'where' => "
-				<{$data['uri']}> a recipe:Recipe ; 
+				<{$this->data['uri']}> a recipe:Recipe ; 
 				rdfs:label ?label ;
 				rdfs:comment ?comment ;
 				recipe:cuisine ?cuisine ;
@@ -54,13 +61,44 @@ class resultLogic {
 		
 		$result = $arcDb->query2($query);
 
-		$ingredientsQuery = array(
+		$ingredientResults = $this->lookupIngredients();
+
+		foreach ( $ingredientResults as $ingredient ) {
+			$ingredients[] = $ingredient['ingredient'];
+			$quantity[] = $ingredient['quantity'];
+		}
+
+		$result['ingredients'] = $ingredients;
+		$result['quantity'] = $quantity;
+
+		$reviewResults = $this->lookupReviews();
+
+		$reviews = $reviewer = $title = $text = array();
+
+		foreach ($reviewResults as $review) {
+			$reviews[] = $review['review'];
+			$reviewer[] = $review['reviewer'];
+			$title[] = $review['title'];
+			$text[] = $review['text'];
+		}
+
+		$result['reviews'] = $reviews;
+		$result['reviewer'] = $reviewer;
+		$result['reviewTitle'] = $title;
+		$result['reviewText'] = $text;
+
+		return new recipe($result);
+	}
+	private function lookupIngredients() {
+		global $arcDb;
+
+		$query = array(
 			'select' => array(
 				'?ingredient',
 				'?quantity'
 			),
 			'where' => "
-				<{$data['uri']}> a recipe:Recipe ;
+				<{$this->data['uri']}> a recipe:Recipe ;
 				recipe:ingredients ?ingredients .
 				?ingredients ?p ?s .
 				?s a recipe:Ingredient ;
@@ -70,17 +108,29 @@ class resultLogic {
 			"
 		);
 
-		$ingredientResults = $arcDb->query2($ingredientsQuery);
-		
-		foreach ( $ingredientResults as $ingredient ) {
-			$ingredients[] = $ingredient['ingredient'];
-			$quantity[] = $ingredient['quantity'];
-		}
+		return $arcDb->query2($query);
+	}
+	private function lookupReviews() {
+		global $arcDb;
 
-		$result['ingredients'] = $ingredients;
-		$result['quantity'] = $quantity;
+		$query = array(
+			'select' => array(
+				'?review',
+				'?reviewer',
+				'?title',
+				'?text'
+			),
+			'where' => "
+				<{$this->data['uri']}> a recipe:Recipe ;
+				rev:hasReview ?review .
+				?review a rev:Review ;
+				rev:reviewer ?reviewer ;
+				rev:title ?title ;
+				rev:text ?text
+			"
+		);
 
-		return new recipe($result);
+		return $arcDb->query2($query);
 	}
 }
 
