@@ -1,0 +1,25 @@
+/*
+	File Name: select.css
+	Author: Alex Reynolds
+
+	Stylesheet for overrides to styles imported by select2 library
+
+*/
+
+/*
+	@Override
+	Stop select2 dropdowns displaying inline
+*/
+div.select2-container {	display:block; }
+
+/*
+	@Override
+	Apply global borders to select2 drop downs
+*/
+div.select2-container ul.select2-choices, 
+.select2-drop.select2-drop-active {border:solid 1px #228B22 !important;}
+
+div.select2-container.error ul.select2-choices, 
+.select2-drop.select2-drop-active .error {border:solid 1px red !important;}
+
+div.select2-container .select2-choices .select2-search-field input {font-size:12px;}

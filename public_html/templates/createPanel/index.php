@@ -22,14 +22,12 @@ $logic = new uploadLogic();
 			<textarea name="comment"></textarea>
 
 			<label for="cuisine">*Cuisine Type</label>
-			<select name="cuisine">
-				<option value=0>Select</option>
+			<select name="cuisine" multiple>
 				<?php echo $logic->outputFacetOptions('recipe:Cuisine'); ?>
 			</select>
 
 			<label for="course">*Course</label>
-			<select name="course">
-				<option value=0>Select</option>
+			<select name="course" multiple>
 				<?php echo $logic->outputFacetOptions('recipe:Course'); ?>
 			</select>
 

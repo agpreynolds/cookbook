@@ -11,6 +11,8 @@ global.recipeCreate = {
 			global.initPanel(_this);
 			global.form.init();
 
+			_this.container.find('select').select2();
+
 			$('.clone-ingredient').bind('click',function(){
 				var newNode = $('.ingredient').last().clone();
 				newNode.find('input').val('');

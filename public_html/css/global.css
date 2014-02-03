@@ -22,7 +22,8 @@ label {
 
 input, textarea {
 	display:block;
-	padding:2px;
+	padding:5px;
+	font-size:12px;
 	border: solid 1px #228B22;
 }
 

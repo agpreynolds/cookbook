@@ -8,12 +8,15 @@
 	<meta charset="utf-8">
 
 	<link rel="stylesheet" type="text/css" href="/css/global.css">
+	<link rel="stylesheet" type="text/css" href="/css/select2.css">
+	<link rel="stylesheet" type="text/css" href="/js/lib/select2/select2.css">
 	
 	<script type="text/javascript" src="/js/lib/jQuery_v1.10.2.js"></script>	
 	<script type="text/javascript" src="/js/lib/jQuery_ext.js"></script>
 	<script type="text/javascript" src="/js/lib/jQuery-File-Upload-9.5.2/js/vendor/jquery.ui.widget.js"></script>
 	<script type="text/javascript" src="/js/lib/jQuery-File-Upload-9.5.2/js/jquery.fileupload.js"></script>
 	<script type="text/javascript" src="/js/lib/jQuery-File-Upload-9.5.2/js/jquery.iframe-transport.js"></script>
+	<script type="text/javascript" src="/js/lib/select2/select2.js"></script>
 	<script type="text/javascript" src="/js/global.js"></script>
 	<script type="text/javascript" src="/js/form.js"></script>
 	<script type="text/javascript" src="/js/popup.js"></script>
