@@ -8,10 +8,7 @@ return array(
 		),
 		'isVegan' => array(
 			'type' => 'checkbox'
-		),
-		'isLactoseIntolerant' => array(
-			'type' => 'checkbox'
-		),
+		)
 	),
 	'validators' => array(
 		

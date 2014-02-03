@@ -9,6 +9,7 @@ return array(
 		'foaf: <http://xmlns.com/foaf/0.1/>',
 		'recipe: <http://linkedrecipes.org/schema/>',
 		'rev: <http://purl.org/stuff/rev#>',
+		'diet: <http://agpreynolds.co.uk/data/rdf/vegetarian/>',
 		'dCourse: <http://palacealex.com/data/Course/>',
 		'dCuisine: <http://palacealex.com/data/Cuisine/>',
 		'dFood: <http://palacealex.com/data/Food/>',

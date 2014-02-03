@@ -14,7 +14,7 @@ class user {
 	public function populate($userData) {
 		foreach ( $userData as $key => $value ) {
         	$this->{$key} = $value;
-      	}
+      	}      	
 	}
 
 	public function exists($username) {
@@ -29,19 +29,38 @@ class user {
 		return ( $result->num_rows === 1 ? $result : 0);
 	}
 
+	public function lookup() {
+		global $arcDb;
+
+      	$query = array(
+      		'select' => array(
+      			'?isVegetarian',
+      			'?isVegan'
+      		),
+      		'where' => "
+      			dUser:{$this->username} a foaf:Person .
+      			OPTIONAL { dUser:{$this->username} ?isVegetarian diet:Vegetarian }
+      			OPTIONAL { dUser:{$this->username} ?isVegan diet:Vegan }
+      		",
+      		'single' => 1
+      	);
+
+      	$result = $arcDb->query2($query);
+
+      	$this->isVegetarian = $result['isVegetarian'] ? 'checked' : '';
+      	$this->isVegan = $result['isVegan'] ? 'checked' : '';
+	}
+
 	public function store() {
 		global $arcDb;
 
 		$triples = array();
 
 		if ( $this->isVegetarian ) {
-			$triples[] = "dUser:{$this->username} a dUserRestricted:Vegetarian";
+			$triples[] = "dUser:{$this->username} a diet:Vegetarian";
 		}
 		if ( $this->isVegan ) {
-			$triples[] = "dUser:{$this->username} a dUserRestricted:Vegan";
-		}
-		if ( $this->isLactoseIntolerant) {
-			$triples[] = "dUser:{$this->username} a dUserRestricted:LactoseIntolerant";
+			$triples[] = "dUser:{$this->username} a diet:Vegan";
 		}
 
 		return ( sizeof($triples) > 0 ) ? $arcDb->insert($triples) : 1;

@@ -46,6 +46,7 @@ class userSignup extends validateForm {
 		$_SESSION['user']->populate(array(
 			'username' => $username
 		));
+		$_SESSION['user']->lookup();
 	}
 }
 

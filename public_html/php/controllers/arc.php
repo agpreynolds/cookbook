@@ -6,19 +6,16 @@ global $arcDb;
 
 
 $query = array(
-			'select' => array(
-				'?review',
-				'?reviewer',
-				'?title',
-				'?text'
-			),
-			'where' => "
-				?review a rev:Review ;
-				rev:reviewer ?reviewer ;
-				rev:title ?title ;
-				rev:text ?text
-			"
-		);
+      		'select' => array(
+      			'?username',
+      			'?isVegetarian'
+      		),
+      		'where' => "
+      			dUser:alex a foaf:Person ;
+      			rdfs:label ?username .
+      			OPTIONAL { dUser:alex ?isVegetarian diet:Vegetarian }
+      		"
+      	);
 
 $result = $arcDb->query2($query);
 var_dump($result);

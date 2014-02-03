@@ -31,7 +31,8 @@ class userLogin extends validateForm {
 
 			if ($userData['password'] === $password) {
 				$_SESSION['user']->isSignedIn = 1;
-				$_SESSION['user']->populate($userData);				
+				$_SESSION['user']->populate($userData);
+				$_SESSION['user']->lookup();
 			}
 			else {
 				$this->setError('password_incorrect','password');

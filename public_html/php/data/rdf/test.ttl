@@ -4,6 +4,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema> .
 @prefix recipe: <http://linkedrecipes.org/schema/> .
 @prefix rev: <http://purl.org/stuff/rev#> .
+@prefix diet: <http://agpreynolds.co.uk/data/rdf/vegetarian/> .
 
 @prefix dUser: <http://palacealex.com/data/User/> .
 @prefix dUserRestricted: <http://palacealex.com/data/User/Restricted/> .
@@ -17,13 +18,9 @@
 @prefix dTechnique: <http://palacealex.com/data/Technique/> .
 @prefix dTool: <http://palacealex.com/data/Tool/> .
 
-dUserRestricted: rdfs:subClassOf foaf:Person .
-dUserRestricted:Vegetarian rdfs:subClassOf dUserRestricted: .
-dUserRestricted:Vegan rdfs:subClassOf dUserRestricted: .
-
 dUser:Root a foaf:Person ;
 	rdfs:label "Root" .
-dUser:Veggie a foaf:Person , dUserRestricted:Vegetarian ;
+dUser:Veggie a diet:Vegetarian, foaf:Person ;
 	rdfs:label "Veggie" .
 
 dReview:review1 a rev:Review ;

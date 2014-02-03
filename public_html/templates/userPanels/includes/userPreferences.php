@@ -1,3 +1,9 @@
+<?php
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
+
+?>
+
 <article>
 	<header class="black">
 		<h4>Preferences</h4>
@@ -6,18 +12,13 @@
 		<input type="hidden" name="formID" value="userPreferences"/>
 		
 		<div class="checkbox">
-			<input name="isVegetarian" type="checkbox"/>
+			<input name="isVegetarian" type="checkbox" <?php echo $_SESSION['user']->isVegetarian ? 'checked' : ''; ?>/>
 			<label for="isVegetarian">Vegetarian</label>
 		</div>
 		
 		<div class="checkbox">
-			<input name="isVegan" type="checkbox"/>
+			<input name="isVegan" type="checkbox" <?php echo $_SESSION['user']->isVegan ? 'checked' : ''; ?>/>
 			<label for="isVegan">Vegan</label>
-		</div>
-
-		<div class="checkbox">
-			<input name="isLactoseIntolerant" type="checkbox"/>
-			<label for="isLactoseIntolerant">Lactose Intolerant</label>
 		</div>
 
 		<input type="submit" value="Submit"/>

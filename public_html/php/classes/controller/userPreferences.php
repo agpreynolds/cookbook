@@ -12,7 +12,7 @@ class userPreferences extends validateForm {
 		* Writes triples to DB
 	*/
 	private function update() {
-		$_SESSION['user']->populate($formData);
+		$_SESSION['user']->populate($this->formData);
 
 		if ( !$_SESSION['user']->store() ) {
 			$this->setError('db_failed','');
