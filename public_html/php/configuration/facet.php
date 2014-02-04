@@ -8,5 +8,9 @@ return array(
 	'recipe:Course' => array(
 		'label' => 'Course',
 		'shortcut' => '?course'
+	),
+	'recipe:Food' => array(
+		'label' => 'Ingredient',
+		'shortcut' => '?ingredient'
 	)
 );

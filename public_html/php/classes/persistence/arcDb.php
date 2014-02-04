@@ -32,6 +32,7 @@ class arcDb {
 				- where - string - triples to extract
 			Optional
 				- single - returns a single row if specified
+				- distinct - eliminates duplicates
 	*/
 	public function query2($args) {
 		if (!$args) { return; }
@@ -39,6 +40,10 @@ class arcDb {
 		$sparql = $this->attachDefaultPrefixes();
 		
 		$sparql .= "SELECT ";
+
+		if ($args['distinct']) {
+			$sparql .= 'DISTINCT ';
+		}
 		if ($args['select']) {
 			foreach ($args['select'] as $prop) {
 				$sparql .= $prop . ' ';
@@ -76,7 +81,11 @@ class arcDb {
 
 		$single = ( isset($args['single']) ) ? 'row' : 'rows';
 		// echo $sparql;
-		return $result = $this->store->query($sparql,$single);
+		$result = $this->store->query($sparql,$single);
+		
+		$this->handleError();
+
+		return $result;
 	}
 
 	public function insert($triples) {
@@ -108,6 +117,22 @@ class arcDb {
 	}
 	private function optionalFilterString($filter,$value,$last) {
 		return "{ $filter rdfs:label '$value'}" . ( !$last ? ' UNION' : '' );
+	}
+
+	private function handleError() {
+		global $response;
+
+		$errors = $this->store->getErrors();
+		
+		if ($errors) {
+			foreach ($errors as $error) {
+				$response->setMessage(array(
+					'key' => $error,
+					'text' => $error,
+					'field' => ''
+				));
+			}
+		}
 	}
 }
 

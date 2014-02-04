@@ -40,6 +40,7 @@
 		<section class="wrapper">
 			<section id="recipeSearchFacets">
 				<form name="recipeSearch">
+					<p class="note required-note"></p>
 					<input type="hidden" name="formID" value="recipeSearch"/>
 					<?php new searchOptions(); ?>
 				</form>

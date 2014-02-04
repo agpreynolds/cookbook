@@ -16,17 +16,22 @@ div.select2-container {	display:block; }
 	@Override
 	Apply global borders to select2 drop downs
 */
-div.select2-container ul.select2-choices, 
-.select2-drop.select2-drop-active {border:solid 1px #228B22 !important;}
+div.select2-container ul.select2-choices,
+div.select2-drop.select2-drop-active,
+div.select2-drop.select2-drop-above.select2-drop-active,
+div.select2-container-multi.select2-container-active ul.select2-choices,
+div.select2-container-multi .select2-choices li.select2-search-choice {border:solid 1px #228B22;}
 
 /*
 	@Override
 	Apply error state border to drop downs
 */
-div.select2-container.error ul.select2-choices {border:solid 1px red !important;}
+div.select2-container.error ul.select2-choices {border:solid 1px red;}
 
 /*
 	@Override
 	Re-apply font-size to input box
 */
 div.select2-container .select2-choices .select2-search-field input {font-size:12px;}
+
+ul.select2-results {font-size:12px;}

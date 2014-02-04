@@ -2,7 +2,8 @@
 
 return array(
 	'recipe:Cuisine',
-	'recipe:Course'
+	'recipe:Course',
+	'recipe:Food'
 	// 'searchByCuisineType' => array(
 	// 	'active' => 1,
 	// 	'label' => 'Cuisine Type',

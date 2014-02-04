@@ -20,10 +20,7 @@ class recipeSearch extends validateForm {
 			'select' => array(
 				'?uri',
 				'?label',
-				'?comment',
-				'?username',
-				'?cuisine',
-				'?course'
+				'?username'
 			),
 			'where' => "
 				?uri a recipe:Recipe ; 
@@ -31,10 +28,16 @@ class recipeSearch extends validateForm {
 				rdfs:comment ?comment ;
 				recipe:cuisine ?cuisine ;
 				recipe:course ?course ;
-				rdf:author ?author .
+				rdf:author ?author ;			
+				recipe:ingredients ?ingredients .
+				?ingredients ?p ?s .
+				?s a recipe:Ingredient ;
+				recipe:quantity ?quantity ;
+				recipe:food ?ingredient .
 				?author rdfs:label ?username
 			",
-			'filters' => array()
+			'filters' => array(),
+			'distinct' => 1
 		);
 
 		$data = $this->formData;
