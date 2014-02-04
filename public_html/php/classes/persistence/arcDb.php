@@ -66,6 +66,9 @@ class arcDb {
 						//TODO: Numerical Comparison
 					}
 				}
+				else {
+					$sparql .= $this->filterString($filter,$choices);
+				}
 			}
 		}
 
@@ -101,7 +104,7 @@ class arcDb {
 	}
 
 	private function filterString($filter,$value) {
-		return "$filter rdfs:label '$value'";
+		return ". $filter rdfs:label '$value'";
 	}
 	private function optionalFilterString($filter,$value,$last) {
 		return "{ $filter rdfs:label '$value'}" . ( !$last ? ' UNION' : '' );

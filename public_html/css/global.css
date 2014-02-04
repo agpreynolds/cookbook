@@ -135,19 +135,9 @@ div.ingredient input {
 	width:76%;
 }
 
-a.facetLink {font-weight:bold;}
-.selected.facetValue a {background:#228B22;}
 .facetOptions { 
 	display:none;
 	font-size:80%;
-}
-.facetValue a {
-	margin: 2px 0;
-	padding:2px;
-}
-
-.facetLink:hover {
-	border-radius:10px;
 }
 
 #recipeSearchResults li {

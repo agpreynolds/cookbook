@@ -19,7 +19,14 @@ div.select2-container {	display:block; }
 div.select2-container ul.select2-choices, 
 .select2-drop.select2-drop-active {border:solid 1px #228B22 !important;}
 
-div.select2-container.error ul.select2-choices, 
-.select2-drop.select2-drop-active .error {border:solid 1px red !important;}
+/*
+	@Override
+	Apply error state border to drop downs
+*/
+div.select2-container.error ul.select2-choices {border:solid 1px red !important;}
 
+/*
+	@Override
+	Re-apply font-size to input box
+*/
 div.select2-container .select2-choices .select2-search-field input {font-size:12px;}

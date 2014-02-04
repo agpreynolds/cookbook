@@ -1,24 +1,22 @@
 <?php
 
-class recipeSearch {
-	private $recipes = array();
-	private $results;
-	private $config;
-	private $queryData;
-
-	public function __construct($data) {
-		$this->generateQueryData($data);
-
-		global $arcDb;
-		$this->results = $arcDb->query2($this->queryData);
-
-		foreach ( $this->results as $result ) {
-			$this->recipes[] = new recipe($result);
+class recipeSearch extends validateForm {
+	/*
+		* Function should exist in all subclasses of validateForm
+	*/
+	protected function run() {
+		if ( $results = $this->runQuery() ) {
+			$html = new searchResults($results);
+		}
+		else {
+			$this->setError('db_failure','');
 		}
 	}
 
-	private function generateQueryData($data) {
-		$this->queryData = array(
+	private function runQuery() {
+		global $arcDb;
+
+		$query = array(
 			'select' => array(
 				'?uri',
 				'?label',
@@ -39,19 +37,17 @@ class recipeSearch {
 			'filters' => array()
 		);
 
+		$data = $this->formData;
+		unset($data['formID']);
+
 		foreach ($data as $param => $value) {
 			$facet = new facet($param);
 			if ($facet && $facet->shortcut) {
-				$this->queryData['filters'][$facet->shortcut] = $value;
+				$query['filters'][$facet->shortcut] = $value;
 			}
-		}		
-	}
+		}
 
-	public function getRecipes() {
-		return $this->recipes;
-	}
-	public function getResults() {
-		return $this->results;
+		return $results = $arcDb->query2($query);
 	}
 }
 

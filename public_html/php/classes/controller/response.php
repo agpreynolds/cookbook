@@ -24,7 +24,8 @@ class response {
 			array(
 				'messages' => $this->messages,
 				'status' => $this->status,
-				'action' => $this->action
+				'action' => $this->action,
+				'html' => ob_get_clean()
 			)
 		);
 	}

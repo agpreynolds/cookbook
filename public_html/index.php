@@ -39,7 +39,10 @@
 		</header>
 		<section class="wrapper">
 			<section id="recipeSearchFacets">
-				<ul><?php new searchOptions(); ?></ul>		
+				<form name="recipeSearch">
+					<input type="hidden" name="formID" value="recipeSearch"/>
+					<?php new searchOptions(); ?>
+				</form>
 			</section>
 			
 			<section id="recipeSearchResults">
