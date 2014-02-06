@@ -1,3 +1,6 @@
 [submodule "public_html/js/lib/select2"]
 	path = public_html/js/lib/select2
 	url = https://github.com/ivaynberg/select2.git
+[submodule "public_html/js/lib/jQuery-File-Upload"]
+	path = public_html/js/lib/jQuery-File-Upload
+	url = https://github.com/blueimp/jQuery-File-Upload.git
