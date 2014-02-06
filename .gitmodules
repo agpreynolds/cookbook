@@ -1,0 +1,3 @@
+[submodule "public_html/js/lib/select2"]
+	path = public_html/js/lib/select2
+	url = https://github.com/ivaynberg/select2.git
