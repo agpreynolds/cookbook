@@ -25,6 +25,7 @@ class facet {
 		global $arcDb;
 		$queryData = array(
 			'select' => array(
+				'?facet',
 				'?displayName'
 			),
 			'where' => "?facet a {$this->id} ;
@@ -34,7 +35,7 @@ class facet {
 		$result = $arcDb->query2($queryData);
 		
 		foreach ($result as $option) {
-			$this->options[] = $option['displayName'];			
+			$this->options[$option['facet']] = $option['displayName'];			
 		}		
 	}
 }

@@ -16,41 +16,59 @@ class recipeSearch extends validateForm {
 	private function runQuery() {
 		global $arcDb;
 
+		$where = "?uri a recipe:Recipe ; 
+				rdfs:label ?label ;				
+				rdf:author ?author ";
+		$where .= $this->addCuisineTriples($this->formData['recipe:Cuisine']);
+		$where .= $this->addCourseTriples($this->formData['recipe:Course']);
+		$where .= $this->addIngredientsTriples($this->formData['recipe:Food']);
+		$where .= ".\n ?author rdfs:label ?username";
+
 		$query = array(
 			'select' => array(
 				'?uri',
 				'?label',
 				'?username'
 			),
-			'where' => "
-				?uri a recipe:Recipe ; 
-				rdfs:label ?label ;
-				rdfs:comment ?comment ;
-				recipe:cuisine ?cuisine ;
-				recipe:course ?course ;
-				rdf:author ?author ;			
-				recipe:ingredients ?ingredients .
-				?ingredients ?p ?s .
-				?s a recipe:Ingredient ;
-				recipe:quantity ?quantity ;
-				recipe:food ?ingredient .
-				?author rdfs:label ?username
-			",
-			'filters' => array(),
+			'where' => $where,			
 			'distinct' => 1
 		);
-
-		$data = $this->formData;
-		unset($data['formID']);
-
-		foreach ($data as $param => $value) {
-			$facet = new facet($param);
-			if ($facet && $facet->shortcut) {
-				$query['filters'][$facet->shortcut] = $value;
-			}
-		}
-
+		
 		return $results = $arcDb->query2($query);
+	}
+	private function addIngredientsTriples($ingredients) {
+		if (isset($ingredients)) {
+			$qIngredients = ";\n recipe:ingredients ?ingredients .
+				?ingredients";
+			$qFood = '';
+		
+			for ( $i=1; $i<=count($ingredients); $i++ ) {
+				$qIngredients .= " ?p{$i} ?s{$i}";
+				$qIngredients .= ( $i != count($ingredients) ) ? ';' : '';
+				$qFood .= ".\n ?s{$i} a recipe:Ingredient ;\n
+					recipe:food <{$ingredients[$i-1]}>";
+			}
+
+			return $qIngredients . $qFood;
+		}
+	}
+	private function addCuisineTriples($cuisine) {
+		if (isset($cuisine)) {
+			$OUT = '';
+			foreach ($cuisine as $c) {
+				$OUT .= ";\n recipe:cuisine <{$c}>";
+			}
+			return $OUT;			
+		}
+	}
+	private function addCourseTriples($course) {
+		if (isset($course)) {
+			$OUT = '';
+			foreach ($course as $c) {
+				$OUT .= ";\n recipe:course <{$c}>";
+			}
+			return $OUT;			
+		}
 	}
 }
 

@@ -11,7 +11,7 @@ class searchOptions {
 	}
 
 	public function outputFacetOptions($options) {
-		foreach ($options as $opt) {
+		foreach ($options as $uri => $label) {
 			include ( getAbsIncPath('/templates/searchPanels/includes/facetOption.php') );
 		}
 	}

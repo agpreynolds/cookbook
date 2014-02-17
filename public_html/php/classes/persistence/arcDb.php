@@ -57,30 +57,10 @@ class arcDb {
 			$sparql .= "WHERE { {$args['where']} ";
 		}
 
-		if (isset($args['filters'])) {
-			foreach ($args['filters'] as $filter => $choices) {
-				if (is_array($choices)) {
-					$length = count($choices);
-					$i = 0;
-					foreach ($choices as $value) {
-						$i++;
-						if (is_string($value)) {
-							$last = ( $i == $length ) ? 1 : 0;
-							$sparql .= $this->optionalFilterString($filter,$value,$last);
-						}
-						//TODO: Numerical Comparison
-					}
-				}
-				else {
-					$sparql .= $this->filterString($filter,$choices);
-				}
-			}
-		}
-
 		$sparql .= "}";
 
 		$single = ( isset($args['single']) ) ? 'row' : 'rows';
-		// echo $sparql;
+		 // echo $sparql;
 		$result = $this->store->query($sparql,$single);
 		
 		$this->handleError();
@@ -112,13 +92,6 @@ class arcDb {
 		return $OUT;
 	}
 
-	private function filterString($filter,$value) {
-		return ". $filter rdfs:label '$value'";
-	}
-	private function optionalFilterString($filter,$value,$last) {
-		return "{ $filter rdfs:label '$value'}" . ( !$last ? ' UNION' : '' );
-	}
-
 	private function handleError() {
 		global $response;
 
@@ -127,7 +100,7 @@ class arcDb {
 		if ($errors) {
 			foreach ($errors as $error) {
 				$response->setMessage(array(
-					'key' => $error,
+					'key' => 'arc_db',
 					'text' => $error,
 					'field' => ''
 				));

@@ -1,6 +1,3 @@
-<option value="<?php echo $opt; ?>">
-	<?php echo $opt; ?>
+<option value="<?php echo $uri; ?>">
+	<?php echo $label; ?>
 </option>
-<!-- <li class="facetValue">
-	<a><?php echo $opt; ?></a>
-</li> -->
