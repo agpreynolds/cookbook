@@ -15,6 +15,8 @@ global.recipeCreate = {
 
 			$('.clone-ingredient').bind('click',function(){
 				var newNode = $('.ingredient').last().clone();
+				newNode.find('.select2-container').remove();
+				newNode.find('select').select2();
 				newNode.find('input').val('');
 				$(this).parent().before( newNode );
 			});			
