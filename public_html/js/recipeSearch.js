@@ -6,8 +6,8 @@ global.recipeSearch = {
 		var _this = global.recipeSearch;
 
 		_this.container = $("#recipeSearchContainer");
-
 		_this.searchForm = _this.container.find('form');
+		_this.resultsContainer = _this.container.find('#resultList');
 
 		_this.selects = _this.searchForm.find("select");
 		_this.selects.bind('change',function(){
@@ -24,38 +24,20 @@ global.recipeSearch = {
 	},
 	onSuccess : function(form,response) {
 		var _this = global.recipeSearch;
-		_this.resultPanel.init(response.html);
-	}
-};
-
-global.recipeSearch.resultPanel = {
-	state : 'hidden',
-	init : function(responseData) {
-		//If there is no response data, something went wrong
-		if (!responseData) {
-			global.consoleDebug("global.recipeSearch.resultPanel.init() No responseData provided");
-			return null;
-		}
-
-		var _this = global.recipeSearch.resultPanel;
-
-		_this.container = $("#recipeSearchResults");
-		_this.resultList = $("#resultList");
-
-		_this.resultList.html(responseData);
-		_this.bindEvents();
-		
-		//If we are not already showing the panel, show it
-		_this.container.is(":hidden") ? _this.container.show() : '';
-		_this.state = 'visible';
-
-		global.consoleDebug("global.recipeSearch.resultPanel successfully initialised" ,_this);
+		_this.resultsContainer.removeClass('errorList').empty();
+		_this.updateResults(response.html);
 	},
-	bindEvents : function() {
-		var _this = global.recipeSearch.resultPanel;
-		_this.resultThumbnails = $(".searchResult");
+	onError : function(form,response) {
+		var _this = global.recipeSearch;
+		_this.resultsContainer.addClass('errorList').empty();
+		global.form.showErrors(form,response,_this.resultsContainer);
+	},
+	updateResults: function(content) {
+		var _this = global.recipeSearch;
 
-		_this.resultThumbnails.unbind('click').bind("click",function(){
+		_this.resultsContainer.html(content);
+
+		_this.resultsContainer.find(".searchResult").unbind('click').bind("click",function(){
 			global.popup.init({
 				id : 'resultLarge',
 				path : '/templates/searchPanels/resultLarge/index.php',
@@ -69,7 +51,7 @@ global.recipeSearch.resultPanel = {
 					global.recipeSearch.largeResultPanel.init(response,container);
 				}
 			});						
-		});		
+		});
 	}
 };
 

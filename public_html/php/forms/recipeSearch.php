@@ -34,7 +34,8 @@ return array(
 	'errors' => array(
 		'db_failure' => 'No Results Found'
 	),
-	'onSuccess' => "global.recipeSearch.onSuccess"
+	'onSuccess' => "global.recipeSearch.onSuccess",
+	'onError' => "global.recipeSearch.onError"
 );
 
 ?>

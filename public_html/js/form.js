@@ -81,8 +81,19 @@ global.form = {
 	},
 	onError : function(form,response) {
 		var _this = global.form;
-		var errorNode = $('<ul>').addClass('errorList');
-		$(form).prepend(errorNode);
+		
+		if (response.action) {
+			_this.doCallback(form,response);			
+		}
+		else {
+			_this.showErrors(form,response);
+		}
+	},
+	showErrors : function(form,response,errorNode) {
+		if (!errorNode) {
+			var errorNode = $('<ul>').addClass('errorList');
+			$(form).prepend(errorNode);
+		}
 		
 		if (response && response.messages) {
 			$(response.messages).each(function(){
@@ -95,8 +106,6 @@ global.form = {
 		else {	
 			errorNode.append($('<li>').attr('id','system_error').addClass('error').html('System Error'));
 		}
-
-		_this.doCallback(form,response);
 	},
 	doCallback : function(form,response) {
 		if (response.action) {
