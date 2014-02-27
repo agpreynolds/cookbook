@@ -17,6 +17,7 @@ $recipe = $resultLogic->recipe;
 				<?php echo $recipe->username; ?>
 			</a>
 		</p>
+		<div class="ratingLarge"></div>
 		
 		<p><?php echo $recipe->comment; ?></p>
 		
@@ -35,14 +36,6 @@ $recipe = $resultLogic->recipe;
 				</header>
 				<section>
 					<ul><?php $resultLogic->outputToolList(); ?></ul>
-				</section>
-			</article>
-			<article class="componentOption">
-				<header>
-					<a><h4>Techniques <span class="indicator">+</span></h4></a>
-				</header>
-				<section>
-					<ul><?php $resultLogic->outputTechniqueList(); ?></ul>					
 				</section>
 			</article>
 			<article class="componentOption">

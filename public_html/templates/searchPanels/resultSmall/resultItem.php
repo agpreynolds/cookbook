@@ -5,8 +5,9 @@
 		</header>
 		<img class="fLeft" src="<?php echo $recipe->imagePath; ?>" height="64" width="64">
 		<section class="thumbnailRating">
-			<img src="#" height="20" width="80" alt="Rating">
-			<p>4 / 5 (200 votes)</p>
+			<div class="rating" data-average="5"></div>
+			<!-- <img src="#" height="20" width="80" alt="Rating">
+			<p>4 / 5 (200 votes)</p> -->
 		</section>
 	</article>
 </li>

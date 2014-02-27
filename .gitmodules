@@ -4,3 +4,6 @@
 [submodule "public_html/js/lib/jQuery-File-Upload"]
 	path = public_html/js/lib/jQuery-File-Upload
 	url = https://github.com/blueimp/jQuery-File-Upload.git
+[submodule "public_html/js/lib/jRating"]
+	path = public_html/js/lib/jRating
+	url = https://github.com/alpixel/jRating.git

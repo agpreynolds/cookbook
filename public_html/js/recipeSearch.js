@@ -52,6 +52,13 @@ global.recipeSearch = {
 				}
 			});						
 		});
+
+		//TODO: Modulise This
+		$('.rating').jRating({
+			rateMax : 5,
+			bigStarsPath : 'js/lib/jRating/jquery/icons/stars.png',
+			isDisabled : true
+		});
 	}
 };
 
@@ -92,6 +99,11 @@ global.recipeSearch.largeResultPanel = {
 				global.form.init();
 				$(window).resize();
 			});
+		});
+
+		$('.ratingLarge').jRating({
+			rateMax : 5,
+			bigStarsPath : 'js/lib/jRating/jquery/icons/stars.png'
 		});
 	}
 };

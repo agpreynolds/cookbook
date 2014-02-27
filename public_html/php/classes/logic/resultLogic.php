@@ -19,11 +19,6 @@ class resultLogic {
 			include ( getAbsIncPath('/templates/searchPanels/resultLarge/toolItem.php') );
 		}
 	}
-	public function outputTechniqueList() {
-		foreach ($this->recipe->techniques as $tec) {
-			include ( getAbsIncPath('/templates/searchPanels/resultLarge/techniqueItem.php') );
-		}
-	}
 	public function outputStepList() {
 		foreach ($this->recipe->steps as $step) {
 			include ( getAbsIncPath('/templates/searchPanels/resultLarge/stepItem.php') );
