@@ -6,9 +6,11 @@ class uploadLogic {
 	}
 	public function outputFacetOptions($id) {
 		$facet = new facet($id);
+		ob_start();
 		foreach ($facet->options as $item) {
-			include ( getAbsIncPath('/templates/includes/selectOption.php') );
+			$html .= include ( getAbsIncPath('/templates/includes/selectOption.php') );
 		}
+		return ob_get_clean();
 	}
 }
 

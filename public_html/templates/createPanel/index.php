@@ -1,6 +1,9 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/php/preload.php');
-$logic = new uploadLogic(); 
+$logic = new uploadLogic();
+
+$ingredients = $logic->outputFacetOptions('recipe:Food');
+
 ?>
 
 <header>
@@ -34,13 +37,17 @@ $logic = new uploadLogic();
 			<label for="ingredients">*Ingredients (please enter at least two)</label>
 			
 			<div class="ingredient">
-				<input type="text" name="ingredients[]" placeholder="Name" />
+				<select name="ingredients[]" class="half-width">
+					<?php echo $ingredients; ?>
+				</select>
 				<input type="text" name="quantity[]" placeholder="Quantity" />
 			</div>
 			
 			<div class="ingredient">
-				<input type="text" name="ingredients[]" placeholder="Name"/>
-				<input type="text" name="quantity[]" placeholder="Quantity"/>
+				<select name="ingredients[]" class="half-width">
+					<?php echo $ingredients; ?>
+				</select>
+				<input type="text" name="quantity[]" placeholder="Quantity" />
 			</div>
 
 			<p class="note"><a class="clone-ingredient">Add another</a></p>
