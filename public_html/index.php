@@ -4,7 +4,7 @@
 <html>
 
 <head>
-	<title>TODO: Good Title</title>
+	<title>Semantic Recipe Finder</title>
 	<meta charset="utf-8">
 
 	<link rel="stylesheet" type="text/css" href="/css/global.css">
@@ -27,7 +27,7 @@
 
 <body>
 	<header>
-		<h1>TODO: Good Title</h1>
+		<h1>Semantic Recipe Finder</h1>
 	</header>
 
 	<div id="userOptionsContainer"><?php new userOptions(); ?></div>
@@ -53,6 +53,6 @@
 		</section>
 	</section>
 
-	<footer>Copyright © 2013 Alex Reynolds</footer>
+	<footer>Copyright &copy; 2014 Alex Reynolds</footer>
 </body>
 </html>

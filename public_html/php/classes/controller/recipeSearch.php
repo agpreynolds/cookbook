@@ -44,7 +44,7 @@ class recipeSearch extends validateForm {
 	}
 	private function addIngredientsTriples($ingredients,$type) {
 		if (isset($ingredients)) {
-			$qIngredients = ";\n recipe:ingredients ?ingredients .
+			$qIngredients = ".\n ?uri recipe:ingredients ?ingredients .
 				?ingredients";
 			$qFood = '';
 		

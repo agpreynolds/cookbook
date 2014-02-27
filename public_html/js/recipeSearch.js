@@ -9,11 +9,10 @@ global.recipeSearch = {
 
 		_this.searchForm = _this.container.find('form');
 
-		_this.searchFacets = _this.container.find(".searchFacet");
-		_this.searchFacets.select2();
-		_this.searchFacets.bind('change',function(){
+		_this.selects = _this.searchForm.find("select");
+		_this.selects.bind('change',function(){
 			_this.searchForm.submit();
-		});
+		}).select2();
 		
 		global.initPanel(_this);
 	},

@@ -2,14 +2,13 @@
 
 <label for="<?php echo $facet->id; ?>"><?php echo $facet->label; ?></label>
 
-<input type="radio" name="<?php echo $facet->id ?>_type" value="all" 
-	<?php echo ( $facet->default_search_type == 'all') ? 'checked' : ''; ?>
-/>All of
+<div class="searchFacetContainer">
+	<select name="<?php echo $facet->id; ?>[]" class="searchFacet" multiple>
+		<?php echo $this->outputFacetOptions($facet->options); ?>			
+	</select>
 
-<input type="radio" name="<?php echo $facet->id ?>_type" value="one"
-	<?php echo ( $facet->default_search_type == 'one') ? 'checked' : ''; ?>
-/>One of
-
-<select name="<?php echo $facet->id; ?>[]" class="searchFacet" multiple>
-<?php echo $this->outputFacetOptions($facet->options); ?>			
-</select>
+	<select name="<?php echo $facet->id ?>_type" class="radio">
+		<option value="all" <?php echo ( $facet->default_search_type == 'all') ? 'selected' : ''; ?> >All</option>
+		<option value="one" <?php echo ( $facet->default_search_type == 'one') ? 'selected' : ''; ?> >One</option>
+	</select>
+</div>
