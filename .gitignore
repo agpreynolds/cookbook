@@ -1,5 +1,4 @@
 /public_html/php/configuration/arcDb.php
 /public_html/php/configuration/db.php
-/public_html/media
-/public_html/graphicsCoursework
-/public_html/error_log
+/public_html/media/userUploads/*
+!/public_html/media/userUploads/recipe_default.png
