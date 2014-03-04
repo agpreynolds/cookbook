@@ -14,9 +14,16 @@
 @prefix dCourse: <http://palacealex.com/data/Course/> .
 @prefix dCuisine: <http://palacealex.com/data/Cuisine/> .
 @prefix dFood: <http://palacealex.com/data/Food/> .
+@prefix dFoodGroup: <http://palacealex.com/data/FoodGroup/> .
 @prefix dRecipe: <http://palacealex.com/data/Recipe/> .
 @prefix dTechnique: <http://palacealex.com/data/Technique/> .
 @prefix dTool: <http://palacealex.com/data/Tool/> .
+
+@prefix dClass: <http://palacealex.com/data/Classes/> .
+
+dClass:FoodGroup a rdfs:class .
+dClass:foodGroup a rdf:property .
+dFoodGroup:Meat a dClass:FoodGroup .
 
 dUser:Root a foaf:Person ;
 	rdfs:label "Root" .
@@ -51,7 +58,8 @@ dCuisine:Russian a recipe:Cuisine ;
 dFood:Cheese 	a recipe:Food ;
 	rdfs:label "Cheese" .
 dFood:Chicken 	a recipe:Food ;
-	rdfs:label "Chicken" .
+	rdfs:label "Chicken" ;
+	dClass:foodGroup dFoodGroup:Meat .
 dFood:Egg 		a recipe:Food ;
 	rdfs:label "Egg" .
 dFood:Flour 	a recipe:Food ;

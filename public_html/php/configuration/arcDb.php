@@ -13,13 +13,15 @@ return array(
 		'dCourse: <http://palacealex.com/data/Course/>',
 		'dCuisine: <http://palacealex.com/data/Cuisine/>',
 		'dFood: <http://palacealex.com/data/Food/>',
+		'dFoodGroup: <http://palacealex.com/data/FoodGroup/>',
 		'dIngredient: <http://palacealex.com/data/Ingredient/>',
 		'dRecipe: <http://palacealex.com/data/Recipe/>',
 		'dTechnique: <http://palacealex.com/data/Technique/>',
 		'dTool: <http://palacealex.com/data/Tool/>',
 		'dReview: <http://palacealex.com/data/Review/>',
 		'dUser: <http://palacealex.com/data/User/>',
-		'dUserRestricted: <http://palacealex.com/data/User/Restricted/>'
+		'dUserRestricted: <http://palacealex.com/data/User/Restricted/>',
+		'dClass: <http://palacealex.com/data/Classes/>'
 	),
 	/* store */
 	'store_name' => 'arc_tests',

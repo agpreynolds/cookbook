@@ -12,6 +12,14 @@ class userPreferences extends validateForm {
 		* Writes triples to DB
 	*/
 	private function update() {
+		//Yuck - checkboxes not passed if value is null...
+		if (!$this->formData['isVegetarian']) {
+			$this->formData['isVegetarian'] = 0;
+		}
+		if (!$this->formData['isVegan']) {
+			$this->formData['isVegan'] = 0;
+		}
+
 		$_SESSION['user']->populate($this->formData);
 
 		if ( !$_SESSION['user']->store() ) {

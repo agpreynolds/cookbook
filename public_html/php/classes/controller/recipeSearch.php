@@ -34,34 +34,48 @@ class recipeSearch extends validateForm {
 			'select' => array(
 				'?uri',
 				'?label',
-				'?username'
+				'?username',
+				'?hasMeat'
 			),
 			'where' => $where,			
-			'distinct' => 1
+			'distinct' => 1,
+			'group' => '?uri'
 		);
 		
 		return $results = $arcDb->query2($query);
 	}
 	private function addIngredientsTriples($ingredients,$type) {
-		if (isset($ingredients)) {
-			$qIngredients = ".\n ?uri recipe:ingredients ?ingredients .
-				?ingredients";
-			$qFood = '';
+		$default = ".\n ?uri recipe:ingredients ?ingredients .
+			?ingredients ?p ?s .
+			?s a recipe:Ingredient ;
+			recipe:food ?food .
+			OPTIONAL { ?food ?hasMeat dFoodGroup:Meat }";
+
 		
-			for ( $i=1; $i<=count($ingredients); $i++ ) {
-				if ( $type == 'all' ) {
+		//If we have ingredients set in the search
+		if (isset($ingredients)) {
+			$qIngredients = ".\n ?ingredients";
+			$qFood = '';
+			//Check the search type
+			if ( $type == 'all' ) {
+				for ( $i=1; $i<=count($ingredients); $i++ ) {
 					$qIngredients .= " ?p{$i} ?s{$i}" . ( $i != count($ingredients) ? ';' : '' );
 					$qFood .= ".\n ?s{$i} a recipe:Ingredient ;\n
-						recipe:food <{$ingredients[$i-1]}>";					
+						recipe:food <{$ingredients[$i-1]}> ;";					
 				}
-				elseif ( $type == 'one') {
+			}
+			elseif ( $type = 'one' ) {
+				for ( $i=1; $i<=count($ingredients); $i++ ) {
 					$qIngredients .= ( $i == 1 ? " ?p ?s" : '' );
 					$qFood .= ( $i==1 ? ".\n ?s a recipe:Ingredient ;\n" : '') . "{ ?s recipe:food <{$ingredients[$i-1]}> }" . ( $i != count($cuisine)-1 ? 'UNION' : '' );
 				}
 			}
-
-			return $qIngredients . $qFood;
+			return $default . $qIngredients . $qFood;
 		}
+		else {
+			return $default;
+		}
+		
 	}
 	private function addCuisineTriples($cuisine,$type) {
 		if (isset($cuisine)) {

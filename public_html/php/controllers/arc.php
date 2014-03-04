@@ -8,22 +8,28 @@ $query = array(
       'select' => array(
             '?uri',
             '?label',
-            '?username'
+            '?group'
       ),
       'where' => "?uri a recipe:Recipe ;
             rdfs:label ?label ;
-            rdf:author ?author ;
-            recipe:cuisine dCuisine:Chinese ;
-            recipe:cuisine dCuisine:Italian .
-            ?author rdfs:label ?username",                  
-      'distinct' => 1
+            recipe:ingredients ?ingredients .
+            ?ingredients ?p ?s .
+            ?s a recipe:Ingredient ;
+            recipe:food ?food .
+            OPTIONAL { 
+                  ?food ?group dFoodGroup:Meat
+            }            
+      ",                  
+      'distinct' => 1,
+      'group' => '?uri'
 );
+            // MINUS { ?food dClass:foodGroup dFoodGroup:Meat }
 
 $result = $arcDb->query2($query);
 var_dump($result);
 
 global $response;
 $response->returnJSON = 1;
-$response->output();
+ // $response->output();
 
 ?>

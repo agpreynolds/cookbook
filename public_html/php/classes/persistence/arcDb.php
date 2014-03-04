@@ -59,6 +59,10 @@ class arcDb {
 
 		$sparql .= "}";
 
+		if ($args['group']) {
+			$sparql .= "GROUP BY {$args['group']}";
+		}
+
 		$single = ( isset($args['single']) ) ? 'row' : 'rows';
 		 // echo $sparql;
 		$result = $this->store->query($sparql,$single);
