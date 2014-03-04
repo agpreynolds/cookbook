@@ -11,6 +11,7 @@ class arcDb {
 		if ( !$this->store->isSetup() ) {
 			$this->store->setUp();
 			$this->store->query('LOAD <file://' . $_SERVER['DOCUMENT_ROOT'] . '/php/data/rdf/test.ttl>');
+			var_dump($this->store->getErrors());
 		}
 		//echo $this->store->dump();
 	}

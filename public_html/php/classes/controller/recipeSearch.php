@@ -35,7 +35,10 @@ class recipeSearch extends validateForm {
 				'?uri',
 				'?label',
 				'?username',
-				'?hasMeat'
+				'?hasMeat',
+				'?hasSeaFood',
+				'?hasDairy',
+				'?hasEgg'
 			),
 			'where' => $where,			
 			'distinct' => 1,
@@ -45,11 +48,16 @@ class recipeSearch extends validateForm {
 		return $results = $arcDb->query2($query);
 	}
 	private function addIngredientsTriples($ingredients,$type) {
-		$default = ".\n ?uri recipe:ingredients ?ingredients .
+		$default = "
+			.\n ?uri recipe:ingredients ?ingredients .
 			?ingredients ?p ?s .
 			?s a recipe:Ingredient ;
 			recipe:food ?food .
-			OPTIONAL { ?food ?hasMeat dFoodGroup:Meat }";
+			OPTIONAL { ?food ?hasMeat dFoodGroup:Meat }
+			OPTIONAL { ?food ?hasDairy dFoodGroup:Dairy }
+			OPTIONAL { ?food ?hasEgg dFoodGroup:Egg }
+			OPTIONAL { ?food ?hasSeaFood dFoodGroup:SeaFood }
+		";
 
 		
 		//If we have ingredients set in the search
@@ -82,7 +90,7 @@ class recipeSearch extends validateForm {
 			$OUT = '';
 			for ($i=0; $i<count($cuisine); $i++) {
 				if ( $type == 'all' ) {
-					$OUT .= ";\n recipe:cuisine <{$cuisine[$i]}>";
+					$OUT .= ".\n ?uri recipe:cuisine <{$cuisine[$i]}>";
 				}
 				elseif ( $type == 'one' ) {
 					$OUT .= ( $i==0 ? ".\n" : '') . "{ ?uri recipe:cuisine <{$cuisine[$i]}> }" . ( $i < count($cuisine)-1 ? 'UNION' : '' );
@@ -96,7 +104,7 @@ class recipeSearch extends validateForm {
 			$OUT = '';
 			for ($i=0; $i<count($course); $i++) {
 				if ( $type == 'all' ) {
-					$OUT .= ";\n recipe:course <{$course[$i]}>";
+					$OUT .= ".\n ?uri recipe:course <{$course[$i]}>";
 				}
 				elseif ( $type == 'one' ) {
 					$OUT .= ( $i==0 ? ".\n" : '') . "{ ?uri recipe:course <{$course[$i]}> }" . ( $i < count($course)-1 ? 'UNION' : '' );

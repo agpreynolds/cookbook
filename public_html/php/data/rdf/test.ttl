@@ -21,9 +21,15 @@
 
 @prefix dClass: <http://palacealex.com/data/Classes/> .
 
-dClass:FoodGroup a rdfs:class .
-dClass:foodGroup a rdf:property .
+dClass:FoodGroup a rdfs:Class .
+dClass:foodGroup a rdf:Property .
+
+dFoodGroup:Dairy a dClass:FoodGroup .
+dFoodGroup:Egg a dClass:FoodGroup .
+dFoodGroup:Fruit a dClass:FoodGroup .
 dFoodGroup:Meat a dClass:FoodGroup .
+dFoodGroup:SeaFood a dClass:FoodGroup .
+dFoodGroup:Vegetable a dClass:FoodGroup .
 
 dUser:Root a foaf:Person ;
 	rdfs:label "Root" .
@@ -56,22 +62,36 @@ dCuisine:Russian a recipe:Cuisine ;
 	rdfs:label "Russian" .
 
 dFood:Cheese 	a recipe:Food ;
-	rdfs:label "Cheese" .
+	rdfs:label "Cheese" ;
+	dClass:foodGroup dFoodGroup:Dairy .
 dFood:Chicken 	a recipe:Food ;
 	rdfs:label "Chicken" ;
 	dClass:foodGroup dFoodGroup:Meat .
+dFood:Chips 	a recipe:Food ;
+	rdfs:label "Chips" ;
+	dClass:foodGroup dFoodGroup:Vegetable .
+dFood:Cod 		a recipe:Food ;
+	rdfs:label "Cod" ;
+	dClass:foodGroup dFoodGroup:SeaFood .
 dFood:Egg 		a recipe:Food ;
-	rdfs:label "Egg" .
+	rdfs:label "Egg" ;
+	dClass:foodGroup dFoodGroup:Egg .
 dFood:Flour 	a recipe:Food ;
 	rdfs:label "Flour" .
 dFood:Margarine a recipe:Food ;
 	rdfs:label "Margarine" .
 dFood:MincedBeef a recipe:Food ;
-	rdfs:label "Minced Beef" .
+	rdfs:label "Minced Beef" ;
+	dClass:foodGroup dFoodGroup:Meat .
 dFood:MixedPeppers a recipe:Food ;
-	rdfs:label "Mixed Peppers" .
+	rdfs:label "Mixed Peppers" ;
+	dClass:foodGroup dFoodGroup:Vegetable .
 dFood:Onion 	a recipe:Food ;
-	rdfs:label "Onion" .
+	rdfs:label "Onion" ;
+	dClass:foodGroup dFoodGroup:Vegetable .
+dFood:Peas 		a recipe:Food ;
+	rdfs:label "Peas" ;
+	dClass:foodGroup dFoodGroup:Vegetable .
 dFood:Rice 		a recipe:Food ;
 	rdfs:label "Rice" .
 dFood:Salt 		a recipe:Food ;
@@ -81,9 +101,11 @@ dFood:Spaghetti a recipe:Food ;
 dFood:Sugar 	a recipe:Food ;
 	rdfs:label "Sugar" .
 dFood:Sultana 	a recipe:Food ;
-	rdfs:label "Sultana" .
+	rdfs:label "Sultana" ;
+	dClass:foodGroup dFoodGroup:Fruit . 
 dFood:Tomato 	a recipe:Food ;
-	rdfs:label "Tomato" .
+	rdfs:label "Tomato" ;
+	dClass:foodGroup dFoodGroup:Vegetable .
 
 dTechnique:Cook a recipe:Technique .
 
@@ -241,10 +263,31 @@ dRecipe:SultanaCake a recipe:Recipe ;
 	] ;
 	recipe:method [
 		rdf:_1 [ a recipe:Step ;
-			recipe:Ingredient ;
+			recipe:Ingredient  dFood:Egg;
 			recipe:Tool dTool:Oven ;
 			recipe:Technique dTechnique:Cook ;
 		]
+	] .
+
+dRecipe:Fishandchips a recipe:Recipe ;
+	rdf:author dUser:Root ;
+	rdfs:label "Fish and Chips" ;
+	rdfs:comment "Lorem Ipsum" ;
+	recipe:course dCourse:Main ;
+	recipe:cuisine dCuisine:British ;
+	recipe:ingredients [ a recipe:IngredientList ;
+		rdf:_1 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Cod ;
+			recipe:quantity 1 ;
+		] ;
+		rdf:_2 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Chips ;
+			recipe:quantity	"100g" ;
+		] ;
+		rdf:_3 [ a recipe:Ingredient ;
+			recipe:food 	dFood:Peas ;
+			recipe:quantity "50g" ;
+		] 
 	] .
 
 
