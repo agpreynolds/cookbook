@@ -164,9 +164,7 @@ div.ingredient input {
 }
 
 section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRating {
-	border:none;
-	width:auto;
-	font-size:0.8em;
+	padding:5px 10px;
 }
 
 #components {clear:both}
@@ -180,6 +178,7 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 }
 
 /* Generic Classes */
+.hidden {display:none;}
 .fLeft {float:left;}
 .fRight {float:right;}
 .note {

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'name' => 'recipeReview',
+	'name' => 'recipeRating',
 	'fields' => array(
 		'subject' => array(
 			'type' => 'hidden',
@@ -16,22 +16,15 @@ return array(
 				'maxLength' => 15
 			)
 		),
-		'title' => array(
-			'type' => 'text',
-			'validators' => array(
-				'required' => 1
-			)
-		),
-		'text' => array(
-			'type' => 'textarea',
+		'rating' => array(
+			'type' => 'numeric',
 			'validators' => array(
 				'required' => 1
 			)
 		)
 	),
 	'errors' => array(
-		'required_title' => 'Please add a title to your review',
-		'required_text' => 'Please add some text to your review'		
+		
 	)	
 );
 

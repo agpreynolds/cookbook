@@ -17,8 +17,8 @@ $recipe = $resultLogic->recipe;
 				<?php echo $recipe->username; ?>
 			</a>
 		</p>
-		<div class="ratingLarge"></div>
-		
+		<?php include ( getAbsIncPath('/templates/rating/form.php') ); ?>
+				
 		<p><?php echo $recipe->comment; ?></p>
 		
 		<section id="components">

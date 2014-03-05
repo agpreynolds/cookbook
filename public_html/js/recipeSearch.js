@@ -101,9 +101,16 @@ global.recipeSearch.largeResultPanel = {
 			});
 		});
 
+		_this.ratingForm = $('form[name="recipeRating"]');
+		_this.ratingInput = _this.ratingForm.find('#rating');
 		$('.ratingLarge').jRating({
 			rateMax : 5,
-			bigStarsPath : 'js/lib/jRating/jquery/icons/stars.png'
+			bigStarsPath : 'js/lib/jRating/jquery/icons/stars.png',
+			sendRequest : 0,
+			onClick : function(element,rating) {
+				_this.ratingInput.val(rating);
+				_this.ratingForm.submit();
+			}
 		});
 	}
 };
