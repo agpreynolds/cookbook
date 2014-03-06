@@ -9,6 +9,9 @@ global.recipeSearch = {
 		_this.searchForm = _this.container.find('form');
 		_this.resultsContainer = _this.container.find('#resultList');
 
+		//Templates
+		_this.smallResultTemplate = Handlebars.compile($("#searchResults").html());
+
 		_this.selects = _this.searchForm.find("select");
 		_this.selects.bind('change',function(){
 			_this.searchForm.submit();
@@ -25,17 +28,22 @@ global.recipeSearch = {
 	onSuccess : function(form,response) {
 		var _this = global.recipeSearch;
 		_this.resultsContainer.removeClass('errorList').empty();
-		_this.updateResults(response.html);
+		_this.updateResults(response.data);
 	},
 	onError : function(form,response) {
 		var _this = global.recipeSearch;
 		_this.resultsContainer.addClass('errorList').empty();
 		global.form.showErrors(form,response,_this.resultsContainer);
 	},
-	updateResults: function(content) {
+	updateResults: function(data) {
 		var _this = global.recipeSearch;
 
-		_this.resultsContainer.html(content);
+		_this.resultsContainer.html('');
+		$(data).each(function(){
+			_this.resultsContainer.append(
+				_this.smallResultTemplate(this)
+			);
+		});
 
 		_this.resultsContainer.find(".searchResult").unbind('click').bind("click",function(){
 			global.popup.init({

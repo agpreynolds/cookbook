@@ -27,14 +27,13 @@ class recipeSearch extends validateForm {
 			,$this->formData['recipe:Course_type']);
 
 		$where .= $this->addIngredientsTriples($this->formData['recipe:Food']
-			,$this->formData['recipe:Food_type']);
-		$where .= ".\n ?author rdfs:label ?username";
+			,$this->formData['recipe:Food_type']);		
 
 		$query = array(
 			'select' => array(
 				'?uri',
 				'?label',
-				'?username',
+				'?author',
 				'?hasMeat',
 				'?hasSeaFood',
 				'?hasDairy',

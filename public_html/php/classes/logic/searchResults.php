@@ -8,7 +8,8 @@ class searchResults {
 		
 		$this->applyFilters();
 
-		$this->outputHTML();
+		global $response;
+		$response->data = $this->instantiateRecipes();
 	}
 
 	private function applyFilters() {
@@ -39,14 +40,12 @@ class searchResults {
 		}
 		return $recipes;
 	}
-
-	private function outputHTML() {		
-		ob_start();
-		foreach ($this->recipes as $recipe ) {
-			$recipe = new recipe($recipe);
-			$class = ( $recipe->username === $_SESSION['user']->username ) ? 'userCreated' : '';
-			include( getAbsIncPath('/templates/searchPanels/resultSmall/resultItem.php') );
+	private function instantiateRecipes() {
+		$recipes = [];
+		foreach ($this->recipes as $recipe) {
+			$recipes[] = new recipe($recipe);
 		}
+		return $recipes;
 	}
 }
 

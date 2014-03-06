@@ -19,12 +19,27 @@
 	<script type="text/javascript" src="/js/lib/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
 	<script type="text/javascript" src="/js/lib/select2/select2.js"></script>
 	<script type="text/javascript" src="/js/lib/jRating/jquery/jRating.jquery.js"></script>
+	<script type="text/javascript" src="/js/lib/handlebars.js"></script>
 	<script type="text/javascript" src="/js/global.js"></script>
 	<script type="text/javascript" src="/js/form.js"></script>
 	<script type="text/javascript" src="/js/popup.js"></script>
 	<script type="text/javascript" src="/js/recipeCreate.js"></script>
 	<script type="text/javascript" src="/js/recipeSearch.js"></script>
 	<script type="text/javascript" src="/js/user.js"></script>
+
+	<script id="searchResults" type="text/x-handlebars-template">
+		<li id="{{uri}}" class="searchResult <?php echo $class; ?>">
+			<article>
+				<header>
+					<h4>{{label}}</h4>
+				</header>
+				<img class="fLeft" src="{{imagePath}}" height="64" width="64">
+				<section class="thumbnailRating">
+					<div class="rating" data-average="{{avgRating}}"></div>
+				</section>
+			</article>
+		</li>
+	</script>
 </head>
 
 <body>

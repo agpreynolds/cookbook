@@ -4,6 +4,7 @@ class response {
 	public $messages;
 	public $status;
 	public $action;
+	public $data;
 	public $returnJSON;
 
 	public function __construct() {
@@ -25,6 +26,7 @@ class response {
 				'messages' => $this->messages,
 				'status' => $this->status,
 				'action' => $this->action,
+				'data' => $this->data,
 				'html' => ob_get_clean()
 			)
 		);

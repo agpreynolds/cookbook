@@ -16,6 +16,7 @@ class recipe {
 	public $isComplete;
 	public $dateUploaded;
 	public $dateLastUpdated;
+	private $config;
 
 	public function __construct($data) {
 		// if ( !isset($data['ingredients']) ) {
@@ -79,21 +80,6 @@ class recipe {
 		else {
 			$this->imagePath = $this->config['base_image_path'] . 'default.png';
 		}	
-	}
-
-	public function isVegetarianSuitable() {
-		foreach ( $this->ingredients as $currentIngredient ) {
-			$ingredient = new ingredient($currentIngredient);
-
-			if ( $ingredient->getFoodGroup() == 'meat' ) {
-				return 0;
-			}
-		}
-		return 1;
-	}
-
-	public function isVeganSuitable() {
-
 	}
 
 	/*
