@@ -1,1 +1,0 @@
-<li id="<?php echo $ing->uri; ?>"><?php echo $ing->quantity . ' ' . $ing->name; ?></li>
