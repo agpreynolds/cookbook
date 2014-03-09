@@ -6,7 +6,10 @@ class resultLogic {
 
 	public function __construct($data) {
 		$this->data = $data;
-		$this->recipe = $this->lookup();
+		
+		global $response;
+		$response->returnJSON = 1;
+		$response->data = $this->lookup();
 	}
 
 	public function outputIngredientList() {

@@ -27,18 +27,148 @@
 	<script type="text/javascript" src="/js/recipeSearch.js"></script>
 	<script type="text/javascript" src="/js/user.js"></script>
 
-	<script id="searchResults" type="text/x-handlebars-template">
-		<li id="{{uri}}" class="searchResult <?php echo $class; ?>">
-			<article>
-				<header>
-					<h4>{{label}}</h4>
-				</header>
-				<img class="fLeft" src="{{imagePath}}" height="64" width="64">
-				<section class="thumbnailRating">
-					<div class="rating" data-average="{{avgRating}}"></div>
-				</section>
-			</article>
-		</li>
+	<script id="smallResult" type="text/x-handlebars-template">
+		{{#if messages.length}}
+			<ul class="errorList">
+			{{#each messages}}
+				<li id="{{key}}" class="error">{{text}}</li>
+			{{/each}}
+			</ul>
+		{{/if}}
+
+		{{#if data.length}}
+			<ul id="resultList">
+			{{#each data}}
+				<li id="{{uri}}" class="searchResult <?php echo $class; ?>">
+					<article>
+						<header>
+							<h4>{{label}}</h4>
+						</header>
+						<img class="fLeft" src="{{imagePath}}" height="64" width="64">
+						<section class="thumbnailRating">
+							<div class="rating" data-average="{{avgRating}}"></div>
+						</section>
+					</article>
+				</li>
+			{{/each}}
+			</ul>
+			<p class="note">Showing 1 - {{data.length}} of {{data.length}}</p>
+		{{/if}}
+	</script>
+	<script id="largeResult" type="text/x-handlebars-template">
+		{{#if data}}
+			{{#with data}}
+				<article id="{{uri}}" class="contentContainer">
+					<header>
+						<h3>{{label}}<a class="close-link">X</a></h3>			
+					</header>
+					<section class="wrapper">
+						<img class="fLeft" src="{{imagePath}}" height="128" width="128">
+						<p>Uploaded by:
+							<a href="/user.php?username={{username}}">
+								{{username}}
+							</a>
+						</p>
+						<form name="recipeRating" class="hidden">
+							<input type="hidden" name="formID" value="recipeRating"/>
+							<input type="hidden" name="subject" value="{{uri}}" />
+							<input type="hidden" name="rating" id="rating"/>
+						</form>
+						<div class="ratingLarge"></div>
+								
+						<p>{{comment}}</p>
+						
+						<section id="components">
+							{{#if ingredients}}
+							<article class="componentOption">
+								<header>
+									<a><h4>Ingredients <span class="indicator">+</span></h4></a>
+								</header>
+								<section>
+									<ul>
+										{{#each ingredients}}
+											<li id="{{uri}}">{{quantity}} {{name}}</li>
+										{{/each}}
+									</ul>
+								</section>
+							</article>
+							{{/if}}
+							
+							{{#if tools}}
+							<article class="componentOption">
+								<header>
+									<a><h4>Tools <span class="indicator">+</span></h4></a>
+								</header>
+								<section>
+									<ul>
+										{{#each tools}}
+											<li>{{this}}</li>
+										{{/each}}
+									</ul>
+								</section>
+							</article>
+							{{/if}}
+							
+							{{#if steps}}
+							<article class="componentOption">
+								<header>
+									<a><h4>Steps <span class="indicator">+</span></h4></a>
+								</header>
+								<section>
+									<ul>
+										{{#each steps}}
+											<li>{{this}}</li>
+										{{/each}}
+									</ul>
+								</section>
+							</article>
+							{{/if}}
+
+							<article class="componentOption">
+								<header>
+									<a><h4>Reviews <span class="indicator">+</span></h4></a>
+								</header>
+								<section>
+									{{#if reviews}}
+									<ul>
+										{{#each reviews}}
+											<li id="{{uri}}">{{title}} {{text}}</li>
+										{{/each}}
+									</ul>
+									{{/if}}
+
+									<header class="black">
+										<h4>Review this Recipe</h4>
+									</header>
+									<form name="recipeReview">
+										<input type="hidden" name="formID" value="recipeReview"/>
+										<input type="hidden" name="subject" value="{{uri}}" />
+										
+										{{#if ../../username}}
+											<input type="hidden" name="reviewer" value="{{../../username}}"/>
+										{{else}}
+											<label for="reviewer">*Username</label>
+											<input type="text" name="reviewer"/>
+										{{/if}}										
+																				
+										<label for="title">*Title</label>
+										<input type="text" name="title"/>
+
+										<label for="text">*Review Text</label>
+										<textarea name="text"/>
+										
+										<input type="submit" value="Submit">	
+									</form>
+								</section>
+							</article>
+						</section>
+						<section id="recipeModeration">
+							<a>Report to a Moderator</a>
+						</section>
+					</section>
+				</article>
+			{{/with}}
+		{{/if}}
 	</script>
 </head>
 

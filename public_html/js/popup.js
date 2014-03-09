@@ -39,15 +39,8 @@ global.popup = {
         if (path) {
             $.post(path,data)
             .done(function(response){
-            	contentContainer.html(response);
-            	align();
-                
-                $('body').animate({
-                    scrollTop: $('body').offset().top
-                }, 500);
-            	
                 if (callback) {
-                    callback(response,container);
+                    callback(response,container,contentContainer);
                 }
                 //TODO: Need to bind the close link event in a more generic customisable way
                 //TODO: Consider keeping plain text/html popups on page to minimise requests
@@ -56,6 +49,14 @@ global.popup = {
                         container.remove();
                     });
                 }
+                
+                // contentContainer.html(response);
+                align();
+                
+                $('body').animate({
+                    scrollTop: $('body').offset().top
+                }, 500);
+                
             });            
         }
         //Otherwise we may have some local or js created content to inject

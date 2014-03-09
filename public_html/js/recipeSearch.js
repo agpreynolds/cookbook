@@ -7,10 +7,11 @@ global.recipeSearch = {
 
 		_this.container = $("#recipeSearchContainer");
 		_this.searchForm = _this.container.find('form');
-		_this.resultsContainer = _this.container.find('#resultList');
+		_this.resultsContainer = _this.container.find('#recipeSearchResults');
 
 		//Templates
-		_this.smallResultTemplate = Handlebars.compile($("#searchResults").html());
+		_this.smallResultTemplate = Handlebars.compile($("#smallResult").html());
+		_this.largeResultTemplate = Handlebars.compile($("#largeResult").html());
 
 		_this.selects = _this.searchForm.find("select");
 		_this.selects.bind('change',function(){
@@ -27,36 +28,29 @@ global.recipeSearch = {
 	},
 	onSuccess : function(form,response) {
 		var _this = global.recipeSearch;
-		_this.resultsContainer.removeClass('errorList').empty();
-		_this.updateResults(response.data);
+		_this.updateResults(response);
 	},
 	onError : function(form,response) {
 		var _this = global.recipeSearch;
-		_this.resultsContainer.addClass('errorList').empty();
-		global.form.showErrors(form,response,_this.resultsContainer);
+		_this.updateResults(response);
 	},
-	updateResults: function(data) {
+	updateResults: function(response) {
 		var _this = global.recipeSearch;
 
-		_this.resultsContainer.html('');
-		$(data).each(function(){
-			_this.resultsContainer.append(
-				_this.smallResultTemplate(this)
-			);
-		});
-
+		_this.resultsContainer.html( _this.smallResultTemplate(response) );
+		
 		_this.resultsContainer.find(".searchResult").unbind('click').bind("click",function(){
 			global.popup.init({
 				id : 'resultLarge',
-				path : '/templates/searchPanels/resultLarge/index.php',
+				path : '/php/controllers/formHandler.php',
 				data : {
 					method : 'resultLogic',
 					data: {
 						uri : this.id
 					}
 				},
-				callback : function(response,container) {
-					global.recipeSearch.largeResultPanel.init(response,container);
+				callback : function(response,container,contentContainer) {
+					global.recipeSearch.largeResultPanel.init(response,container,contentContainer);
 				}
 			});						
 		});
@@ -72,9 +66,17 @@ global.recipeSearch = {
 
 global.recipeSearch.largeResultPanel = {
 	state : 'hidden',
-	init : function(response,container) {
+	init : function(response,container,contentContainer) {
 		var _this = global.recipeSearch.largeResultPanel;
 		_this.container = $("#resultLarge");
+
+		response = global.parseJSONResponse(response);
+
+		//FIXME: Not sure about the robustness of this
+		response.username = global.user.username;
+
+		contentContainer.html( global.recipeSearch.largeResultTemplate(response) );
+
 		global.initPanel(_this);
 
 		_this.contentContainer = _this.container.find('article.contentContainer').get(0);

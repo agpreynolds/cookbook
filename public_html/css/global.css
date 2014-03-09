@@ -13,7 +13,8 @@ h3,h4 {
 }
 
 ul {
-	list-style: none;	
+	list-style: none;
+	overflow:hidden;
 }
 
 label {

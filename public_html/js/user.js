@@ -66,6 +66,10 @@ global.user = {
 	},
 	signin : function() {
 		var _this = global.user;
+
+		//FIXME: Hack - Yuckety yuck yuck
+		_this.username = _this.signinForm.find('input[name="username"]').val();
+		
 		_this.switchPanels('/templates/userPanels/userAccount.php');		
 	},
 	signinError : function(form,response) {
