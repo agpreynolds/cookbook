@@ -97,6 +97,8 @@ global.recipeSearch.largeResultPanel = {
 
 		contentContainer.html( global.recipeSearch.largeResultTemplate(response) );
 
+		facebook.load();
+
 		global.initPanel(_this);
 
 		_this.contentContainer = _this.container.find('article.contentContainer').get(0);

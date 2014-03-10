@@ -26,6 +26,7 @@
 	<script type="text/javascript" src="/js/recipeCreate.js"></script>
 	<script type="text/javascript" src="/js/recipeSearch.js"></script>
 	<script type="text/javascript" src="/js/user.js"></script>
+	<script type="text/javascript" src="/js/api/facebook.js"></script>
 
 	<script id="smallResult" type="text/x-handlebars-template">
 		{{#if messages.length}}
@@ -79,6 +80,9 @@
 						<div class="ratingLarge"></div>
 								
 						<p>{{comment}}</p>
+
+						<div id="fb-root"></div>
+						<div class="fb-share-button" data-type="button_count"></div>
 						
 						<section id="components">
 							{{#if ingredients}}
