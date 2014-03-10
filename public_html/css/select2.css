@@ -35,9 +35,3 @@ div.select2-container.error ul.select2-choices {border:solid 1px red;}
 div.select2-container .select2-choices .select2-search-field input {font-size:12px;}
 
 ul.select2-results {font-size:12px;}
-
-.searchFacetContainer {overflow:hidden;}
-.select2-container.radio { float:left; width:30%;}
-.select2-container.searchFacet { float:left; width:60%;}
-
-.half-width {width:150px;float:left;}

@@ -100,21 +100,6 @@
 							</article>
 							{{/if}}
 							
-							{{#if tools}}
-							<article class="componentOption">
-								<header>
-									<a><h4>Tools <span class="indicator">+</span></h4></a>
-								</header>
-								<section>
-									<ul>
-										{{#each tools}}
-											<li>{{this}}</li>
-										{{/each}}
-									</ul>
-								</section>
-							</article>
-							{{/if}}
-							
 							{{#if steps}}
 							<article class="componentOption">
 								<header>
@@ -179,7 +164,7 @@
 </head>
 
 <body>
-	<header>
+	<header class="black">
 		<h1>Semantic Recipe Finder</h1>
 	</header>
 
@@ -200,12 +185,13 @@
 			</section>
 			
 			<section id="recipeSearchResults">
-				<p class="note">Select from the options on the left to start searching for recipes</p>
-				<ul id="resultList"></ul>			
+				<ul class="errorList">
+					<li class="error">Select from the options on the left to start searching for recipes</li>
+				</ul>							
 			</section>
 		</section>
 	</section>
 
-	<footer>Copyright &copy; 2014 Alex Reynolds</footer>
+	<footer>Copyright &copy; 2014 <a href="http://agpreynolds.co.uk">Alex Reynolds</a></footer>
 </body>
 </html>

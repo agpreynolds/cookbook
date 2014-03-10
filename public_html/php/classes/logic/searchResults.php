@@ -9,7 +9,16 @@ class searchResults {
 		$this->applyFilters();
 
 		global $response;
-		$response->data = $this->instantiateRecipes();
+		if ($this->recipes) {
+			$response->data = $this->instantiateRecipes();			
+		}
+		//What if we just filterec all our recipes
+		else {
+			$response->setMessage([
+				'key' => 'recipes_filtered',
+				'text' => 'No results found'
+			]);
+		}
 	}
 
 	private function applyFilters() {

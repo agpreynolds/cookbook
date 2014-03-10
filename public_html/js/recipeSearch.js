@@ -15,6 +15,15 @@ global.recipeSearch = {
 
 		_this.selects = _this.searchForm.find("select");
 		_this.selects.bind('change',function(){
+			var noteNode = $(this).nextAll('.note');
+			if ($(this).val().length > 1) {
+				noteNode.html('Switch search?');
+			}
+			else {
+				//Reset to empty string
+				//TODO: Redundancies???
+				noteNode.html('');
+			}
 			_this.searchForm.submit();
 		}).select2();
 		
@@ -97,6 +106,7 @@ global.recipeSearch.largeResultPanel = {
 
 		contentContainer.html( global.recipeSearch.largeResultTemplate(response) );
 
+		//FIXME: Only works on first load...???
 		facebook.load();
 
 		global.initPanel(_this);

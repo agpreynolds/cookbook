@@ -1,9 +1,9 @@
 <?php
 
 return array(
+	'recipe:Food',
 	'recipe:Cuisine',
-	'recipe:Course',
-	'recipe:Food'
+	'recipe:Course'
 );
 
 ?>

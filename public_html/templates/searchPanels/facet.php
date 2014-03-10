@@ -7,8 +7,6 @@
 		<?php echo $this->outputFacetOptions($facet->options); ?>			
 	</select>
 
-	<select name="<?php echo $facet->id ?>_type" class="radio">
-		<option value="all" <?php echo ( $facet->default_search_type == 'all') ? 'selected' : ''; ?> >All</option>
-		<option value="one" <?php echo ( $facet->default_search_type == 'one') ? 'selected' : ''; ?> >One</option>
-	</select>
+	<input type="hidden" name="<?php echo $facet->id ?>_type" value="<?php echo $facet->default_search_type; ?>"/>
+	<p class="note"></p>
 </div>
