@@ -141,7 +141,15 @@ div.ingredient input {
 	font-size:80%;
 }
 
-#recipeSearchResults li {
+#recipeSearchResults li.error {
+	padding:10px;
+	background:#FF8533;
+	color:#000;
+	font-weight:bold;
+	font-size:14px;
+}
+
+#recipeSearchResults li.searchResult {
 	float:left;
 	margin:5px 10px 5px 0px;
 	border: 1px solid #228B22;
@@ -150,7 +158,7 @@ div.ingredient input {
 	cursor:pointer;
 }
 
-#recipeSearchResults li.userCreated {
+#recipeSearchResults li.searchResult.userCreated {
 	background:gray;
 }
 

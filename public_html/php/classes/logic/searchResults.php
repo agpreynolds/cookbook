@@ -26,7 +26,15 @@ class searchResults {
 		foreach ($this->recipes as $recipe) {
 			if (!$recipe['hasMeat']) {
 				$recipes[] = $recipe;
+				$setMessage = 1;
 			}
+		}
+		if ($setMessage) {
+			global $response;
+			$response->setMessage([
+				'key' => 'vegetarian_filtered',
+				'text' => 'Some recipes have been removed based on your dietary requirements'
+			]);			
 		}
 		return $recipes;
 	}
@@ -36,7 +44,15 @@ class searchResults {
 		foreach ($this->recipes as $recipe) {
 			if (!isset($recipe['hasMeat']) && !isset($recipe['hasSeaFood']) && !isset($recipe['hasEgg']) && !isset($recipe['hasDairy']) ) {
 				$recipes[] = $recipe;
+				$setMessage = 1;
 			}
+		}
+		if ($setMessage) {
+			global $response;
+			$response->setMessage([
+				'key' => 'vegetarian_filtered',
+				'text' => 'Some recipes have been removed based on your dietary requirements'
+			]);			
 		}
 		return $recipes;
 	}
