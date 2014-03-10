@@ -39,7 +39,8 @@
 		{{#if data.length}}
 			<ul id="resultList">
 			{{#each data}}
-				<li id="{{uri}}" class="searchResult <?php echo $class; ?>">
+				<a href="#{{id}}">
+				<li id="{{id}}" class="searchResult <?php echo $class; ?>">
 					<article>
 						<header>
 							<h4>{{label}}</h4>
@@ -50,6 +51,7 @@
 						</section>
 					</article>
 				</li>
+				</a>
 			{{/each}}
 			</ul>
 			<p class="note">Showing 1 - {{data.length}} of {{data.length}}</p>
@@ -58,7 +60,7 @@
 	<script id="largeResult" type="text/x-handlebars-template">
 		{{#if data}}
 			{{#with data}}
-				<article id="{{uri}}" class="contentContainer">
+				<article id="{{id}}" class="contentContainer">
 					<header>
 						<h3>{{label}}<a class="close-link">X</a></h3>			
 					</header>

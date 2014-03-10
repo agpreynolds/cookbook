@@ -19,6 +19,26 @@ global.recipeSearch = {
 		}).select2();
 		
 		global.initPanel(_this);
+
+		//Can access recipe details from uri
+		//TODO: Restful API structure????
+		//Rethought - Fragments are better - must make this more readable
+		var recipe;
+		if (recipe = location.hash.match("\\w*$").join()) {
+			global.popup.init({
+				id : 'resultLarge',
+				path : '/php/controllers/formHandler.php',
+				data : {
+					method : 'resultLogic',
+					data: {
+						id : recipe.toLowerCase()
+					}
+				},
+				callback : function(response,container,contentContainer) {
+					global.recipeSearch.largeResultPanel.init(response,container,contentContainer);
+				}
+			});
+		}
 	},
 	//TODO: Reset Search Form
 	reset : function() {
@@ -46,7 +66,7 @@ global.recipeSearch = {
 				data : {
 					method : 'resultLogic',
 					data: {
-						uri : this.id
+						id : this.id
 					}
 				},
 				callback : function(response,container,contentContainer) {

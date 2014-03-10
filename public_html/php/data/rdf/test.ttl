@@ -111,14 +111,14 @@ dTechnique:Cook a recipe:Technique .
 
 dTool:Oven a recipe:Tool .
 
-dRecipe:Noodles a recipe:Recipe ; 
+dRecipe:noodles a recipe:Recipe ; 
 	rdf:author dUser:Root ;
 	rdfs:label "Noodles" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Starter ;
 	recipe:cuisine dCuisine:Chinese .
 
-dRecipe:Pizza a recipe:Recipe ;
+dRecipe:pizza a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Pizza" ;
 	rdfs:comment "Lorem Ipsum" ;
@@ -126,7 +126,7 @@ dRecipe:Pizza a recipe:Recipe ;
 	recipe:cuisine dCuisine:Italian ;
 	rev:hasReview dReview:review1 .
 
-dRecipe:GarlicBread a recipe:Recipe ;
+dRecipe:garlicbread a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Garlic Bread" ;
 	rdfs:comment "Lorem Ipsum" ;
@@ -134,7 +134,7 @@ dRecipe:GarlicBread a recipe:Recipe ;
 	recipe:cuisine dCuisine:Italian ;
 	recipe:time "PT20M"^^xsd:duration .
 
-dRecipe:ChickenFajitas a recipe:Recipe ;
+dRecipe:chickenfajitas a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Chicken Fajitas" ;
 	rdfs:comment "Lorem Ipsum" ;
@@ -151,7 +151,7 @@ dRecipe:ChickenFajitas a recipe:Recipe ;
 		] ;
 	] .
 
-dRecipe:ChickenKorma a recipe:Recipe ;
+dRecipe:chickenkorma a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Chicken Korma" ;
 	rdfs:comment "Lorem Ipsum" ;
@@ -168,21 +168,21 @@ dRecipe:ChickenKorma a recipe:Recipe ;
 		]
 	] .
 
-dRecipe:Nachos a recipe:Recipe ;
+dRecipe:nachos a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Nachos" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Starter ;
 	recipe:cuisine dCuisine:Mexican .
 
-dRecipe:RoastTurkey a recipe:Recipe ;
+dRecipe:roastturkey a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Roast Turkey" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Main ;
 	recipe:cuisine dCuisine:British .
 
-dRecipe:Bolognese a recipe:Recipe ;
+dRecipe:bolognese a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Spaghetti Bolognese" ;
 	rdfs:comment "Lorem Ipsum" ;
@@ -215,21 +215,21 @@ dRecipe:Bolognese a recipe:Recipe ;
 		]
 	] .
 
-dRecipe:Tiramisu a recipe:Recipe ;
+dRecipe:tiramisu a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Tiramisu" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Dessert ;
 	recipe:cuisine dCuisine:Italian .
 
-dRecipe:Pavlova a recipe:Recipe ;
+dRecipe:pavlova a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Pavlova" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Dessert ;
 	recipe:cuisine dCuisine:Russian .
 
-dRecipe:SultanaCake a recipe:Recipe ;
+dRecipe:sultanacake a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Sultana Cake" ;
 	rdfs:comment "Lorem Ipsum" ;
@@ -269,7 +269,7 @@ dRecipe:SultanaCake a recipe:Recipe ;
 		]
 	] .
 
-dRecipe:Fishandchips a recipe:Recipe ;
+dRecipe:fishandchips a recipe:Recipe ;
 	rdf:author dUser:Root ;
 	rdfs:label "Fish and Chips" ;
 	rdfs:comment "Lorem Ipsum" ;

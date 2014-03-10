@@ -11,27 +11,6 @@ class resultLogic {
 		$response->returnJSON = 1;
 		$response->data = $this->lookup();
 	}
-
-	public function outputIngredientList() {
-		foreach ($this->recipe->ingredients as $ing) {
-			include ( getAbsIncPath('/templates/searchPanels/resultLarge/ingredientItem.php') );
-		}
-	}
-	public function outputToolList() {
-		foreach ($this->recipe->tools as $tool) {
-			include ( getAbsIncPath('/templates/searchPanels/resultLarge/toolItem.php') );
-		}
-	}
-	public function outputStepList() {
-		foreach ($this->recipe->steps as $step) {
-			include ( getAbsIncPath('/templates/searchPanels/resultLarge/stepItem.php') );
-		}
-	}
-	public function outputReviews() {
-		foreach ($this->recipe->reviews as $review) {
-			include ( getAbsIncPath('/templates/searchPanels/resultLarge/reviewItem.php') );
-		}
-	}
 	private function lookup() {
 		global $arcDb;
 
@@ -46,7 +25,7 @@ class resultLogic {
 				'?course'				
 			),
 			'where' => "
-				<{$this->data['uri']}> a recipe:Recipe ; 
+				dRecipe:{$this->data['id']} a recipe:Recipe ; 
 				rdfs:label ?label ;
 				rdfs:comment ?comment ;
 				recipe:cuisine ?cuisine ;
@@ -96,7 +75,7 @@ class resultLogic {
 				'?quantity'
 			),
 			'where' => "
-				<{$this->data['uri']}> a recipe:Recipe ;
+				dRecipe:{$this->data['id']} a recipe:Recipe ;
 				recipe:ingredients ?ingredients .
 				?ingredients ?p ?s .
 				?s a recipe:Ingredient ;
@@ -119,7 +98,7 @@ class resultLogic {
 				'?text'
 			),
 			'where' => "
-				<{$this->data['uri']}> a recipe:Recipe ;
+				dRecipe:{$this->data['id']} a recipe:Recipe ;
 				rev:hasReview ?review .
 				?review a rev:Review ;
 				rev:reviewer ?reviewer ;

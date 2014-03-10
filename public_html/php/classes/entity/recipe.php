@@ -1,6 +1,7 @@
 <?php
 
 class recipe {
+	public $id;
 	public $uri;
 	public $label;
 	public $imagePath;
@@ -68,9 +69,11 @@ class recipe {
 		$this->techniques = array('cook','stir');
 		$this->steps = array('put it in the oven','wait till its done');
 
-		//If the uri is not set we can generate it from the label
-		if (!isset($this->uri) && isset($this->label)) {
-			$this->uri = preg_replace('/\s+/', '', $this->label);
+		//If the id is not set we can generate it from the label
+		if (!isset($this->id) && isset($this->label)) {
+			//Force to lowercase.. not really sure this should be used
+			//TODO: Extract uri component instead
+			$this->id = strtolower( preg_replace('/\s+/', '', $this->label) );
 		}
 
 		$baseImagePath = $this->config['base_image_path'] . preg_replace('/\s+/', '', $this->label);
@@ -116,7 +119,7 @@ class recipe {
 		$arcDb->insert( $ingredientTriples );		
 
 		$triples = array(
-			"dRecipe:{$this->uri} a recipe:Recipe ;",
+			"dRecipe:{$this->id} a recipe:Recipe ;",
 			"rdfs:label '{$this->label}' ;",
 			"rdfs:comment '{$this->comment}' ;",
 			"rdf:author dUser:{$this->author} ;",
