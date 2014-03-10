@@ -14,7 +14,6 @@ class resultLogic {
 	private function lookup() {
 		global $arcDb;
 
-		$ingredients = $quantity = array();
 		
 		$query = array(
 			'select' => array(
@@ -38,6 +37,7 @@ class resultLogic {
 		
 		$result = $arcDb->query2($query);
 
+		$ingredients = $quantity = array();
 		$ingredientResults = $this->lookupIngredients();
 
 		foreach ( $ingredientResults as $ingredient ) {
@@ -48,9 +48,8 @@ class resultLogic {
 		$result['ingredients'] = $ingredients;
 		$result['quantity'] = $quantity;
 
-		$reviewResults = $this->lookupReviews();
-
 		$reviews = $reviewer = $title = $text = array();
+		$reviewResults = $this->lookupReviews();
 
 		foreach ($reviewResults as $review) {
 			$reviews[] = $review['review'];
@@ -63,6 +62,8 @@ class resultLogic {
 		$result['reviewer'] = $reviewer;
 		$result['reviewTitle'] = $title;
 		$result['reviewText'] = $text;
+
+		$result['steps'] = $this->lookupSteps();
 
 		return new recipe($result);
 	}
@@ -108,6 +109,26 @@ class resultLogic {
 		);
 
 		return $arcDb->query2($query);
+	}
+	private function lookupSteps() {
+		global $arcDb;
+
+		$query = array(
+			'select' => ['?step'],
+			'where' => "
+				dRecipe:{$this->data['id']} a recipe:Recipe ;
+				recipe:method ?method .
+				?method ?p ?s .
+				?s a recipe:Step ;
+				rdfs:comment ?step
+			"
+		);
+		$results = $arcDb->query2($query);
+		$steps = array();
+		foreach ($results as $step) {
+			$steps[] = $step['step'];
+		}
+		return $steps;
 	}
 }
 

@@ -24,7 +24,7 @@ class recipe {
 		// 	return null;
 		// }
 		
-		$this->ingredients = $this->reviews = array();
+		$this->ingredients = $this->reviews = $this->steps = array();
 
 		foreach($data as $key => $value){
     		$i = 0;
@@ -63,13 +63,7 @@ class recipe {
 
       	$this->config = getConfig('recipe');
 
-      	//TODO: Replace Dummydata
-		// $this->ingredients = array('flour','egg','milk');
-		$this->tools = array('knife','fork','spoon');
-		$this->techniques = array('cook','stir');
-		$this->steps = array('put it in the oven','wait till its done');
-
-		//If the id is not set we can generate it from the label
+      	//If the id is not set we can generate it from the label
 		if (!isset($this->id) && isset($this->label)) {
 			//Force to lowercase.. not really sure this should be used
 			//TODO: Extract uri component instead

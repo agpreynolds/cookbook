@@ -288,6 +288,23 @@ dRecipe:fishandchips a recipe:Recipe ;
 			recipe:food 	dFood:Peas ;
 			recipe:quantity "50g" ;
 		] 
+	] ;
+	recipe:method [
+		rdf:_1 [ a recipe:Step ;
+			rdfs:comment "Place fish and chips on oven tray in centre of oven for 25 minutes at 180 degrees" ;
+		] ;
+		rdf:_2 [ a recipe:Step ;
+			rdfs:comment "Boil water in a saucepan on the hob" ;
+		] ;
+		rdf:_3 [ a recipe:Step ;
+			rdfs:comment "Place peas in boiling water for 10 minutes" ;
+		] ;
+		rdf:_4 [ a recipe:Step ;
+			rdfs:comment "Drain water from peas" ;
+		] ;
+		rdf:_5 [ a recipe:Step ;
+			rdfs:comment "Plate up" ;
+		]
 	] .
 
 
