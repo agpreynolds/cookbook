@@ -16,7 +16,7 @@ global.recipeSearch = {
 		_this.selects = _this.searchForm.find("select");
 		_this.selects.bind('change',function(){
 			var noteNode = $(this).nextAll('.note');
-			if ($(this).val().length > 1) {
+			if ($(this).val() && $(this).val().length > 1) {
 				noteNode.html('Switch search?');
 			}
 			else {

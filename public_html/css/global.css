@@ -8,6 +8,10 @@ h1,h2,h3,h4,p,ul,input,select,textarea {
 	padding:0;
 }
 
+h1 {
+	font-size:26px;
+}
+
 h3,h4 {
 	text-align:left;
 }
@@ -252,7 +256,7 @@ section.popup a.close-link { float:right; }
 }
 
 @media (max-width:480px) {
-	input, textarea {width:98%;}
+	input, textarea {width:96%;}
 	select, input[type="submit"] {width:100%;}
 	input[type="checkbox"] {width:13px;}
 	.wrapper {padding:0;}

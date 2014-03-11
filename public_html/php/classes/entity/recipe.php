@@ -63,11 +63,10 @@ class recipe {
 
       	$this->config = getConfig('recipe');
 
-      	//If the id is not set we can generate it from the label
-		if (!isset($this->id) && isset($this->label)) {
-			//Force to lowercase.. not really sure this should be used
-			//TODO: Extract uri component instead
-			$this->id = strtolower( preg_replace('/\s+/', '', $this->label) );
+      	//If the id is not set we can generate it from the uri
+		if (!isset($this->id) && isset($this->uri)) {			
+			preg_match('/\w*$/', $this->uri, $matches);
+			$this->id = strtolower( array_shift($matches) );
 		}
 
 		$baseImagePath = $this->config['base_image_path'] . preg_replace('/\s+/', '', $this->label);
