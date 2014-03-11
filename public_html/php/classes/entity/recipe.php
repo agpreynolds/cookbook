@@ -69,7 +69,7 @@ class recipe {
 			$this->id = strtolower( array_shift($matches) );
 		}
 
-		$baseImagePath = $this->config['base_image_path'] . preg_replace('/\s+/', '', $this->label);
+		$baseImagePath = $this->config['base_image_path'] . $this->id;
 		if ( $ext = getImageExtension($baseImagePath) ) {
 			$this->imagePath = $baseImagePath . '.' . $ext;
 		}
@@ -109,6 +109,20 @@ class recipe {
 			}
 		}
 
+		//Hmm Why is this repetition happening...
+		//If only someone invented functions....
+		$i = 1;
+		$i = count($this->steps);
+		$stepTriples = '';
+		foreach ($this->steps as $step) {
+			$stepTriples .= "rdf:_{$i} [ a recipe:Step ;
+			rdfs:comment '{$step}'
+			]";
+			$stepTriples .= ( $i == $count ) ? '' : ';';
+
+			$i++;
+		}
+
 		$arcDb->insert( $ingredientTriples );		
 
 		$triples = array(
@@ -118,7 +132,8 @@ class recipe {
 			"rdf:author dUser:{$this->author} ;",
 			"recipe:course dCourse:{$this->course} ;",
 			"recipe:cuisine dCuisine:{$this->cuisine} ;",
-			"recipe:ingredients {$bNodeID}"
+			"recipe:ingredients {$bNodeID} ;",
+			"recipe:method [ {$stepTriples} ]"
 		);
 
 		// var_dump($triples);

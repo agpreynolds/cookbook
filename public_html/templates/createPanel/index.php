@@ -52,6 +52,13 @@ $ingredients = $logic->outputFacetOptions('recipe:Food');
 
 			<p class="note"><a class="clone-ingredient">Add another</a></p>
 
+			<label for="steps">*Steps (please enter at least one)</label>
+			<div class="step">
+				<input type="text" name="steps[]" placeholder="Add a step"/>
+			</div>
+
+			<p class="note"><a class="clone-step">Add another</a></p>
+
 			<input type="submit" value="Submit Recipe"/>
 		</form>
 	</article>

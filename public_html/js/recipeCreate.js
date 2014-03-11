@@ -19,7 +19,13 @@ global.recipeCreate = {
 				newNode.find('select').select2();
 				newNode.find('input').val('');
 				$(this).parent().before( newNode );
-			});			
+			});
+
+			$('.clone-step').bind('click',function(){
+				var newNode = $('.step').last().clone();
+				newNode.find('input').val('');
+				$(this).parent().before( newNode );
+			});
 		});
 	},
 	onSuccess : function() {

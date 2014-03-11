@@ -39,6 +39,12 @@ return array(
 			'validators' => array(
 				'minLength' => 2
 			)
+		),
+		'steps' => array(
+			'type' => 'array',
+			'validators' => array(
+				'minLength' => 1
+			)
 		)
 	),
 	'errors' => array(

@@ -106,8 +106,7 @@ div.checkbox label {
 	margin-left:15px;
 }
 
-div.ingredient input {
-	float:left;
+div.ingredient input, div.step input {
 	margin:0 5px 5px 0;
 }
 
