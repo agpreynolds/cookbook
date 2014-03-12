@@ -24,7 +24,7 @@ class recipe {
 		// 	return null;
 		// }
 		
-		$this->ingredients = $this->reviews = $this->steps = array();
+		$this->cuisine = $this->course = $this->ingredients = $this->reviews = $this->steps = array();
 
 		foreach($data as $key => $value){
     		$i = 0;

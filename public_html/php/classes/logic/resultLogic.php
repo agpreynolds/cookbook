@@ -64,6 +64,8 @@ class resultLogic {
 		$result['reviewText'] = $text;
 
 		$result['steps'] = $this->lookupSteps();
+		$result['cuisine'] = $this->lookupCuisine();
+		$result['course'] = $this->lookupCourse();
 
 		return new recipe($result);
 	}
@@ -129,6 +131,42 @@ class resultLogic {
 			$steps[] = $step['step'];
 		}
 		return $steps;
+	}
+	private function lookupCuisine() {
+		global $arcDb;
+
+		$query = [
+			'select' => ['?label'],
+			'where' => "
+				dRecipe:{$this->data['id']} a recipe:Recipe ;
+				recipe:cuisine ?cuisine .
+				?cuisine rdfs:label ?label
+			"
+		];
+		$results = $arcDb->query2($query);
+		$vals = [];
+		foreach ($results as $cuisine) {
+			$vals[] = $cuisine['label'];
+		}
+		return $vals;
+	}
+	private function lookupCourse() {
+		global $arcDb;
+
+		$query = [
+			'select' => ['?label'],
+			'where' => "
+				dRecipe:{$this->data['id']} a recipe:Recipe ;
+				recipe:course ?course .
+				?course rdfs:label ?label
+			"
+		];
+		$results = $arcDb->query2($query);
+		$vals = [];
+		foreach ($results as $course) {
+			$vals[] = $course['label'];
+		}
+		return $vals;
 	}
 }
 

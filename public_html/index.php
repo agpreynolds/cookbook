@@ -49,6 +49,7 @@
 						<img class="fLeft" src="{{imagePath}}" height="64" width="64">
 						<section class="thumbnailRating">
 							<div class="rating" data-average="{{avgRating}}"></div>
+							<p>{{username}}</p>
 						</section>
 					</article>
 				</li>
@@ -66,24 +67,31 @@
 						<h3>{{label}}<a class="close-link">X</a></h3>			
 					</header>
 					<section class="wrapper">
-						<img class="fLeft" src="{{imagePath}}" height="128" width="128">
-						<p>Uploaded by:
-							<a href="/user.php?username={{username}}">
-								{{username}}
-							</a>
-						</p>
-						<form name="recipeRating" class="hidden">
-							<input type="hidden" name="formID" value="recipeRating"/>
-							<input type="hidden" name="subject" value="{{uri}}" />
-							<input type="hidden" name="rating" id="rating"/>
-						</form>
-						<div class="ratingLarge"></div>
-								
-						<p>{{comment}}</p>
+						<div class="img">
+							<img src="{{imagePath}}" height="128" width="128">
+							<div id="fb-root"></div>
+							<div class="fb-share-button" data-type="button_count"></div>
+						</div>
+						<div class="details">
+							<p>{{comment}}</p>
+							
+							<p>Uploaded by:
+								<a href="/user.php?username={{username}}">
+									{{username}}
+								</a>
+							</p>
 
-						<div id="fb-root"></div>
-						<div class="fb-share-button" data-type="button_count"></div>
-						
+							<p>Cuisine Type: {{#each cuisine}}	{{this}} {{/each}}</p>
+							<p>Suitable as a: {{#each course}} {{this}} {{/each}}</p>
+							
+							<form name="recipeRating" class="hidden">
+								<input type="hidden" name="formID" value="recipeRating"/>
+								<input type="hidden" name="subject" value="{{uri}}" />
+								<input type="hidden" name="rating" id="rating"/>
+							</form>
+							<div class="ratingLarge"></div>
+						</div>
+											
 						<section id="components">
 							{{#if ingredients}}
 							<article class="componentOption">

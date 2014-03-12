@@ -180,6 +180,20 @@ section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRa
 	padding:5px 10px;
 }
 
+section#recipeSearchContainer section#recipeSearchResults li section.thumbnailRating p {
+	margin:5px 0;
+	color:#000;
+}
+
+/*Improve selector*/
+div.img {
+	float:left;
+	padding:5px;
+}
+div.details {
+	margin:5px;
+}
+
 #components {clear:both}
 
 .componentOption {

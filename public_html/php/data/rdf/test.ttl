@@ -125,7 +125,7 @@ dTool:Oven a recipe:Tool .
 dRecipe:noodles a recipe:Recipe ; 
 	rdf:author dUser:Root ;
 	rdfs:label "Noodles" ;
-	rdfs:comment "Lorem Ipsum" ;
+	rdfs:comment "Use lighter rice noodles in this fragrant Malaysian soup with spiced chicken, coconut broth, coriander and mint" ;
 	recipe:course dCourse:Starter ;
 	recipe:cuisine dCuisine:Chinese ;
 	recipe:ingredients [ a recipe:IngredientList ;
