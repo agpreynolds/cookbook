@@ -31,7 +31,7 @@ class userSignup extends validateForm {
 		
 		$db->insert(
 			array(
-				'table' => 'user',
+				'table' => 'user (username,password)',
 				'values' => "'$username','$password'"
 			)
 		);
