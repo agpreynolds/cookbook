@@ -68,6 +68,9 @@ class recipe {
 			preg_match('/\w*$/', $this->uri, $matches);
 			$this->id = strtolower( array_shift($matches) );
 		}
+		elseif (!isset($this->id) && isset($this->label)) {
+			$this->id = strtolower( preg_replace('/\s+/', '', $this->label) );
+		}
 
 		$baseImagePath = $this->config['base_image_path'] . $this->id;
 		if ( $ext = getImageExtension($baseImagePath) ) {
