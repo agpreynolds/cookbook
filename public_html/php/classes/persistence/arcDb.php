@@ -84,7 +84,11 @@ class arcDb {
 
 		$sparql .= "}";
 		 // echo $sparql;
-		return $this->store->query($sparql,'',true);
+		$result = $this->store->query($sparql,'',true);
+
+		$this->handleError();
+
+		return $result;
 	}
 
 	private function attachDefaultPrefixes() {

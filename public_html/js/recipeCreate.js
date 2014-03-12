@@ -28,7 +28,19 @@ global.recipeCreate = {
 			});
 		});
 	},
-	onSuccess : function() {
-		alert('Recipe Successfully Uploaded');
+	onSuccess : function(form,response) {
+		global.popup.init({
+				id : 'resultLarge',
+				path : '/php/controllers/formHandler.php',
+				data : {
+					method : 'resultLogic',
+					data: {
+						id : $(form.label).val().toLowerCase()
+					}
+				},
+				callback : function(response,container,contentContainer) {
+					global.recipeSearch.largeResultPanel.init(response,container,contentContainer);
+				}
+			});
 	}
 }

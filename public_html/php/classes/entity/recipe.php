@@ -91,6 +91,7 @@ class recipe {
 
 		$timestamp = time();
 		$bNodeID = 'dIngredient:bn' . $timestamp;
+		$sNodeID = 'dStep:bn' . $timestamp;
 
 		$ingredientTriples = array($bNodeID . ' a recipe:IngredientList ;');
 
@@ -116,17 +117,20 @@ class recipe {
 		//If only someone invented functions....
 		$i = 1;
 		$i = count($this->steps);
-		$stepTriples = '';
+		$stepTriples = [ $sNodeID . ' a rdf:seq ;' ];
 		foreach ($this->steps as $step) {
-			$stepTriples .= "rdf:_{$i} [ a recipe:Step ;
-			rdfs:comment '{$step}'
+			$triple = "rdf:_{$i} [ a recipe:Step ;
+			rdfs:comment '{$step}' ;
 			]";
-			$stepTriples .= ( $i == $count ) ? '' : ';';
+			$triple .= ( $i == $count ) ? '' : ';';
+
+			$stepTriples[] = $triple;
 
 			$i++;
-		}
+		}		
 
-		$arcDb->insert( $ingredientTriples );		
+		$arcDb->insert( $ingredientTriples );
+		$arcDb->insert( $stepTriples );
 
 		$triples = array(
 			"dRecipe:{$this->id} a recipe:Recipe ;",
@@ -136,7 +140,7 @@ class recipe {
 			"recipe:course dCourse:{$this->course} ;",
 			"recipe:cuisine dCuisine:{$this->cuisine} ;",
 			"recipe:ingredients {$bNodeID} ;",
-			"recipe:method [ {$stepTriples} ]"
+			"recipe:method {$sNodeID}"
 		);
 
 		// var_dump($triples);

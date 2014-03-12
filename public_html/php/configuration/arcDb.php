@@ -19,6 +19,7 @@ return array(
 		'dTechnique: <http://palacealex.com/data/Technique/>',
 		'dTool: <http://palacealex.com/data/Tool/>',
 		'dReview: <http://palacealex.com/data/Review/>',
+		'dStep: <http://palacealex.com/data/Review/>',
 		'dUser: <http://palacealex.com/data/User/>',
 		'dUserRestricted: <http://palacealex.com/data/User/Restricted/>',
 		'dClass: <http://palacealex.com/data/Classes/>'
