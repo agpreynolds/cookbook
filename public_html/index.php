@@ -106,11 +106,11 @@
 									<a><h4>Steps <span class="indicator">+</span></h4></a>
 								</header>
 								<section>
-									<ul>
+									<ol>
 										{{#each steps}}
 											<li>{{this}}</li>
 										{{/each}}
-									</ul>
+									</ol>
 								</section>
 							</article>
 							{{/if}}

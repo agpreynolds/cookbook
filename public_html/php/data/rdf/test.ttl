@@ -67,9 +67,15 @@ dFood:Cheese 	a recipe:Food ;
 dFood:Chicken 	a recipe:Food ;
 	rdfs:label "Chicken" ;
 	dClass:foodGroup dFoodGroup:Meat .
+dFood:Chilli 	a recipe:Food ;
+	rdfs:label "Chilli" ;
+	dClass:foodGroup dFoodGroup:Vegetable .
 dFood:Chips 	a recipe:Food ;
 	rdfs:label "Chips" ;
 	dClass:foodGroup dFoodGroup:Vegetable .
+dFood:CocunutMilk a recipe:Food ;
+	rdfs:label "Cocunut Milk" ;
+	dClass:foodGroup dFoodGroup:Dairy .
 dFood:Cod 		a recipe:Food ;
 	rdfs:label "Cod" ;
 	dClass:foodGroup dFoodGroup:SeaFood .
@@ -78,6 +84,9 @@ dFood:Egg 		a recipe:Food ;
 	dClass:foodGroup dFoodGroup:Egg .
 dFood:Flour 	a recipe:Food ;
 	rdfs:label "Flour" .
+dFood:Garlic 	a recipe:Food ;
+	rdfs:label "Garlic" ;
+	dClass:foodGroup dFoodGroup:Vegetable .
 dFood:Margarine a recipe:Food ;
 	rdfs:label "Margarine" .
 dFood:MincedBeef a recipe:Food ;
@@ -94,6 +103,8 @@ dFood:Peas 		a recipe:Food ;
 	dClass:foodGroup dFoodGroup:Vegetable .
 dFood:Rice 		a recipe:Food ;
 	rdfs:label "Rice" .
+dFood:RiceNoodles a recipe:Food ;
+	rdfs:label "Rice Noodles" .
 dFood:Salt 		a recipe:Food ;
 	rdfs:label "Salt" .
 dFood:Spaghetti a recipe:Food ;
@@ -116,7 +127,43 @@ dRecipe:noodles a recipe:Recipe ;
 	rdfs:label "Noodles" ;
 	rdfs:comment "Lorem Ipsum" ;
 	recipe:course dCourse:Starter ;
-	recipe:cuisine dCuisine:Chinese .
+	recipe:cuisine dCuisine:Chinese ;
+	recipe:ingredients [ a recipe:IngredientList ;
+		rdf:_1 [ a recipe:Ingredient ;
+			recipe:food dFood:Chicken ;
+			recipe:quantity 1 ;
+		] ;
+		rdf:_2 [ a recipe:Ingredient ;
+			recipe:food dFood:CocunutMilk ;
+			recipe:quantity "200ml" ;
+		] ;
+		rdf:_3 [ a recipe:Ingredient ;
+			recipe:food dFood:RiceNoodles ;
+			recipe:quantity "300g" ;
+		] ;
+		rdf:_4 [ a recipe:Ingredient ;
+			recipe:food dFood:Chilli ;
+			recipe:quantity 3 ;
+		] ;
+		rdf:_4 [ a recipe:Ingredient ;
+			recipe:food dFood:Garlic ;
+			recipe:quantity "3 Cloves " ;
+		]
+	] ;
+	recipe:method [
+		rdf:_1 [ a recipe:Step ;
+			rdfs:comment "Put the chicken in a large saucepan with the coriander seeds, ginger, lemongrass, lime zest and a little salt. Add enough cold water to cover, slowly bring to the boil, then reduce to a simmer, gently poaching the chicken for 40 mins until it starts to fall away from the bone." ;
+		] ;
+		rdf:_2 [ a recipe:Step ;
+			rdfs:comment "Carefully lift the chicken onto a plate and cover with foil. Leave the stock to stand for 10 mins, skim off any excess fat and strain into a clean saucepan. Pull the chicken from the bones and tear into chunks." ;
+		] ;
+		rdf:_3 [ a recipe:Step ;
+			rdfs:comment "Bring the stock back to the boil, then add the fish sauce, soy, coconut milk, garlic, chillies and coriander stalks. Simmer for 2 mins, return the chicken to the pan and cook for a further 5 mins until warm. Add the spring onions and lime juice to taste." ;
+		] ;
+		rdf:_4 [ a recipe:Step ;
+			rdfs:comment "Divide the noodles between 6 bowls, then use a slotted spoon to lift the chicken and veg into each. Season the stock and pour over. Scatter with coriander and mint leaves, and serve with a drizzle of sesame oil, if you like." ;
+		]
+	] .
 
 dRecipe:pizza a recipe:Recipe ;
 	rdf:author dUser:Root ;

@@ -123,7 +123,9 @@ global.recipeSearch.largeResultPanel = {
 			var indicator = $(this).find('span.indicator');
 			global.toggleHTML(indicator,'+','-');
 			
-			$(this).parent().find('section').slideToggle();
+			$(this).parent().find('section').slideToggle(400,function(){
+				$(window).trigger('resize');
+			});
 		});
 
 		_this.moderation = _this.container.find('#recipeModeration');

@@ -240,7 +240,7 @@ section.popup a.close-link { float:right; }
 	padding:0;
 }
 #resultLarge .content {
-	min-width:50%;
+	min-width:80%;
     max-width:95%;
     border:3px solid #228B22;
     border-radius:5px;	
