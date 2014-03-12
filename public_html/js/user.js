@@ -74,6 +74,7 @@ global.user = {
 	},
 	signinError : function(form,response) {
 		var _this = global.user;
+		global.form.showErrors(form,response);
 		if (response && response.messages) {
 			$(response.messages).each(function(){
 				if (this.key == 'user_not_recognized') {
