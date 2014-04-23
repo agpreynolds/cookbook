@@ -199,6 +199,7 @@
 			</section>
 		</section>
 	</section>
+	<a href="/api/data">Get RDF Data</a>
 
 	<footer>Copyright &copy; 2014 <a href="http://agpreynolds.co.uk">Alex Reynolds</a></footer>
 </body>
